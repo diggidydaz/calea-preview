@@ -1,0 +1,222 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Calea · Option A · Immersive</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500&family=Jost:wght@300;400;500&display=swap">
+<link rel="stylesheet" href="site.css">
+<style>
+  /* Header: absent over the hero, arrives after the first scroll */
+  .top {
+    position: fixed; inset: 0 0 auto 0; z-index: 10;
+    display: flex; align-items: center; justify-content: space-between; gap: 24px;
+    padding: 22px var(--gutter);
+    transition: background .4s ease-out, padding .4s ease-out, border-color .4s ease-out;
+    border-bottom: 1px solid transparent;
+  }
+  .top .mark-w { height: 46px; width: auto; }
+  .top .mark-d { height: 34px; width: auto; display: none; }
+  .top nav { display: flex; gap: 32px; opacity: 0; pointer-events: none; transition: opacity .4s ease-out; }
+  .top nav a { font-family: var(--display); font-size: 12px; letter-spacing: .22em; text-transform: uppercase; text-decoration: none; }
+  .top .cta { font-family: var(--display); font-size: 12px; letter-spacing: .22em; text-transform: uppercase; color: #fff; text-decoration: none; border-bottom: 1px solid rgba(255,255,255,.6); padding-bottom: 3px; }
+  .top.scrolled { background: rgba(244,243,240,.92); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); padding-block: 14px; border-bottom-color: var(--rule); }
+  .top.scrolled .mark-w { display: none; }
+  .top.scrolled .mark-d { display: block; height: 28px; }
+  .top.scrolled nav { opacity: 1; pointer-events: auto; }
+  .top.scrolled .cta { color: var(--green); border-bottom-color: var(--green); }
+
+  .hero { position: relative; height: 100vh; min-height: 560px; max-height: 1100px; overflow: hidden; background: #2a2e2a; color: #fff; }
+  .hero img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; animation: drift 18s var(--ease) both; }
+  @keyframes drift { from { transform: scale(1.06); } to { transform: scale(1); } }
+  .hero::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to top, rgba(18,20,18,.62) 0%, rgba(18,20,18,0) 55%), linear-gradient(to bottom, rgba(18,20,18,.35), rgba(18,20,18,0) 22%); }
+  .hero-copy { position: absolute; z-index: 2; left: var(--gutter); right: var(--gutter); bottom: clamp(40px, 7vh, 80px); display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 24px; }
+  .hero-copy h1 { font-size: clamp(30px, 4vw, 56px); line-height: 1.1; max-width: 18ch; }
+  .hero-copy .eyebrow { color: rgba(255,255,255,.85); margin-bottom: 16px; }
+  .scroll-cue { font-family: var(--display); font-size: 11px; letter-spacing: .24em; text-transform: uppercase; color: rgba(255,255,255,.85); }
+
+  .intro { display: grid; grid-template-columns: minmax(0,1.3fr) minmax(0,1fr); gap: clamp(32px, 6vw, 120px); align-items: end; }
+  .specs { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 28px 32px; border-top: 1px solid var(--rule); padding-top: 28px; }
+  .specs b { display: block; font-family: var(--display); font-weight: 300; font-size: clamp(30px, 3vw, 42px); line-height: 1; margin-bottom: 8px; }
+  .specs span { font-family: var(--display); font-size: 11.5px; letter-spacing: .2em; text-transform: uppercase; color: var(--ink-2); }
+
+  .full { position: relative; height: clamp(420px, 88vh, 980px); overflow: hidden; }
+  .full img { width: 100%; height: 100%; object-fit: cover; }
+  .full .cap { position: absolute; left: var(--gutter); bottom: 36px; color: #fff; max-width: 34ch; z-index: 2; }
+  .full::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to top, rgba(18,20,18,.55), rgba(18,20,18,0) 45%); pointer-events: none; }
+  .full .cap .eyebrow { color: rgba(255,255,255,.85); margin-bottom: 10px; }
+
+  .split { display: grid; grid-template-columns: 1fr 1fr; min-height: 80vh; }
+  .split .img { position: relative; overflow: hidden; min-height: 360px; }
+  .split .img img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .split .txt { display: flex; flex-direction: column; justify-content: center; gap: 24px; padding: var(--section) var(--gutter); }
+
+  .strip { display: grid; grid-auto-flow: column; grid-auto-columns: minmax(280px, 34vw); gap: 6px; overflow-x: auto; scroll-snap-type: x mandatory; padding-inline: var(--gutter); scrollbar-width: thin; }
+  .strip figure { margin: 0; scroll-snap-align: start; display: flex; flex-direction: column; gap: 14px; }
+  .strip .ph { position: relative; aspect-ratio: 4/5; overflow: hidden; }
+  .strip img { width: 100%; height: 100%; object-fit: cover; }
+  .strip figcaption { font-size: 14px; color: var(--ink-2); max-width: 34ch; }
+  .gardens-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: end; gap: 24px; margin-bottom: 48px; }
+
+  .sust { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: clamp(32px, 6vw, 96px); align-items: center; }
+  .sust .lockup { width: clamp(140px, 16vw, 200px); }
+
+  .cam-band { position: relative; }
+  .cam-band .cam { height: clamp(380px, 70vh, 760px); }
+  .cam-band .cam::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to top, rgba(18,20,18,.6), rgba(18,20,18,0) 50%); }
+  .cam-band .cap { position: absolute; z-index: 2; left: var(--gutter); right: var(--gutter); bottom: 40px; color: #fff; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: end; gap: 16px; }
+
+  .req { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1.2fr); gap: clamp(40px, 7vw, 120px); }
+  .req form { display: grid; grid-template-columns: 1fr 1fr; gap: 28px 32px; align-content: start; }
+  .req .wide { grid-column: 1 / -1; }
+  .sent { font-size: 15px; color: var(--green); }
+
+  @media (max-width: 860px) {
+    .top nav { display: none; }
+    .intro, .req, .sust { grid-template-columns: 1fr; }
+    .split { grid-template-columns: 1fr; min-height: 0; }
+    .split .img { aspect-ratio: 4/3; min-height: 0; }
+    .strip { grid-auto-columns: 78vw; }
+    .req form { grid-template-columns: 1fr; }
+    .hero { height: 88vh; }
+  }
+</style>
+</head>
+<body>
+
+<header class="top" id="top">
+  <img class="mark-w" src="img/calea-wordmark-white.svg" alt="Calea St. John">
+  <img class="mark-d" src="img/calea-wordmark.svg" alt="" aria-hidden="true">
+  <nav aria-label="Main">
+    <a href="#villa">The Villa</a><a href="#gardens">Gardens</a><a href="#sustainability">Sustainability</a><a href="#gardens">Gallery</a>
+  </nav>
+  <a class="cta" href="#stay">Request dates</a>
+</header>
+
+<section class="hero" aria-label="Calea from above">
+  <img src="img/aerial.jpg" alt="Calea from the air: terraced stone and concrete levels, a solar roof, and the pool set into the green hillside">
+  <div class="hero-copy">
+    <div>
+      <p class="eyebrow">Francis Bay · St. John</p>
+      <h1>A house set into the hillside, open to its garden on every level.</h1>
+    </div>
+    <span class="scroll-cue">Scroll</span>
+  </div>
+</section>
+
+<section class="wrap section" id="villa">
+  <div class="intro">
+    <div style="display:flex;flex-direction:column;gap:28px">
+      <p class="eyebrow">The villa</p>
+      <h2 class="h-l">Stone, board-formed concrete and a slatted wood ceiling that carries from the covered rooms straight out over the terrace.</h2>
+    </div>
+    <div class="specs">
+      <div><b>5</b><span>Bedrooms</span></div>
+      <div><b><span class="tbc">Baths TBC</span></b><span>Bathrooms</span></div>
+      <div><b>3</b><span>Levels</span></div>
+      <div><b><span class="tbc">~10,000</span></b><span>Square feet</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="full">
+  <img src="img/great-room.jpg" alt="The great room: a long stone dining table under woven pendants, glass walls open to the pool deck and the bay">
+  <div class="cap">
+    <p class="eyebrow">Indoors and out</p>
+    <p class="h-m" style="font-family:var(--display);font-weight:300">The glass walls slide away. The room becomes the terrace.</p>
+  </div>
+</section>
+
+<section class="split">
+  <div class="img"><img src="img/hero-pool.jpg" alt="The pool edge, with the hillside dropping away toward the water"><span class="photo-note">Placeholder · site-visit photo</span></div>
+  <div class="txt">
+    <p class="eyebrow">Five bedrooms, three levels</p>
+    <h2 class="h-l">A pool that ends where the hillside drops away.</h2>
+    <p class="muted measure">Bedrooms sit across the upper and lower floors. The entry level holds the kitchen and the long covered dining room. Below, a gym; above everything, a roof deck for sunset.</p>
+    <p><a class="link" href="#stay">See every room</a></p>
+  </div>
+</section>
+
+<section class="section" id="gardens">
+  <div class="wrap gardens-head">
+    <div style="display:flex;flex-direction:column;gap:20px;max-width:640px">
+      <p class="eyebrow">The gardens</p>
+      <h2 class="h-l">The planting came first.</h2>
+    </div>
+    <p class="muted" style="max-width:40ch">Ornamental grasses along the terrace walls and a rock garden set right into the covered rooms, so the green reads from inside the house.</p>
+  </div>
+  <div class="strip" tabindex="0" aria-label="Garden photographs, scroll sideways">
+    <figure><div class="ph"><img src="img/garden.jpg" alt="Ornamental grasses along a concrete terrace wall, hills beyond"><span class="photo-note">Placeholder</span></div><figcaption>Grasses on the upper terrace wall.</figcaption></figure>
+    <figure><div class="ph"><img src="img/terrace-wood.jpg" alt="The rock garden framed by stone columns under the slatted wood ceiling"><span class="photo-note">Placeholder</span></div><figcaption>The rock garden, inside the covered room.</figcaption></figure>
+    <figure><div class="ph"><img src="img/entry.jpg" alt="The entry: stone columns, planted terraces and a patterned steel door"><span class="photo-note">Placeholder</span></div><figcaption>Arrival, between stone columns.</figcaption></figure>
+    <figure><div class="ph"><img src="img/stone-view.jpg" alt="Stone wall and fire pit on the open terrace"><span class="photo-note">Placeholder</span></div><figcaption>The fire pit on the open terrace.</figcaption></figure>
+  </div>
+</section>
+
+<section class="on-dark wrap section" id="sustainability">
+  <div class="sust">
+    <img class="lockup" src="img/calea-logo-reversed.svg" alt="Calea St. John">
+    <div style="display:flex;flex-direction:column;gap:22px;max-width:640px">
+      <p class="eyebrow">Sustainability</p>
+      <h2 class="h-l">Built to run on its own power.</h2>
+      <p class="muted"><span class="tbc">Solar and water system details</span> go here once Anna confirms the specifications in writing. Nothing specific is published before then.</p>
+    </div>
+  </div>
+</section>
+
+<section class="cam-band" aria-label="Live view of Francis Bay">
+  <div class="cam">
+    <img src="img/pool-deck.jpg" alt="View across the pool toward Francis Bay and the islands">
+    <span class="cam-live"><i></i>Live · webcam preview</span>
+    <span class="cam-time" data-cam-time>St. John</span>
+  </div>
+  <div class="cap">
+    <div style="display:flex;flex-direction:column;gap:12px">
+      <p class="eyebrow" style="color:rgba(255,255,255,.85)">From the terrace</p>
+      <h2 class="h-l">Francis Bay, right now.</h2>
+    </div>
+    <span class="muted" style="color:rgba(255,255,255,.8);font-size:14px">Live feed from the house · still image shown in this preview</span>
+  </div>
+</section>
+
+<section class="wrap section" id="stay">
+  <div class="req">
+    <div style="display:flex;flex-direction:column;gap:24px">
+      <p class="eyebrow">Stay at Calea</p>
+      <h2 class="h-l">Tell us when you would like to come.</h2>
+      <p class="muted measure">Every stay is confirmed by hand. Chris and Sarah, who look after the house, will write back with availability and rates.</p>
+    </div>
+    <form data-request aria-label="Reservation request">
+      <div class="field"><label for="a-arr">Arrival</label><input id="a-arr" type="date"></div>
+      <div class="field"><label for="a-dep">Departure</label><input id="a-dep" type="date"></div>
+      <div class="field"><label for="a-guests">Guests</label><select id="a-guests"><option>2</option><option>4</option><option>6</option><option>8</option><option>10</option></select></div>
+      <div class="field"><label for="a-name">Name</label><input id="a-name" type="text" autocomplete="name"></div>
+      <div class="field wide"><label for="a-note">Anything we should know</label><textarea id="a-note" rows="2"></textarea></div>
+      <div class="wide" style="display:flex;flex-wrap:wrap;gap:20px;align-items:center">
+        <button class="btn btn-primary" type="submit">Send request</button>
+        <p class="sent" data-sent hidden>Thank you. Chris and Sarah will reply by email.</p>
+      </div>
+    </form>
+  </div>
+</section>
+
+<footer class="site band wrap">
+  <div class="cols">
+    <img src="img/calea-wordmark.svg" alt="Calea St. John" style="height:44px;width:auto">
+    <small>Francis Bay, St. John, U.S. Virgin Islands · <span class="tbc">enquiry email</span></small>
+  </div>
+</footer>
+
+<script src="site.js"></script>
+<script>
+  (function () {
+    var top = document.getElementById("top");
+    function onScroll() { top.classList.toggle("scrolled", window.scrollY > window.innerHeight * 0.6); }
+    window.addEventListener("scroll", onScroll, { passive: true });
+    onScroll();
+  })();
+</script>
+</body>
+</html>

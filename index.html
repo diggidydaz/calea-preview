@@ -1,0 +1,484 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>Calea Homepage Options</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600&family=Jost:wght@300;400;500&display=swap">
+<style>
+  :root {
+    --ground: #F4F3F0;
+    --surface: #FFFFFF;
+    --band: #EAE8E3;
+    --ink: #303030;
+    --muted: #5E5C58;
+    --faint: #7A7873;
+    --rule: rgba(48,48,48,.14);
+    --rule-strong: rgba(48,48,48,.3);
+    --accent: #597140;
+    --accent-ink: #4A5E35;
+    --accent-soft: rgba(89,113,64,.1);
+    --on-accent: #FFFFFF;
+    --tbc-ink: #8A5A10;
+    --tbc-bg: rgba(201,160,60,.16);
+    --tbc-line: rgba(138,90,16,.45);
+    --device: #232422;
+    --shadow: 0 1px 2px rgba(30,30,28,.05), 0 18px 40px -24px rgba(30,30,28,.28);
+    --display: "Jost", "Futura", "Century Gothic", system-ui, sans-serif;
+    --body: "Hanken Grotesk", "Helvetica Neue", Arial, sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      color-scheme: dark;
+      --ground: #1C1D1B; --surface: #252624; --band: #2B2C29;
+      --ink: #ECEAE5; --muted: #B5B2AB; --faint: #928F88;
+      --rule: rgba(236,234,229,.13); --rule-strong: rgba(236,234,229,.3);
+      --accent: #A8BF8C; --accent-ink: #B9CE9E; --accent-soft: rgba(168,191,140,.12); --on-accent: #1C1D1B;
+      --tbc-ink: #F0D08A; --tbc-bg: rgba(240,208,138,.1); --tbc-line: rgba(240,208,138,.4);
+      --device: #0F100F;
+      --shadow: 0 1px 2px rgba(0,0,0,.4), 0 18px 40px -24px rgba(0,0,0,.8);
+    }
+  }
+  :root[data-theme="dark"] {
+    color-scheme: dark;
+    --ground: #1C1D1B; --surface: #252624; --band: #2B2C29;
+    --ink: #ECEAE5; --muted: #B5B2AB; --faint: #928F88;
+    --rule: rgba(236,234,229,.13); --rule-strong: rgba(236,234,229,.3);
+    --accent: #A8BF8C; --accent-ink: #B9CE9E; --accent-soft: rgba(168,191,140,.12); --on-accent: #1C1D1B;
+    --tbc-ink: #F0D08A; --tbc-bg: rgba(240,208,138,.1); --tbc-line: rgba(240,208,138,.4);
+    --device: #0F100F;
+    --shadow: 0 1px 2px rgba(0,0,0,.4), 0 18px 40px -24px rgba(0,0,0,.8);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; }
+  [hidden] { display: none !important; }
+  body { background: var(--ground); color: var(--ink); font-family: var(--body); font-size: 16px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+  .page { max-width: 1240px; margin: 0 auto; padding-inline: clamp(16px, 4vw, 48px); padding-block: 40px 96px; display: flex; flex-direction: column; gap: clamp(56px, 8vw, 104px); }
+  h1, h2, h3 { font-family: var(--display); font-weight: 300; margin: 0; text-wrap: balance; }
+  p { margin: 0; }
+  a { color: var(--accent-ink); text-underline-offset: 3px; }
+  .eyebrow { font-family: var(--display); font-size: 11.5px; font-weight: 400; letter-spacing: .22em; text-transform: uppercase; color: var(--muted); }
+  .tbc { font-family: var(--display); font-size: .85em; letter-spacing: .05em; color: var(--tbc-ink); background: var(--tbc-bg); border: 1px dashed var(--tbc-line); padding: 0 .4em; border-radius: 2px; white-space: nowrap; }
+  :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+  /* Masthead */
+  .mast { display: flex; flex-direction: column; gap: 36px; }
+  .mast-top { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 16px; border-bottom: 1px solid var(--rule); padding-bottom: 20px; }
+  .wm { height: 40px; width: auto; }
+  .wm-dark { display: none; }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .wm-light { display: none; } :root:not([data-theme="light"]) .wm-dark { display: block; } }
+  :root[data-theme="dark"] .wm-light { display: none; }
+  :root[data-theme="dark"] .wm-dark { display: block; }
+  .mast h1 { font-size: clamp(36px, 5.4vw, 64px); line-height: 1.06; max-width: 16ch; }
+  .mast-grid { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: clamp(32px, 5vw, 80px); align-items: start; }
+  .letter { display: flex; flex-direction: column; gap: 16px; max-width: 62ch; color: var(--ink); }
+  .letter .sig { font-family: var(--display); font-size: 15px; letter-spacing: .04em; color: var(--muted); }
+  .how { background: var(--surface); border: 1px solid var(--rule); box-shadow: var(--shadow); padding: 24px 26px; display: flex; flex-direction: column; gap: 18px; }
+  .how ol { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 14px; counter-reset: s; }
+  .how li { display: grid; grid-template-columns: 30px 1fr; gap: 10px; counter-increment: s; font-size: 15px; }
+  .how li::before { content: counter(s); font-family: var(--display); font-size: 20px; font-weight: 300; color: var(--accent-ink); line-height: 1.2; }
+  .legend { display: flex; flex-direction: column; gap: 10px; border-top: 1px solid var(--rule); padding-top: 16px; font-size: 14px; color: var(--muted); }
+  .legend div { display: flex; gap: 10px; align-items: baseline; flex-wrap: wrap; }
+  .ph-chip { font-family: var(--display); font-size: 10.5px; letter-spacing: .14em; text-transform: uppercase; color: #fff; background: rgba(20,20,20,.7); padding: 2px 7px; white-space: nowrap; }
+
+  /* Compare */
+  .compare-wrap { overflow-x: auto; border: 1px solid var(--rule); background: var(--surface); }
+  table.compare { width: 100%; min-width: 720px; border-collapse: collapse; font-size: 14.5px; }
+  .compare th, .compare td { text-align: left; vertical-align: top; padding: 14px 18px; border-bottom: 1px solid var(--rule); }
+  .compare thead th { font-family: var(--display); font-weight: 400; font-size: 13px; letter-spacing: .16em; text-transform: uppercase; color: var(--ink); background: var(--band); }
+  .compare tbody th { font-family: var(--display); font-weight: 400; font-size: 11.5px; letter-spacing: .18em; text-transform: uppercase; color: var(--muted); width: 16%; }
+  .compare tr:last-child > * { border-bottom: 0; }
+  .sec-head { display: flex; flex-direction: column; gap: 12px; margin-bottom: 24px; }
+  .sec-head h2 { font-size: clamp(26px, 3vw, 36px); line-height: 1.15; }
+
+  /* Options */
+  .option { display: flex; flex-direction: column; gap: 28px; border-top: 1px solid var(--rule-strong); padding-top: 32px; scroll-margin-top: 24px; }
+  .opt-head { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(24px, 4vw, 64px); align-items: end; }
+  .opt-title { display: flex; flex-direction: column; gap: 10px; }
+  .opt-title .letter-mark { font-family: var(--display); font-size: 13px; letter-spacing: .24em; text-transform: uppercase; color: var(--accent-ink); }
+  .opt-title h2 { font-size: clamp(32px, 4vw, 48px); line-height: 1.05; }
+  .opt-title p { color: var(--muted); max-width: 46ch; }
+  .opt-notes { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; font-size: 14.5px; }
+  .opt-notes div { display: flex; flex-direction: column; gap: 6px; }
+  .opt-notes b { font-family: var(--display); font-weight: 400; font-size: 11px; letter-spacing: .2em; text-transform: uppercase; color: var(--muted); }
+
+  .devices { display: grid; grid-template-columns: minmax(0, 1fr) 268px; gap: clamp(20px, 3vw, 40px); align-items: start; }
+  .device { display: flex; flex-direction: column; gap: 10px; }
+  .device-cap { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; font-size: 13px; color: var(--faint); }
+  .device-cap a { font-family: var(--display); font-size: 12px; letter-spacing: .16em; text-transform: uppercase; color: var(--accent-ink); }
+  .screen { position: relative; overflow: hidden; background: var(--device); border-radius: 8px; padding: 22px 6px 6px; box-shadow: var(--shadow); }
+  .screen::before { content: ""; position: absolute; top: 8px; left: 10px; width: 36px; height: 7px; background: radial-gradient(circle at 3.5px 3.5px, #5a5b58 3px, transparent 3.5px) 0 0 / 12px 7px repeat-x; }
+  .viewport { position: relative; overflow: hidden; border-radius: 3px; background: #F4F3F0; }
+  .viewport iframe { position: absolute; top: 0; left: 0; border: 0; transform-origin: 0 0; background: #F4F3F0; }
+  .desk .viewport { aspect-ratio: 1440 / 860; }
+  .desk .viewport iframe { width: 1440px; height: 860px; }
+  .phone .screen { border-radius: 30px; padding: 12px; max-width: 268px; }
+  .phone .screen::before { top: 14px; left: 50%; width: 60px; height: 6px; margin-left: -30px; border-radius: 4px; background: #3a3b38; z-index: 2; }
+  .phone .viewport { aspect-ratio: 390 / 800; border-radius: 20px; }
+  .phone .viewport iframe { width: 390px; height: 800px; }
+  .loading { position: absolute; inset: 0; display: grid; place-items: center; font-family: var(--display); font-size: 11px; letter-spacing: .2em; text-transform: uppercase; color: #8a8883; }
+
+  /* Shared */
+  .shared { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1px; background: var(--rule); border: 1px solid var(--rule); }
+  .shared > div { background: var(--surface); padding: 22px; display: flex; flex-direction: column; gap: 8px; }
+  .shared h3 { font-size: 19px; font-weight: 400; }
+  .shared p { font-size: 14.5px; color: var(--muted); }
+  .swatches { display: flex; gap: 8px; margin-top: 4px; }
+  .swatches i { width: 28px; height: 28px; border: 1px solid var(--rule); }
+
+  /* Feedback */
+  .fb { background: var(--surface); border: 1px solid var(--rule); box-shadow: var(--shadow); padding: clamp(22px, 4vw, 48px); display: flex; flex-direction: column; gap: 36px; }
+  fieldset { border: 0; margin: 0; padding: 0; min-width: 0; display: flex; flex-direction: column; gap: 14px; }
+  legend { font-family: var(--display); font-size: 21px; font-weight: 300; padding: 0; margin-bottom: 4px; }
+  .q-help { font-size: 14px; color: var(--muted); margin-top: -8px; }
+  .choices { display: flex; flex-wrap: wrap; gap: 8px; }
+  .choices:not(.per-option .choices) .choice { display: inline-block; }
+  .choice { position: relative; display: block; }
+  .choice input { position: absolute; opacity: 0; inset: 0; margin: 0; cursor: pointer; }
+  .choice span { display: inline-flex; align-items: center; min-height: 42px; padding: 8px 16px; border: 1px solid var(--rule-strong); font-size: 14.5px; cursor: pointer; transition: background .2s ease-out, border-color .2s ease-out; }
+  .choice input:checked + span { background: var(--accent); border-color: var(--accent); color: var(--on-accent); }
+  .choice input:focus-visible + span { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .per-option { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
+  .per-option > div { border: 1px solid var(--rule); padding: 18px; display: flex; flex-direction: column; gap: 12px; }
+  .per-option h3 { font-size: 18px; font-weight: 400; }
+  .per-option .choices { flex-direction: column; }
+  .per-option .choice span { width: 100%; min-height: 38px; font-size: 14px; }
+  textarea, input[type="text"] { font: inherit; font-size: 15px; color: var(--ink); background: var(--ground); border: 1px solid var(--rule-strong); padding: 10px 12px; width: 100%; resize: vertical; border-radius: 0; }
+  textarea:focus, input[type="text"]:focus { outline: 2px solid var(--accent); outline-offset: 0; border-color: var(--accent); }
+  label.lbl { font-family: var(--display); font-size: 11.5px; letter-spacing: .18em; text-transform: uppercase; color: var(--muted); }
+  .field { display: flex; flex-direction: column; gap: 8px; }
+  .two { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  .actions { display: flex; flex-wrap: wrap; align-items: center; gap: 16px; border-top: 1px solid var(--rule); padding-top: 24px; }
+  .btn { font-family: var(--display); font-size: 13px; letter-spacing: .18em; text-transform: uppercase; padding: 15px 26px; border: 1px solid var(--accent); background: var(--accent); color: var(--on-accent); cursor: pointer; }
+  .btn:hover { filter: brightness(.94); }
+  .status { font-size: 14.5px; color: var(--accent-ink); }
+  .out { display: flex; flex-direction: column; gap: 12px; }
+  .out textarea { font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: 13px; min-height: 220px; }
+  .send-to { font-size: 15px; }
+  .send-to code { font-family: var(--display); font-size: 15px; letter-spacing: .02em; user-select: all; background: var(--accent-soft); padding: 2px 8px; }
+
+  footer.foot { font-size: 13px; color: var(--faint); border-top: 1px solid var(--rule); padding-top: 20px; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; }
+
+  @media (max-width: 900px) {
+    .mast-grid, .opt-head { grid-template-columns: 1fr; }
+    .devices { grid-template-columns: 1fr; }
+    .phone { align-items: center; }
+    .phone .screen { width: 100%; max-width: 280px; margin-inline: auto; }
+    .shared, .per-option { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 560px) {
+    .desk { display: none; }
+    .opt-notes, .two { grid-template-columns: 1fr; }
+  }
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+</head>
+<body style="margin:0">
+<div class="page">
+
+  <header class="mast">
+    <div class="mast-top">
+      <img class="wm wm-light" src="img/calea-wordmark.svg" alt="Calea St. John">
+      <img class="wm wm-dark" src="img/calea-wordmark-white.svg" alt="Calea St. John">
+      <span class="eyebrow">Homepage design · Round 1 · September 2026</span>
+    </div>
+    <div class="mast-grid">
+      <div style="display:flex;flex-direction:column;gap:28px">
+        <h1>Three ways to open the Calea website</h1>
+        <div class="letter">
+          <p>Anna, here are three directions for the Calea homepage. All three use the Calea logo, the two brand colors, the request-to-book approach we agreed on, and the Francis Bay webcam you asked about. What changes between them is how the house is presented.</p>
+          <p>Please don't judge the photographs. Most of them are my site-visit shots from September 6, taken before the interiors were finished. Kayden's October and December photos will replace them. For now, focus on the layout, the pace and the feel.</p>
+          <p class="sig">Daryl Wade · VI Aerial Solutions</p>
+        </div>
+      </div>
+      <aside class="how" aria-label="How to review">
+        <p class="eyebrow">How to review</p>
+        <ol>
+          <li><span>Scroll inside each preview, or open the full page to see it at real size on your laptop or phone.</span></li>
+          <li><span>Notice what feels like Calea and what doesn't. A mix of parts from different options is a perfectly good answer.</span></li>
+          <li><span>Fill in the short form at the bottom, copy your answers, and email them to me.</span></li>
+        </ol>
+        <div class="legend">
+          <div><span class="tbc">TBC</span><span>A fact still to confirm with you (bathrooms, square footage, solar details).</span></div>
+          <div><span class="ph-chip">Placeholder</span><span>A temporary photo that will be replaced.</span></div>
+        </div>
+      </aside>
+    </div>
+  </header>
+
+  <section aria-labelledby="cmp-h">
+    <div class="sec-head">
+      <p class="eyebrow">At a glance</p>
+      <h2 id="cmp-h">How the three options differ</h2>
+    </div>
+    <div class="compare-wrap">
+      <table class="compare">
+        <thead><tr><th scope="col"></th><th scope="col"><a href="#option-a">A · Immersive</a></th><th scope="col"><a href="#option-b">B · Editorial</a></th><th scope="col"><a href="#option-c">C · Guided</a></th></tr></thead>
+        <tbody>
+          <tr><th scope="row">Feels like</th><td>A short film. Big photos fill the screen, with very few words.</td><td>A magazine feature on the house, with framed photos and captions.</td><td>A private villa listing, closest to the Cuvée site you liked.</td></tr>
+          <tr><th scope="row">First screen</th><td>Aerial of the house, full screen. No menu until you scroll.</td><td>Headline beside a framed photo of the great room. Menu always visible.</td><td>Great room full screen, with a date-request bar on the photo.</td></tr>
+          <tr><th scope="row">Booking</th><td>One request form at the end of the page.</td><td>A green "Request dates" button in the menu on every screen.</td><td>Date bar on the first screen, plus a bottom bar on phones.</td></tr>
+          <tr><th scope="row">Bedrooms</th><td>Described in a sentence; the detail lives on The Villa page.</td><td>An "at a glance" fact panel near the top.</td><td>A swipeable card for each of the five bedrooms.</td></tr>
+          <tr><th scope="row">Webcam</th><td>A full-width band: "Francis Bay, right now."</td><td>A captioned picture next to the St. John introduction.</td><td>Beside a short card with beach and ferry distances.</td></tr>
+          <tr><th scope="row">Depends on</th><td>Excellent photography. Weak frames have nowhere to hide.</td><td>Good captions and copy. It feels calmer and less dramatic.</td><td>Room details and host photos, which we still need to collect.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="option" id="option-a" aria-labelledby="a-h">
+    <div class="opt-head">
+      <div class="opt-title">
+        <span class="letter-mark">Option A</span>
+        <h2 id="a-h">Immersive</h2>
+        <p>The house is the argument. Photographs run edge to edge, the menu steps aside until you scroll, and each section says one thing.</p>
+      </div>
+      <div class="opt-notes">
+        <div><b>Choose it if</b><span>You want the first impression to be the view and the architecture, with nothing in between.</span></div>
+        <div><b>Keep in mind</b><span>Specs and booking come later in the scroll, so guests who arrive ready to book have further to go.</span></div>
+      </div>
+    </div>
+    <div class="devices">
+      <div class="device desk">
+        <div class="screen"><div class="viewport" data-w="1440"><span class="loading">Loading preview</span><iframe title="Option A on a laptop" data-src="option-a.html" loading="lazy" tabindex="-1"></iframe></div></div>
+        <div class="device-cap"><span>Laptop · scroll inside to explore</span><a href="option-a.html" target="_blank" rel="noopener">Open full page</a></div>
+      </div>
+      <div class="device phone">
+        <div class="screen"><div class="viewport" data-w="390"><span class="loading">Loading preview</span><iframe title="Option A on a phone" data-src="option-a.html" loading="lazy" tabindex="-1"></iframe></div></div>
+        <div class="device-cap"><span>Phone</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="option" id="option-b" aria-labelledby="b-h">
+    <div class="opt-head">
+      <div class="opt-title">
+        <span class="letter-mark">Option B</span>
+        <h2 id="b-h">Editorial</h2>
+        <p>Written and laid out like an architecture magazine. Photos sit framed on the page with captions, and the key facts are easy to find.</p>
+      </div>
+      <div class="opt-notes">
+        <div><b>Choose it if</b><span>You want the site to feel considered and informative, and to hold up well even before the final photos arrive.</span></div>
+        <div><b>Keep in mind</b><span>The house never fills the whole screen, so the arrival moment is quieter than in A or C.</span></div>
+      </div>
+    </div>
+    <div class="devices">
+      <div class="device desk">
+        <div class="screen"><div class="viewport" data-w="1440"><span class="loading">Loading preview</span><iframe title="Option B on a laptop" data-src="option-b.html" loading="lazy" tabindex="-1"></iframe></div></div>
+        <div class="device-cap"><span>Laptop · scroll inside to explore</span><a href="option-b.html" target="_blank" rel="noopener">Open full page</a></div>
+      </div>
+      <div class="device phone">
+        <div class="screen"><div class="viewport" data-w="390"><span class="loading">Loading preview</span><iframe title="Option B on a phone" data-src="option-b.html" loading="lazy" tabindex="-1"></iframe></div></div>
+        <div class="device-cap"><span>Phone</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="option" id="option-c" aria-labelledby="c-h">
+    <div class="opt-head">
+      <div class="opt-title">
+        <span class="letter-mark">Option C</span>
+        <h2 id="c-h">Guided</h2>
+        <p>Built on the Cuvée layout you liked: dates on the first screen, a row of highlights, a card for each bedroom, and your hosts introduced by name.</p>
+      </div>
+      <div class="opt-notes">
+        <div><b>Choose it if</b><span>You want guests to understand the house quickly and send a request with as few steps as possible.</span></div>
+        <div><b>Keep in mind</b><span>It is the most conventional of the three, and it needs room-by-room details and a photo of Chris and Sarah.</span></div>
+      </div>
+    </div>
+    <div class="devices">
+      <div class="device desk">
+        <div class="screen"><div class="viewport" data-w="1440"><span class="loading">Loading preview</span><iframe title="Option C on a laptop" data-src="option-c.html" loading="lazy" tabindex="-1"></iframe></div></div>
+        <div class="device-cap"><span>Laptop · scroll inside to explore</span><a href="option-c.html" target="_blank" rel="noopener">Open full page</a></div>
+      </div>
+      <div class="device phone">
+        <div class="screen"><div class="viewport" data-w="390"><span class="loading">Loading preview</span><iframe title="Option C on a phone" data-src="option-c.html" loading="lazy" tabindex="-1"></iframe></div></div>
+        <div class="device-cap"><span>Phone</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section aria-labelledby="sh-h">
+    <div class="sec-head">
+      <p class="eyebrow">The same in every option</p>
+      <h2 id="sh-h">Already settled</h2>
+    </div>
+    <div class="shared">
+      <div><h3>Your brand</h3><p>The Calea logo and its two colors, Deep Gray and Calea Green, with a clean geometric typeface to match the wordmark.</p><div class="swatches" aria-hidden="true"><i style="background:#303030"></i><i style="background:#597140"></i><i style="background:#F4F3F0"></i><i style="background:#EAE8E3"></i></div></div>
+      <div><h3>Request to book</h3><p>Guests send dates, and Chris and Sarah confirm each stay before any payment. No price on the first screen.</p></div>
+      <div><h3>The house, not people</h3><p>Architecture, gardens, light and views only, as you asked. The gardens get their own section in every option.</p></div>
+    </div>
+  </section>
+
+  <section aria-labelledby="fb-h" id="feedback">
+    <div class="sec-head">
+      <p class="eyebrow">Your feedback</p>
+      <h2 id="fb-h">Tell me what you think</h2>
+      <p style="color:var(--muted);max-width:62ch">Answer as much or as little as you like. When you're done, press the button at the bottom to copy your answers, then paste them into an email to me.</p>
+    </div>
+    <form class="fb" id="fb" novalidate>
+      <fieldset>
+        <legend>Which option feels most like Calea?</legend>
+        <div class="choices" role="radiogroup">
+          <label class="choice"><input type="radio" name="pick" value="A · Immersive" id="pick-a"><span>A · Immersive</span></label>
+          <label class="choice"><input type="radio" name="pick" value="B · Editorial" id="pick-b"><span>B · Editorial</span></label>
+          <label class="choice"><input type="radio" name="pick" value="C · Guided" id="pick-c"><span>C · Guided</span></label>
+          <label class="choice"><input type="radio" name="pick" value="A mix of options" id="pick-mix"><span>A mix of options</span></label>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Your reaction to each one</legend>
+        <p class="q-help">A quick reaction and a note on what you'd keep or change.</p>
+        <div class="per-option">
+          <div>
+            <h3>A · Immersive</h3>
+            <div class="choices">
+              <label class="choice"><input type="radio" name="rA" value="Love it" id="rA1"><span>Love it</span></label>
+              <label class="choice"><input type="radio" name="rA" value="Like parts of it" id="rA2"><span>Like parts of it</span></label>
+              <label class="choice"><input type="radio" name="rA" value="Not for Calea" id="rA3"><span>Not for Calea</span></label>
+            </div>
+            <textarea id="nA" rows="3" aria-label="Notes on option A" placeholder="What would you keep or change?"></textarea>
+          </div>
+          <div>
+            <h3>B · Editorial</h3>
+            <div class="choices">
+              <label class="choice"><input type="radio" name="rB" value="Love it" id="rB1"><span>Love it</span></label>
+              <label class="choice"><input type="radio" name="rB" value="Like parts of it" id="rB2"><span>Like parts of it</span></label>
+              <label class="choice"><input type="radio" name="rB" value="Not for Calea" id="rB3"><span>Not for Calea</span></label>
+            </div>
+            <textarea id="nB" rows="3" aria-label="Notes on option B" placeholder="What would you keep or change?"></textarea>
+          </div>
+          <div>
+            <h3>C · Guided</h3>
+            <div class="choices">
+              <label class="choice"><input type="radio" name="rC" value="Love it" id="rC1"><span>Love it</span></label>
+              <label class="choice"><input type="radio" name="rC" value="Like parts of it" id="rC2"><span>Like parts of it</span></label>
+              <label class="choice"><input type="radio" name="rC" value="Not for Calea" id="rC3"><span>Not for Calea</span></label>
+            </div>
+            <textarea id="nC" rows="3" aria-label="Notes on option C" placeholder="What would you keep or change?"></textarea>
+          </div>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>How visible should booking be?</legend>
+        <div class="choices">
+          <label class="choice"><input type="radio" name="book" value="On the first screen (like C)" id="bk1"><span>On the first screen (like C)</span></label>
+          <label class="choice"><input type="radio" name="book" value="A button always in the menu (like B)" id="bk2"><span>A button always in the menu (like B)</span></label>
+          <label class="choice"><input type="radio" name="book" value="Once, at the end (like A)" id="bk3"><span>Once, at the end (like A)</span></label>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Where should the webcam sit?</legend>
+        <div class="choices">
+          <label class="choice"><input type="radio" name="cam" value="A big feature on the homepage" id="cm1"><span>A big feature on the homepage</span></label>
+          <label class="choice"><input type="radio" name="cam" value="Smaller, next to the St. John section" id="cm2"><span>Smaller, next to the St. John section</span></label>
+          <label class="choice"><input type="radio" name="cam" value="On its own page" id="cm3"><span>On its own page</span></label>
+        </div>
+      </fieldset>
+
+      <div class="two">
+        <div class="field">
+          <label class="lbl" for="sites">Other websites you like, or dislike</label>
+          <textarea id="sites" rows="3" placeholder="The 'Blue Water' site you mentioned, if you can find it"></textarea>
+        </div>
+        <div class="field">
+          <label class="lbl" for="other">Anything else</label>
+          <textarea id="other" rows="3" placeholder="Words, feelings, details you want guests to notice"></textarea>
+        </div>
+      </div>
+
+      <div class="actions">
+        <button class="btn" type="submit" id="copy">Copy my answers</button>
+        <span class="status" id="status" role="status" aria-live="polite"></span>
+      </div>
+      <div class="out" id="out" hidden>
+        <p class="send-to">Paste your answers into an email to <code>info@viaerialsolutions.com</code>. If copying didn't work, select the text below and copy it.</p>
+        <textarea id="summary" readonly aria-label="Your answers"></textarea>
+      </div>
+    </form>
+  </section>
+
+  <footer class="foot">
+    <span>Prepared for Francis Bay Real Estate, LLC by VI Aerial Solutions</span>
+    <span>Round 1 · homepage only · photos are placeholders</span>
+  </footer>
+</div>
+
+<script>
+  // Scale each live preview to its device frame
+  (function () {
+    var vps = document.querySelectorAll(".viewport");
+    function fit(vp) {
+      var w = +vp.dataset.w, f = vp.querySelector("iframe");
+      if (f) f.style.transform = "scale(" + (vp.clientWidth / w) + ")";
+    }
+    var ro = "ResizeObserver" in window ? new ResizeObserver(function (es) { es.forEach(function (e) { fit(e.target); }); }) : null;
+    vps.forEach(function (vp) {
+      fit(vp);
+      if (ro) ro.observe(vp);
+      var f = vp.querySelector("iframe");
+      f.addEventListener("load", function () { var l = vp.querySelector(".loading"); if (l) l.hidden = true; });
+    });
+    if (!ro) window.addEventListener("resize", function () { vps.forEach(fit); });
+
+    // Load previews as they approach the screen; skip the laptop frames on phones
+    function load(f) { if (!f.src && getComputedStyle(f.closest(".device")).display !== "none") f.src = f.dataset.src; }
+    var frames = document.querySelectorAll("iframe[data-src]");
+    if ("IntersectionObserver" in window) {
+      var io = new IntersectionObserver(function (es) { es.forEach(function (e) { if (e.isIntersecting) { load(e.target); io.unobserve(e.target); } }); }, { rootMargin: "600px 0px" });
+      frames.forEach(function (f) { io.observe(f); });
+    } else { frames.forEach(load); }
+  })();
+
+  // Feedback: keep a draft in this browser, build a plain-text summary to paste into an email
+  (function () {
+    var form = document.getElementById("fb"), KEY = "calea-round1-feedback";
+    function val(name) { var el = form.querySelector('input[name="' + name + '"]:checked'); return el ? el.value : ""; }
+    function txt(id) { return document.getElementById(id).value.trim(); }
+    function snapshot() {
+      var s = {};
+      form.querySelectorAll("input[type=radio]:checked").forEach(function (r) { s[r.name] = r.id; });
+      form.querySelectorAll("textarea:not([readonly])").forEach(function (t) { s[t.id] = t.value; });
+      return s;
+    }
+    try {
+      var saved = JSON.parse(localStorage.getItem(KEY) || "null");
+      if (saved) Object.keys(saved).forEach(function (k) {
+        var el = document.getElementById(saved[k]);
+        if (el && el.type === "radio") el.checked = true;
+        else if (document.getElementById(k) && document.getElementById(k).tagName === "TEXTAREA") document.getElementById(k).value = saved[k];
+      });
+    } catch (e) {}
+    form.addEventListener("input", function () { try { localStorage.setItem(KEY, JSON.stringify(snapshot())); } catch (e) {} });
+    form.addEventListener("change", function () { try { localStorage.setItem(KEY, JSON.stringify(snapshot())); } catch (e) {} });
+
+    function line(label, v) { return v ? label + ": " + v : null; }
+    function build() {
+      var parts = ["Calea homepage, round 1 feedback", ""];
+      [line("Feels most like Calea", val("pick")), ""].forEach(function (x) { if (x !== null) parts.push(x); });
+      [["A · Immersive", "rA", "nA"], ["B · Editorial", "rB", "nB"], ["C · Guided", "rC", "nC"]].forEach(function (o) {
+        var r = val(o[1]), n = txt(o[2]);
+        if (r || n) { parts.push(o[0] + (r ? ": " + r : "")); if (n) parts.push("  " + n.replace(/\n/g, "\n  ")); }
+      });
+      parts.push("");
+      [line("Booking", val("book")), line("Webcam", val("cam")), line("Other websites", txt("sites")), line("Anything else", txt("other"))]
+        .forEach(function (x) { if (x) parts.push(x); });
+      return parts.join("\n").replace(/\n{3,}/g, "\n\n").trim();
+    }
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+      var text = build(), out = document.getElementById("out"), sum = document.getElementById("summary"), st = document.getElementById("status");
+      sum.value = text; out.hidden = false;
+      var done = function () { st.textContent = "Copied. Paste it into an email to Daryl."; };
+      var fail = function () { sum.focus(); sum.select(); st.textContent = "Select the text below and copy it."; };
+      try { navigator.clipboard.writeText(text).then(done, fail); } catch (err) { fail(); }
+    });
+  })();
+</script>
+</body>
+</html>
