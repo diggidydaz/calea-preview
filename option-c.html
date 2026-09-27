@@ -12,7 +12,7 @@
   .top { position: absolute; inset: 0 0 auto 0; z-index: 10; }
   .top .in { display: flex; align-items: center; justify-content: space-between; gap: 24px; padding-block: 22px; color: #fff; }
   .top img { height: 36px; width: auto; }
-  .top nav { display: flex; gap: 30px; }
+  .top nav { display: flex; gap: 24px; }
   .top nav a { font-family: var(--display); font-size: 12px; letter-spacing: .2em; text-transform: uppercase; text-decoration: none; color: #fff; }
 
   .hero { position: relative; height: 92vh; min-height: 600px; max-height: 1000px; color: #fff; background: #2a2e2a; }
@@ -93,14 +93,15 @@
   }
 </style>
 </head>
-<body>
+<body id="home">
 
 <header class="top">
   <div class="wrap in">
     <img src="img/calea-wordmark-white.svg" alt="Calea St. John">
     <nav aria-label="Main">
-      <a href="#villa">The Villa</a><a href="#rooms">Bedrooms</a><a href="#gardens">Gardens</a><a href="#place">St. John</a><a href="#stay">Enquire</a>
+      <a href="#villa">The Villa</a><a href="#amenities">Amenities</a><a href="#sustainability">Sustainability</a><a href="#gallery">Gallery</a><a href="#place">St. John</a><a href="#stay">Stay</a><a href="#request">Enquire</a>
     </nav>
+    <button class="menu-btn" type="button" data-menu-open>Menu</button>
   </div>
 </header>
 
@@ -110,7 +111,7 @@
     <p>Francis Bay · St. John · U.S. Virgin Islands</p>
     <h1>Calea</h1>
   </div>
-  <form class="book" data-request aria-label="Check availability">
+  <form class="book" id="request" data-request aria-label="Request dates">
     <div class="field"><label for="c-arr">Arrival</label><input id="c-arr" type="date"></div>
     <div class="field"><label for="c-dep">Departure</label><input id="c-dep" type="date"></div>
     <div class="field"><label for="c-guests">Guests</label><select id="c-guests"><option>2 guests</option><option>4 guests</option><option>6 guests</option><option>8 guests</option><option>10 guests</option></select></div>
@@ -118,15 +119,16 @@
   </form>
 </section>
 
-<section class="wrap" style="padding-block:clamp(40px,5vw,72px)" aria-label="Highlights">
+<section class="wrap" id="amenities" style="padding-block:clamp(40px,5vw,72px)" aria-label="Amenities">
   <div class="highlights">
     <div><svg viewBox="0 0 32 32"><path d="M4 24V9M4 18h24v6M28 18v-3a3 3 0 0 0-3-3H14v6M8 15.5a2 2 0 1 0 0-.1"/></svg><span>5 Bedrooms</span></div>
     <div><svg viewBox="0 0 32 32"><path d="M3 20c2.5 0 2.5-2 5-2s2.5 2 5 2 2.5-2 5-2 2.5 2 5 2 2.5-2 5-2M3 25c2.5 0 2.5-2 5-2s2.5 2 5 2 2.5-2 5-2 2.5 2 5 2 2.5-2 5-2M10 16V6a2 2 0 0 1 4 0M20 16V6a2 2 0 0 1 4 0M10 10h10"/></svg><span>Pool</span></div>
     <div><svg viewBox="0 0 32 32"><path d="M6 16h20M6 11v10M10 9v14M22 9v14M26 11v10"/></svg><span>Gym</span></div>
     <div><svg viewBox="0 0 32 32"><circle cx="16" cy="16" r="5"/><path d="M16 4v3M16 25v3M4 16h3M25 16h3M7.5 7.5l2.1 2.1M22.4 22.4l2.1 2.1M7.5 24.5l2.1-2.1M22.4 9.6l2.1-2.1"/></svg><span>Roof deck</span></div>
     <div><svg viewBox="0 0 32 32"><path d="M5 22l4-12h14l4 12zM12 10l-1.3 12M20 10l1.3 12M7 16h18M16 22v5M11 27h10"/></svg><span>Solar powered</span></div>
-    <div><svg viewBox="0 0 32 32"><rect x="4" y="9" width="18" height="14" rx="1"/><path d="M22 14l6-3v10l-6-3"/><circle cx="9" cy="14" r="1"/></svg><span>Live bay camera</span></div>
+    <div><svg viewBox="0 0 32 32"><path d="M16 28V14M16 14c0-5 3-9 9-10 0 6-4 10-9 10zM16 18c0-4-3-7-8-8 0 5 3 8 8 8z"/></svg><span>Gardens</span></div>
   </div>
+  <p class="muted" style="margin-top:20px;font-size:15px;text-align:center">Also: outdoor dining · billiards and rock garden · family and TV room · secondary kitchen</p>
 </section>
 
 <section class="wrap" style="padding-bottom:var(--section)" id="villa">
@@ -137,13 +139,26 @@
     </div>
     <p class="muted" style="max-width:42ch">Stone, board-formed concrete and a slatted wood ceiling that carries from the covered rooms out over the terrace. <span class="tbc">~10,000 sq ft</span> · <span class="tbc">baths TBC</span></p>
   </div>
-  <div class="mosaic">
+  <div class="mosaic" id="gallery">
     <div class="m"><img src="img/aerial.jpg" alt="Calea from above, set into the green hillside"></div>
     <div class="m"><img src="img/hero-pool.jpg" alt="The pool edge facing the water"><span class="photo-note">Placeholder</span></div>
     <div class="m"><img src="img/terrace-wood.jpg" alt="The rock garden under the wood ceiling"><span class="photo-note">Placeholder</span></div>
     <div class="m"><img src="img/entry.jpg" alt="The entry between stone columns"><span class="photo-note">Placeholder</span></div>
     <div class="m"><img src="img/pool-deck.jpg" alt="The covered dining terrace"><a class="btn btn-ghost more" style="background:var(--ground)" href="#villa">View all photos</a></div>
   </div>
+</section>
+
+<section class="wrap" style="padding-bottom:var(--section)" aria-label="The Calea film">
+  <div class="head">
+    <div><p class="eyebrow">The film</p><h2 class="h-l">See Calea in motion.</h2></div>
+    <p class="muted" style="max-width:36ch">A two-to-three minute film of the house, gardens and bay. Licensed music, no narration.</p>
+  </div>
+  <div class="film " style="height:clamp(260px,42vw,560px)">
+      <img src="img/hero-pool.jpg" alt="Placeholder frame for the Calea film: the pool edge above the bay">
+      <button class="play" type="button" aria-label="Play the Calea film"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4.5v15l12-7.5z"/></svg></button>
+      <span class="film-msg" hidden>The film arrives after the December shoot</span>
+      <div class="film-cap"><p class="eyebrow">The Calea film · 2–3 minutes</p><span class="film-note">Placeholder frame · filmed in December</span></div>
+    </div>
 </section>
 
 <section class="band section" id="rooms">
@@ -174,7 +189,7 @@
       <p class="muted measure">Ornamental grasses line the terrace walls, and a rock garden is set right into the covered rooms, so the green reads from inside the house.</p>
     </div>
   </div>
-  <div class="feature flip">
+  <div class="feature flip" id="sustainability">
     <div class="ph"><img src="img/stone-view.jpg" alt="Stone wall and fire pit on the open terrace"><span class="photo-note">Placeholder</span></div>
     <div class="txt">
       <p class="eyebrow">Sustainability</p>
@@ -191,10 +206,11 @@
       <img src="img/hero-pool.jpg" alt="Live view toward Francis Bay (still image in this preview)">
       <span class="cam-live"><i></i>Live · Francis Bay</span>
       <span class="cam-time" data-cam-time>St. John</span>
+      <span class="addon">Optional add-on · quoted separately</span>
     </div>
     <div class="card on-dark">
       <p class="eyebrow">Francis Bay &amp; St. John</p>
-      <h2 class="h-m" style="font-weight:300">The bay from the terrace, live.</h2>
+      <h2 class="h-m" style="font-weight:300">On the hillside above Francis Bay.</h2>
       <ul>
         <li><span>Francis Bay beach</span><span class="tbc">distance TBC</span></li>
         <li><span>Cruz Bay</span><span class="tbc">drive TBC</span></li>
@@ -212,20 +228,25 @@
       <h2 class="h-m" style="font-weight:300">Chris and Sarah Web look after Calea and answer every request personally.</h2>
       <p class="muted">Send your dates and they will reply with availability, rates and anything else you need to plan the stay. <span class="tbc">photo and bio from Chris and Sarah</span></p>
     </div>
-    <a class="btn btn-primary" href="#top-book" onclick="document.getElementById('c-arr').focus();return false;">Request dates</a>
+    <a class="btn btn-primary" href="#request">Request dates</a>
   </div>
 </section>
 
-<footer class="site wrap">
+<footer class="site  wrap">
   <div class="cols">
     <img src="img/calea-wordmark.svg" alt="Calea St. John" style="height:44px;width:auto">
     <small>Francis Bay, St. John, U.S. Virgin Islands · <span class="tbc">enquiry email</span></small>
   </div>
+  <nav aria-label="All pages"><ul class="sitemap"><li><a href="#home">Home</a></li><li><a href="#villa">The Villa</a></li><li><a href="#amenities">Amenities</a></li><li><a href="#sustainability">Sustainability</a></li><li><a href="#gallery">Gallery</a></li><li><a href="#place">Francis Bay &amp; St. John</a></li><li><a href="#stay">Stay at Calea</a></li><li><a href="#request">Reservation Request &amp; Contact</a></li></ul></nav>
 </footer>
 
+<div class="menu-sheet" id="menu" hidden role="dialog" aria-label="Site menu">
+  <div class="row"><img src="img/calea-wordmark.svg" alt="Calea St. John" style="height:36px;width:auto"><button class="menu-btn" style="display:inline-block" type="button" data-menu-close>Close</button></div>
+  <ul><li><a href="#home">Home</a></li><li><a href="#villa">The Villa</a></li><li><a href="#amenities">Amenities</a></li><li><a href="#sustainability">Sustainability</a></li><li><a href="#gallery">Gallery</a></li><li><a href="#place">Francis Bay &amp; St. John</a></li><li><a href="#stay">Stay at Calea</a></li><li><a href="#request">Reservation Request &amp; Contact</a></li></ul>
+</div>
 <div class="dock">
   <span>Stays confirmed by hand</span>
-  <a class="btn btn-primary" href="#" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;">Request dates</a>
+  <a class="btn btn-primary" href="#request">Request dates</a>
 </div>
 
 <script src="site.js"></script>

@@ -19,13 +19,15 @@
   }
   .top .mark-w { height: 46px; width: auto; }
   .top .mark-d { height: 34px; width: auto; display: none; }
-  .top nav { display: flex; gap: 32px; opacity: 0; pointer-events: none; transition: opacity .4s ease-out; }
+  .top nav { display: flex; gap: 26px; opacity: 0; pointer-events: none; transition: opacity .4s ease-out; }
   .top nav a { font-family: var(--display); font-size: 12px; letter-spacing: .22em; text-transform: uppercase; text-decoration: none; }
   .top .cta { font-family: var(--display); font-size: 12px; letter-spacing: .22em; text-transform: uppercase; color: #fff; text-decoration: none; border-bottom: 1px solid rgba(255,255,255,.6); padding-bottom: 3px; }
   .top.scrolled { background: rgba(244,243,240,.92); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); padding-block: 14px; border-bottom-color: var(--rule); }
   .top.scrolled .mark-w { display: none; }
   .top.scrolled .mark-d { display: block; height: 28px; }
   .top.scrolled nav { opacity: 1; pointer-events: auto; }
+  .top .menu-btn { color: #fff; }
+  .top.scrolled .menu-btn { color: var(--ink); }
   .top.scrolled .cta { color: var(--green); border-bottom-color: var(--green); }
 
   .hero { position: relative; height: 100vh; min-height: 560px; max-height: 1100px; overflow: hidden; background: #2a2e2a; color: #fff; }
@@ -84,15 +86,15 @@
   }
 </style>
 </head>
-<body>
+<body id="home">
 
 <header class="top" id="top">
   <img class="mark-w" src="img/calea-wordmark-white.svg" alt="Calea St. John">
   <img class="mark-d" src="img/calea-wordmark.svg" alt="" aria-hidden="true">
   <nav aria-label="Main">
-    <a href="#villa">The Villa</a><a href="#gardens">Gardens</a><a href="#sustainability">Sustainability</a><a href="#gardens">Gallery</a>
+    <a href="#villa">The Villa</a><a href="#amenities">Amenities</a><a href="#sustainability">Sustainability</a><a href="#gallery">Gallery</a><a href="#place">St. John</a><a href="#stay">Stay</a>
   </nav>
-  <a class="cta" href="#stay">Request dates</a>
+  <div style="display:flex;gap:22px;align-items:center"><button class="menu-btn" type="button" data-menu-open style="color:inherit">Menu</button><a class="cta" href="#request">Request dates</a></div>
 </header>
 
 <section class="hero" aria-label="Calea from above">
@@ -129,6 +131,15 @@
   </div>
 </section>
 
+<section class="film-band" aria-label="The Calea film">
+  <div class="film " style="height:clamp(380px,76vh,860px)">
+      <img src="img/terrace-wood.jpg" alt="Placeholder frame for the Calea film: the rock garden under the slatted wood ceiling">
+      <button class="play" type="button" aria-label="Play the Calea film"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4.5v15l12-7.5z"/></svg></button>
+      <span class="film-msg" hidden>The film arrives after the December shoot</span>
+      <div class="film-cap"><p class="eyebrow">The Calea film · 2–3 minutes</p><span class="film-note">Placeholder frame · filmed in December</span></div>
+    </div>
+</section>
+
 <section class="split">
   <div class="img"><img src="img/hero-pool.jpg" alt="The pool edge, with the hillside dropping away toward the water"><span class="photo-note">Placeholder · site-visit photo</span></div>
   <div class="txt">
@@ -139,13 +150,23 @@
   </div>
 </section>
 
-<section class="section" id="gardens">
+<section class="wrap section" id="amenities">
+  <div class="intro" style="align-items:start">
+    <div style="display:flex;flex-direction:column;gap:22px">
+      <p class="eyebrow">Amenities</p>
+      <h2 class="h-l">Pool, gym, roof deck and a second kitchen, all on site.</h2>
+    </div>
+    <ul class="amenities"><li>Pool and deck</li><li>Outdoor dining</li><li>Billiards and rock garden</li><li>Gym</li><li>Family and TV room</li><li>Secondary kitchen</li><li>Roof sun deck</li><li>Gardens and tropical landscaping</li></ul>
+  </div>
+</section>
+
+<section class="section" id="gallery">
   <div class="wrap gardens-head">
     <div style="display:flex;flex-direction:column;gap:20px;max-width:640px">
       <p class="eyebrow">The gardens</p>
       <h2 class="h-l">The planting came first.</h2>
     </div>
-    <p class="muted" style="max-width:40ch">Ornamental grasses along the terrace walls and a rock garden set right into the covered rooms, so the green reads from inside the house.</p>
+    <div style="display:flex;flex-direction:column;gap:16px;max-width:40ch"><p class="muted">Ornamental grasses along the terrace walls and a rock garden set right into the covered rooms, so the green reads from inside the house.</p><p><a class="link" href="#gallery">View the full gallery</a></p></div>
   </div>
   <div class="strip" tabindex="0" aria-label="Garden photographs, scroll sideways">
     <figure><div class="ph"><img src="img/garden.jpg" alt="Ornamental grasses along a concrete terrace wall, hills beyond"><span class="photo-note">Placeholder</span></div><figcaption>Grasses on the upper terrace wall.</figcaption></figure>
@@ -166,18 +187,19 @@
   </div>
 </section>
 
-<section class="cam-band" aria-label="Live view of Francis Bay">
+<section class="cam-band" id="place" aria-label="Francis Bay and St. John">
   <div class="cam">
     <img src="img/pool-deck.jpg" alt="View across the pool toward Francis Bay and the islands">
     <span class="cam-live"><i></i>Live · webcam preview</span>
     <span class="cam-time" data-cam-time>St. John</span>
+    <span class="addon">Optional add-on · quoted separately</span>
   </div>
   <div class="cap">
     <div style="display:flex;flex-direction:column;gap:12px">
-      <p class="eyebrow" style="color:rgba(255,255,255,.85)">From the terrace</p>
+      <p class="eyebrow" style="color:rgba(255,255,255,.85)">Francis Bay &amp; St. John</p>
       <h2 class="h-l">Francis Bay, right now.</h2>
     </div>
-    <span class="muted" style="color:rgba(255,255,255,.8);font-size:14px">Live feed from the house · still image shown in this preview</span>
+    <span class="muted" style="color:rgba(255,255,255,.8);font-size:14px;max-width:36ch">Beaches, trails and Cruz Bay are covered on the island page. Live view shown as a still in this preview.</span>
   </div>
 </section>
 
@@ -188,7 +210,7 @@
       <h2 class="h-l">Tell us when you would like to come.</h2>
       <p class="muted measure">Every stay is confirmed by hand. Chris and Sarah, who look after the house, will write back with availability and rates.</p>
     </div>
-    <form data-request aria-label="Reservation request">
+    <form data-request id="request" aria-label="Reservation request">
       <div class="field"><label for="a-arr">Arrival</label><input id="a-arr" type="date"></div>
       <div class="field"><label for="a-dep">Departure</label><input id="a-dep" type="date"></div>
       <div class="field"><label for="a-guests">Guests</label><select id="a-guests"><option>2</option><option>4</option><option>6</option><option>8</option><option>10</option></select></div>
@@ -207,8 +229,13 @@
     <img src="img/calea-wordmark.svg" alt="Calea St. John" style="height:44px;width:auto">
     <small>Francis Bay, St. John, U.S. Virgin Islands · <span class="tbc">enquiry email</span></small>
   </div>
+  <nav aria-label="All pages"><ul class="sitemap"><li><a href="#home">Home</a></li><li><a href="#villa">The Villa</a></li><li><a href="#amenities">Amenities</a></li><li><a href="#sustainability">Sustainability</a></li><li><a href="#gallery">Gallery</a></li><li><a href="#place">Francis Bay &amp; St. John</a></li><li><a href="#stay">Stay at Calea</a></li><li><a href="#request">Reservation Request &amp; Contact</a></li></ul></nav>
 </footer>
 
+<div class="menu-sheet" id="menu" hidden role="dialog" aria-label="Site menu">
+  <div class="row"><img src="img/calea-wordmark.svg" alt="Calea St. John" style="height:36px;width:auto"><button class="menu-btn" style="display:inline-block" type="button" data-menu-close>Close</button></div>
+  <ul><li><a href="#home">Home</a></li><li><a href="#villa">The Villa</a></li><li><a href="#amenities">Amenities</a></li><li><a href="#sustainability">Sustainability</a></li><li><a href="#gallery">Gallery</a></li><li><a href="#place">Francis Bay &amp; St. John</a></li><li><a href="#stay">Stay at Calea</a></li><li><a href="#request">Reservation Request &amp; Contact</a></li></ul>
+</div>
 <script src="site.js"></script>
 <script>
   (function () {

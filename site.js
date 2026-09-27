@@ -20,3 +20,19 @@
     });
   });
 })();
+
+// Film placeholder: say when the film arrives instead of doing nothing
+document.querySelectorAll(".film .play").forEach(function (b) {
+  b.addEventListener("click", function () {
+    var m = b.parentNode.querySelector(".film-msg");
+    if (m) m.hidden = !m.hidden;
+  });
+});
+
+// Phone menu
+(function () {
+  var sheet = document.getElementById("menu");
+  if (!sheet) return;
+  document.querySelectorAll("[data-menu-open]").forEach(function (b) { b.addEventListener("click", function () { sheet.hidden = false; }); });
+  sheet.querySelectorAll("[data-menu-close], a").forEach(function (el) { el.addEventListener("click", function () { sheet.hidden = true; }); });
+})();

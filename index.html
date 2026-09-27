@@ -121,7 +121,7 @@
   .loading { position: absolute; inset: 0; display: grid; place-items: center; font-family: var(--display); font-size: 11px; letter-spacing: .2em; text-transform: uppercase; color: #8a8883; }
 
   /* Shared */
-  .shared { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1px; background: var(--rule); border: 1px solid var(--rule); }
+  .shared { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1px; background: var(--rule); border: 1px solid var(--rule); }
   .shared > div { background: var(--surface); padding: 22px; display: flex; flex-direction: column; gap: 8px; }
   .shared h3 { font-size: 19px; font-weight: 400; }
   .shared p { font-size: 14.5px; color: var(--muted); }
@@ -188,7 +188,7 @@
       <div style="display:flex;flex-direction:column;gap:28px">
         <h1>Three ways to open the Calea website</h1>
         <div class="letter">
-          <p>Anna, here are three directions for the Calea homepage. All three use the Calea logo, the two brand colors, the request-to-book approach we agreed on, and the Francis Bay webcam you asked about. What changes between them is how the house is presented.</p>
+          <p>Anna, here are three directions for the Calea homepage. All three follow the approved proposal: the Calea logo and brand colors, the eight pages we agreed on, a place for the villa film, and the request-to-book approach. What changes between them is how the house is presented. I have also shown where the Francis Bay webcam could sit; it sits outside the original scope, so I have marked it as an optional add-on I would quote separately.</p>
           <p>Please don't judge the photographs. Most of them are my site-visit shots from September 6, taken before the interiors were finished. Kayden's October and December photos will replace them. For now, focus on the layout, the pace and the feel.</p>
           <p class="sig">Daryl Wade · VI Aerial Solutions</p>
         </div>
@@ -221,7 +221,8 @@
           <tr><th scope="row">First screen</th><td>Aerial of the house, full screen. No menu until you scroll.</td><td>Headline beside a framed photo of the great room. Menu always visible.</td><td>Great room full screen, with a date-request bar on the photo.</td></tr>
           <tr><th scope="row">Booking</th><td>One request form at the end of the page.</td><td>A green "Request dates" button in the menu on every screen.</td><td>Date bar on the first screen, plus a bottom bar on phones.</td></tr>
           <tr><th scope="row">Bedrooms</th><td>Described in a sentence; the detail lives on The Villa page.</td><td>An "at a glance" fact panel near the top.</td><td>A swipeable card for each of the five bedrooms.</td></tr>
-          <tr><th scope="row">Webcam</th><td>A full-width band: "Francis Bay, right now."</td><td>A captioned picture next to the St. John introduction.</td><td>Beside a short card with beach and ferry distances.</td></tr>
+          <tr><th scope="row">Villa film</th><td>A full-screen band right after the great room.</td><td>A framed, captioned film below the villa introduction.</td><td>A wide "See Calea in motion" section after the photos.</td></tr>
+          <tr><th scope="row">Webcam (add-on)</th><td>A full-width band: "Francis Bay, right now."</td><td>A captioned picture next to the St. John introduction.</td><td>Beside a short card with beach and ferry distances.</td></tr>
           <tr><th scope="row">Depends on</th><td>Excellent photography. Weak frames have nowhere to hide.</td><td>Good captions and copy. It feels calmer and less dramatic.</td><td>Room details and host photos, which we still need to collect.</td></tr>
         </tbody>
       </table>
@@ -308,6 +309,7 @@
     <div class="shared">
       <div><h3>Your brand</h3><p>The Calea logo and its two colors, Deep Gray and Calea Green, with a clean geometric typeface to match the wordmark.</p><div class="swatches" aria-hidden="true"><i style="background:#303030"></i><i style="background:#597140"></i><i style="background:#F4F3F0"></i><i style="background:#EAE8E3"></i></div></div>
       <div><h3>Request to book</h3><p>Guests send dates, and Chris and Sarah confirm each stay before any payment. No price on the first screen.</p></div>
+      <div><h3>The approved scope</h3><p>The eight pages from the proposal: Home, The Villa, Amenities, Sustainability, Gallery, Francis Bay &amp; St. John, Stay at Calea, and Reservation Request &amp; Contact. Every option has a place for the 2–3 minute villa film.</p></div>
       <div><h3>The house, not people</h3><p>Architecture, gardens, light and views only, as you asked. The gardens get their own section in every option.</p></div>
     </div>
   </section>
@@ -364,6 +366,15 @@
       </fieldset>
 
       <fieldset>
+        <legend>Where should the villa film sit?</legend>
+        <div class="choices">
+          <label class="choice"><input type="radio" name="film" value="Full screen, early on the page (like A)" id="fl1"><span>Full screen, early on the page (like A)</span></label>
+          <label class="choice"><input type="radio" name="film" value="Framed with a caption (like B)" id="fl2"><span>Framed with a caption (like B)</span></label>
+          <label class="choice"><input type="radio" name="film" value="Its own section after the photos (like C)" id="fl3"><span>Its own section after the photos (like C)</span></label>
+        </div>
+      </fieldset>
+
+      <fieldset>
         <legend>How visible should booking be?</legend>
         <div class="choices">
           <label class="choice"><input type="radio" name="book" value="On the first screen (like C)" id="bk1"><span>On the first screen (like C)</span></label>
@@ -373,11 +384,13 @@
       </fieldset>
 
       <fieldset>
-        <legend>Where should the webcam sit?</legend>
+        <legend>If we add the webcam, where should it sit?</legend>
+        <p class="q-help">The live webcam is an optional add-on outside the approved proposal. I would quote the camera, streaming service and setup separately.</p>
         <div class="choices">
           <label class="choice"><input type="radio" name="cam" value="A big feature on the homepage" id="cm1"><span>A big feature on the homepage</span></label>
           <label class="choice"><input type="radio" name="cam" value="Smaller, next to the St. John section" id="cm2"><span>Smaller, next to the St. John section</span></label>
           <label class="choice"><input type="radio" name="cam" value="On its own page" id="cm3"><span>On its own page</span></label>
+          <label class="choice"><input type="radio" name="cam" value="Leave it out for now" id="cm4"><span>Leave it out for now</span></label>
         </div>
       </fieldset>
 
@@ -405,7 +418,7 @@
 
   <footer class="foot">
     <span>Prepared for Francis Bay Real Estate, LLC by VI Aerial Solutions</span>
-    <span>Round 1 · homepage only · photos are placeholders</span>
+    <span>Round 1 (updated) · homepage only · photos are placeholders</span>
   </footer>
 </div>
 
@@ -466,7 +479,7 @@
         if (r || n) { parts.push(o[0] + (r ? ": " + r : "")); if (n) parts.push("  " + n.replace(/\n/g, "\n  ")); }
       });
       parts.push("");
-      [line("Booking", val("book")), line("Webcam", val("cam")), line("Other websites", txt("sites")), line("Anything else", txt("other"))]
+      [line("Film", val("film")), line("Booking", val("book")), line("Webcam", val("cam")), line("Other websites", txt("sites")), line("Anything else", txt("other"))]
         .forEach(function (x) { if (x) parts.push(x); });
       return parts.join("\n").replace(/\n{3,}/g, "\n\n").trim();
     }
