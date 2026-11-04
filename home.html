@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="robots" content="noindex, nofollow">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Calea · Homepage · Round 2</title>
+<title>Calea · Homepage · Round 3</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500&family=Jost:wght@300;400;500&display=swap">
 <link rel="stylesheet" href="site.css">
@@ -99,6 +99,31 @@
   .rates b { display:block; font-family:var(--display); font-weight:300; font-size:clamp(28px,3vw,40px); line-height:1.1; }
   .rates span { font-family:var(--display); font-size:11.5px; letter-spacing:.2em; text-transform:uppercase; color:var(--ink-2); }
   @media (max-width:860px){ .rooms{grid-template-columns:repeat(2,minmax(0,1fr));} .stj{grid-template-columns:1fr;} .top nav{display:none;} .book-bar{width:100%;} }
+
+  .rooms-strip { grid-auto-columns: minmax(280px, 26vw); padding-inline: var(--gutter); scroll-padding-inline: var(--gutter); }
+  .room { margin:0; display:flex; flex-direction:column; gap:14px; }
+  .room .ph { position:relative; aspect-ratio:4/5; overflow:hidden; background:var(--band); }
+  .room .ph img { width:100%; height:100%; object-fit:cover; }
+  .room-head { display:flex; align-items:center; gap:14px; }
+  .room-head .plant { width:44px; height:58px; flex:none; }
+  .room-head h3 { font-size:22px; letter-spacing:.18em; text-transform:uppercase; }
+  .latin { font-style:italic; font-size:14px; color:var(--ink-2); }
+  .room-line { font-size:14px; color:var(--ink-2); }
+  .room details { border-top:1px solid var(--rule); padding-top:10px; font-size:14px; color:var(--ink-2); }
+  .room summary { cursor:pointer; font-family:var(--display); font-size:11.5px; letter-spacing:.2em; text-transform:uppercase; color:var(--green); list-style:none; }
+  .room summary::-webkit-details-marker { display:none; }
+  .room summary::after { content:" +"; } .room details[open] summary::after { content:" \2212"; }
+  .room details p { margin-top:8px; } .plant-note { font-style:italic; }
+  .amen-row { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:6px; padding-bottom:var(--section); }
+  .amen-row figure { margin:0; } .amen-row .ph { position:relative; aspect-ratio:4/5; overflow:hidden; background:var(--band); }
+  .amen-row img { width:100%; height:100%; object-fit:cover; }
+  .amen-row figcaption { font-family:var(--display); font-size:11.5px; letter-spacing:.2em; text-transform:uppercase; color:var(--ink-2); padding-top:10px; }
+  .full .photo-note { z-index:3; left:auto; right:12px; }
+  .hosts { display:grid; grid-template-columns:auto minmax(0,1fr); gap:clamp(32px,6vw,96px); align-items:center; }
+  .host-ph { width:clamp(200px,24vw,300px); aspect-ratio:4/5; background:var(--band); border:1px dashed var(--rule); display:flex; flex-direction:column; align-items:center; justify-content:center; gap:10px; }
+  .host-ph span { font-family:var(--display); font-weight:300; font-size:34px; letter-spacing:.2em; color:var(--green); }
+  .host-ph em { font-style:normal; font-family:var(--display); font-size:11px; letter-spacing:.2em; text-transform:uppercase; color:var(--ink-3); }
+  @media (max-width:860px){ .rooms-strip{grid-auto-columns:78vw;} .amen-row{grid-template-columns:repeat(2,minmax(0,1fr));} .hosts{grid-template-columns:1fr;} }
 </style>
 </head>
 <body id="home">
@@ -131,7 +156,7 @@
 
 <section class="film-band" aria-label="The Calea film">
   <div class="film " style="height:100vh;min-height:520px">
-      <img src="img/terrace-wood.jpg" alt="Placeholder frame for the Calea film: the rock garden under the slatted wood ceiling">
+      <img src="https://images.unsplash.com/photo-1785862892474-7a3b550cb046?w=2000&q=75&auto=format&fit=crop" alt="Placeholder frame for the Calea film: an infinity pool at sunset">
       <button class="play" type="button" aria-label="Play the Calea film"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4.5v15l12-7.5z"/></svg></button>
       <span class="film-msg" hidden>The film arrives after the December shoot</span>
       <div class="film-cap"><p class="eyebrow">The Calea film · 2–3 minutes</p><span class="film-note">Placeholder frame · filmed in December</span></div>
@@ -154,25 +179,47 @@
 </section>
 
 <section class="full">
-  <img src="img/great-room.jpg" alt="The great room: a long stone dining table under woven pendants, glass walls open to the pool deck and the bay">
+  <img src="https://images.unsplash.com/photo-1790276317950-cd0cad99655d?w=2000&q=75&auto=format&fit=crop" alt="Placeholder: a modern living space opening onto an infinity pool and the sea"><span class="photo-note">Placeholder · reference image</span>
   <div class="cap">
     <p class="eyebrow">Indoors and out</p>
     <p class="h-m" style="font-family:var(--display);font-weight:300">The glass walls slide away. The room becomes the terrace.</p>
   </div>
 </section>
 
-<section class="wrap section" id="rooms">
-  <div class="gardens-head" style="padding:0">
-    <div style="display:flex;flex-direction:column;gap:20px"><p class="eyebrow">Five bedrooms</p><h2 class="h-l">Each room is named for a native plant.</h2></div>
+<section class="section" id="rooms">
+  <div class="wrap gardens-head"><div style="display:flex;flex-direction:column;gap:20px"><p class="eyebrow">Five bedrooms</p><h2 class="h-l">Each room is named for a native plant.</h2></div></div>
+  <div class="strip rooms-strip" tabindex="0" aria-label="Bedrooms, scroll sideways">
+    <figure class="room">
+      <div class="ph"><img src="https://images.unsplash.com/photo-1760067537376-265afef0f362?w=900&q=75&auto=format&fit=crop" alt="Placeholder bedroom image for Agave" loading="lazy"><span class="photo-note">Placeholder</span></div>
+      <div class="room-head"><img class="plant" src="img/plants/agave.svg" alt="" aria-hidden="true"><div><h3>Agave</h3><p class="latin">Agave missionum</p></div></div>
+      <p class="room-line">Main level · 1 King</p>
+      <details><summary>Room details</summary><p>Partial ocean and garden view, private terrace, outdoor shower. En suite bath.</p><p class="plant-note">The native century plant, crowned with yellow blooms.</p></details>
+    </figure>
+    <figure class="room">
+      <div class="ph"><img src="https://images.unsplash.com/photo-1721369483526-62f48a00b949?w=900&q=75&auto=format&fit=crop" alt="Placeholder bedroom image for Plumeria" loading="lazy"><span class="photo-note">Placeholder</span></div>
+      <div class="room-head"><img class="plant" src="img/plants/plumeria.svg" alt="" aria-hidden="true"><div><h3>Plumeria</h3><p class="latin">Plumeria alba</p></div></div>
+      <p class="room-line">Upper level · Primary suite · 1 King</p>
+      <details><summary>Room details</summary><p>Ocean view, private terrace, walk-in closet, outdoor shower. En suite bath.</p><p class="plant-note">Star-shaped blossoms of the dry tropical forest.</p></details>
+    </figure>
+    <figure class="room">
+      <div class="ph"><img src="https://images.unsplash.com/photo-1668277155881-9d3bccb1683a?w=900&q=75&auto=format&fit=crop" alt="Placeholder bedroom image for Bay Rum" loading="lazy"><span class="photo-note">Placeholder</span></div>
+      <div class="room-head"><img class="plant" src="img/plants/bay-rum.svg" alt="" aria-hidden="true"><div><h3>Bay Rum</h3><p class="latin">Pimenta racemosa</p></div></div>
+      <p class="room-line">Upper level · 1 King</p>
+      <details><summary>Room details</summary><p>Ocean view, private terrace, walk-in closet, outdoor shower. En suite bath.</p><p class="plant-note">The aromatic leaf behind St. John's bay rum.</p></details>
+    </figure>
+    <figure class="room">
+      <div class="ph"><img src="https://images.unsplash.com/photo-1776876648949-63ccabf63b10?w=900&q=75&auto=format&fit=crop" alt="Placeholder bedroom image for Eugenia" loading="lazy"><span class="photo-note">Placeholder</span></div>
+      <div class="room-head"><img class="plant" src="img/plants/eugenia.svg" alt="" aria-hidden="true"><div><h3>Eugenia</h3><p class="latin">Eugenia earhartii</p></div></div>
+      <p class="room-line">Upper level · 1 King, plus a bunk room with 1 Full and 1 Twin</p>
+      <details><summary>Room details</summary><p>Ocean view, private terrace, two walk-in closets. En suite bath.</p><p class="plant-note">A rare native found in only two places, both on St. John.</p></details>
+    </figure>
+    <figure class="room">
+      <div class="ph"><img src="https://images.unsplash.com/photo-1760067538083-b9d87cd6706c?w=900&q=75&auto=format&fit=crop" alt="Placeholder bedroom image for Wattapama" loading="lazy"><span class="photo-note">Placeholder</span></div>
+      <div class="room-head"><img class="plant" src="img/plants/wattapama.svg" alt="" aria-hidden="true"><div><h3>Wattapama</h3><p class="latin">Poitea florida</p></div></div>
+      <p class="room-line">Lower level · 1 King</p>
+      <details><summary>Room details</summary><p>Partial ocean and salt pond view. En suite bath.</p><p class="plant-note">An ancient native tree, shaped by sun and wind.</p></details>
+    </figure>
   </div>
-  <div class="rooms">
-    <figure><img src="img/great-room.jpg" alt=""><figcaption>Plumeria</figcaption></figure>
-    <figure><img src="img/terrace-wood.jpg" alt=""><figcaption>Bay Rum</figcaption></figure>
-    <figure><img src="img/garden.jpg" alt=""><figcaption>Eugenia</figcaption></figure>
-    <figure><img src="img/stone-view.jpg" alt=""><figcaption>Wattapama</figcaption></figure>
-    <figure><img src="img/hero-pool.jpg" alt=""><figcaption>Agave</figcaption></figure>
-  </div>
-  <p class="muted" style="margin-top:20px;font-size:14px"><span class="tbc">Placeholder images</span> until the room photography is done.</p>
 </section>
 
 <section class="split" id="privacy">
@@ -180,7 +227,7 @@
   <div class="txt">
     <p class="eyebrow">Privacy</p>
     <h2 class="h-l">Behind the entry gate, the hillside is yours.</h2>
-    <p class="muted measure">Set well back from the road and screened by planting. <span class="tbc">Gate and security details</span></p>
+    <p class="muted measure">Guests enter through a handcrafted gate, tucked away from public view. Coded access keeps arrival effortless and private.</p>
   </div>
 </section>
 
@@ -190,8 +237,15 @@
       <p class="eyebrow">Amenities</p>
       <h2 class="h-l">Everything is on site.</h2>
     </div>
-    <ul class="amenities"><li>Pool and deck</li><li>Outdoor dining</li><li>Billiards and rock garden</li><li>Gym</li><li>Family and TV room</li><li>Secondary kitchen</li><li>Roof sun deck</li><li>Gardens and tropical landscaping</li></ul>
+    <ul class="amenities"><li>Pool and deck</li><li>Outdoor dining</li><li>Billiards and rock garden</li><li>Gym</li><li>Family and TV room</li><li>Secondary kitchen</li><li>Roof sun deck</li><li>Gardens and tropical landscaping</li><li>Garage and parking for 8 vehicles</li></ul>
   </div>
+</section>
+
+<section class="wrap amen-row" aria-label="Amenity images">
+  <figure><div class="ph"><img src="https://images.unsplash.com/photo-1786204413545-cc7f6d87a112?w=900&q=75&auto=format&fit=crop" alt="Placeholder: a home gym with large windows onto planting" loading="lazy"><span class="photo-note">Placeholder</span></div><figcaption>Fitness studio</figcaption></figure>
+  <figure><div class="ph"><img src="https://images.unsplash.com/photo-1718931162137-add643ee948f?w=900&q=75&auto=format&fit=crop" alt="Placeholder: sunset over the sea from a deck" loading="lazy"><span class="photo-note">Placeholder</span></div><figcaption>Rooftop viewing deck</figcaption></figure>
+  <figure><div class="ph"><img src="https://images.unsplash.com/photo-1661069543192-98a5a598ae9e?w=900&q=75&auto=format&fit=crop" alt="Placeholder: an outdoor shower surrounded by tropical planting" loading="lazy"><span class="photo-note">Placeholder</span></div><figcaption>Outdoor showers</figcaption></figure>
+  <figure><div class="ph"><img src="https://images.unsplash.com/photo-1756079664354-34944e001f6d?w=900&q=75&auto=format&fit=crop" alt="Placeholder: a modern bathroom with a stone vanity and two sinks" loading="lazy"><span class="photo-note">Placeholder</span></div><figcaption>En suite baths</figcaption></figure>
 </section>
 
 <section class="section" id="gallery">
@@ -216,7 +270,7 @@
     <div style="display:flex;flex-direction:column;gap:22px;max-width:640px">
       <p class="eyebrow">Sustainability</p>
       <h2 class="h-l">Built to run on its own power.</h2>
-      <p class="muted"><span class="tbc">Solar and water system details</span> go here once Anna confirms the specifications in writing. Nothing specific is published before then.</p>
+      <p class="muted">Solar powered, with a backup generator. <span class="tbc">System details</span></p>
     </div>
   </div>
 </section>
@@ -238,8 +292,17 @@
 
 <section class="wrap section" id="rates" style="padding-bottom:0">
   <p class="eyebrow">Rates · per week</p>
-  <div class="rates"><div><b>$25,000</b><span>Winter</span></div><div><b>$20,000</b><span>Summer</span></div><div><b><span class="tbc">TBC</span></b><span>Holiday · Dec 18 to Jan 7</span></div></div>
-  <p class="muted" style="margin-top:16px;font-size:14px"><span class="tbc">Draft from Anna's copy</span> Not final until she confirms.</p>
+  <div class="rates"><div><b>$25,000</b><span>Winter</span></div><div><b>$20,000</b><span>Summer</span></div><div><b><span class="tbc">Rate TBC</span></b><span>Holiday · Dec 18 to Jan 7</span></div></div>
+  <p class="muted" style="margin-top:16px;font-size:14px">Rates are plus tax and may vary with the number of guests, travel dates and length of stay.</p>
+</section>
+
+<section class="wrap section hosts" id="hosts">
+  <div class="host-ph" role="img" aria-label="Placeholder for a portrait of Chris and Sarah"><span>C&nbsp;&amp;&nbsp;S</span><em>Portrait to come</em></div>
+  <div style="display:flex;flex-direction:column;gap:20px;max-width:46ch">
+    <p class="eyebrow">Your hosts</p>
+    <h2 class="h-l">Chris and Sarah look after Calea, and every stay.</h2>
+    <p class="muted">They answer each request personally, and can arrange an in-villa massage, a Caribbean cooking class or a day on the water. <span class="tbc">Bio</span></p>
+  </div>
 </section>
 
 <section class="wrap section" id="stay">
@@ -266,7 +329,7 @@
 <footer class="site band wrap">
   <div class="cols">
     <img src="img/calea-wordmark.svg" alt="Calea St. John" style="height:44px;width:auto">
-    <small>Francis Bay, St. John, U.S. Virgin Islands · <span class="tbc">enquiry email</span></small>
+    <small>Francis Bay, St. John, U.S. Virgin Islands · <a href="mailto:info@caleastjohn.com">info@caleastjohn.com</a></small>
   </div>
   <nav aria-label="All pages"><ul class="sitemap"><li><a href="#home">Home</a></li><li><a href="#villa">The Villa</a></li><li><a href="#rooms">Rooms</a></li><li><a href="#amenities">Amenities</a></li><li><a href="#privacy">Privacy</a></li><li><a href="#sustainability">Sustainability</a></li><li><a href="#gallery">Gallery</a></li><li><a href="#place">Francis Bay &amp; St. John</a></li><li><a href="#stay">Stay at Calea</a></li><li><a href="#request">Reservation Request &amp; Contact</a></li></ul></nav>
 </footer>
