@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="robots" content="noindex, nofollow">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Calea · Homepage · Round 3</title>
+<title>Calea · Homepage · Round 4</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500&family=Jost:wght@300;400;500&display=swap">
 <link rel="stylesheet" href="site.css">
@@ -124,13 +124,24 @@
   .host-ph span { font-family:var(--display); font-weight:300; font-size:34px; letter-spacing:.2em; color:var(--green); }
   .host-ph em { font-style:normal; font-family:var(--display); font-size:11px; letter-spacing:.2em; text-transform:uppercase; color:var(--ink-3); }
   @media (max-width:860px){ .rooms-strip{grid-auto-columns:78vw;} .amen-row{grid-template-columns:repeat(2,minmax(0,1fr));} .hosts{grid-template-columns:1fr;} }
+
+  .brand { display:flex; align-items:center; gap:12px; text-decoration:none; }
+  .brand .leaf { height:44px; width:auto; }
+  .brand .leaf-d { display:none; }
+  .top.scrolled .brand .leaf { height:30px; }
+  .top.scrolled .brand .leaf-w { display:none; }
+  .top.scrolled .brand .leaf-d { display:block; }
 </style>
 </head>
 <body id="home">
 
 <header class="top" id="top">
-  <img class="mark-w" src="img/calea-wordmark-white.svg" alt="Calea St. John">
-  <img class="mark-d" src="img/calea-wordmark.svg" alt="" aria-hidden="true">
+  <a class="brand" href="#home" aria-label="Calea St. John, home">
+    <img class="leaf leaf-w" src="img/calea-leaf-solid-white.svg" alt="" aria-hidden="true">
+    <img class="leaf leaf-d" src="img/calea-leaf-solid.svg" alt="" aria-hidden="true">
+    <img class="mark-w" src="img/calea-wordmark-white.svg" alt="">
+    <img class="mark-d" src="img/calea-wordmark.svg" alt="" aria-hidden="true">
+  </a>
   <nav aria-label="Main">
     <a href="#villa">The Villa</a><a href="#rooms">Rooms</a><a href="#privacy">Privacy</a><a href="#gallery">Gallery</a><a href="#place">St. John</a><a href="#stay">Stay</a>
   </nav>
