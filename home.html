@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="robots" content="noindex, nofollow">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Calea · Homepage · Round 6</title>
+<title>Calea · Homepage · Round 7</title>
 <script>if(!matchMedia("(prefers-reduced-motion: reduce)").matches&&"IntersectionObserver" in window)document.documentElement.classList.add("motion");</script>
 <link rel="icon" type="image/svg+xml" href="img/calea-leaf-seagrape-a.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -174,6 +174,18 @@
   .top .cta { transition: color var(--t-micro) var(--ease-out), border-color var(--t-micro) var(--ease-out); }
   .film .play { transition: background var(--t-micro) var(--ease-out), transform var(--t-ui) var(--ease-out); }
   .film .play:hover { transform: translate(-50%,-50%) scale(1.06); }
+  /* Film band, round 7: a silent looping preview stands in until the December film */
+  .film .film-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: .94; }
+  .film .play { transition: background var(--t-micro) var(--ease-out), transform var(--t-ui) var(--ease-out), opacity var(--t-ui) var(--ease-out); }
+  .film.is-playing .play { opacity: 0; pointer-events: none; }
+  .film .film-note { display: inline-flex; align-items: center; gap: 14px; }
+  .film-toggle { width: 34px; height: 34px; border-radius: 50%; border: 1px solid rgba(255,255,255,.6); background: rgba(20,20,20,.25); color: #fff; display: inline-grid; place-items: center; cursor: pointer; transition: background var(--t-micro) var(--ease-out); }
+  .film-toggle:hover { background: rgba(20,20,20,.5); }
+  .film-toggle:focus-visible, .film .play:focus-visible { outline: 2px solid #fff; outline-offset: 3px; }
+  .film-toggle svg { width: 14px; height: 14px; fill: currentColor; }
+  .film-toggle .i-play { display: none; margin-left: 2px; }
+  .film:not(.is-playing) .film-toggle .i-pause { display: none; }
+  .film:not(.is-playing) .film-toggle .i-play { display: block; }
   @media (hover: hover) {
     .room .ph img, .amen-row .ph img, .strip .ph img { transition: transform 900ms var(--ease-out), opacity 600ms var(--ease-out); }
     .room:hover .ph img, .amen-row figure:hover .ph img, .strip figure:hover .ph img { transform: scale(1.035); }
@@ -240,11 +252,13 @@
 </section>
 
 <section class="film-band" aria-label="The Calea film">
-  <div class="film " style="height:100vh;min-height:520px">
-      <img src="https://images.unsplash.com/photo-1785862892474-7a3b550cb046?w=2000&q=75&auto=format&fit=crop" alt="Placeholder frame for the Calea film: an infinity pool at sunset">
-      <button class="play" type="button" aria-label="Play the Calea film"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4.5v15l12-7.5z"/></svg></button>
-      <span class="film-msg" hidden>The film arrives after the December shoot</span>
-      <div class="film-cap"><p class="eyebrow">The Calea film · 2–3 minutes</p><span class="film-note">Placeholder frame · filmed in December</span></div>
+  <div class="film" style="height:100vh;min-height:520px" data-film>
+      <video class="film-video" muted loop playsinline preload="none" poster="video/calea-film-poster.jpg" aria-label="Placeholder footage: a planted stone walkway leading to glass doors and the sea, then an infinity pool at dusk">
+        <source src="video/calea-film-1080.mp4" type="video/mp4" media="(min-width: 901px)">
+        <source src="video/calea-film-720.mp4" type="video/mp4">
+      </video>
+      <button class="play" type="button" aria-label="Play the film preview"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4.5v15l12-7.5z"/></svg></button>
+      <div class="film-cap"><p class="eyebrow">The Calea film · 2–3 minutes</p><span class="film-note">Placeholder footage, not Calea · the film is shot in December <button class="film-toggle" type="button" aria-label="Pause the film preview" hidden><svg class="i-pause" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 5h3.5v14H7zM13.5 5H17v14h-3.5z"/></svg><svg class="i-play" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4.5v15l12-7.5z"/></svg></button></span></div>
     </div>
 </section>
 
@@ -490,6 +504,35 @@
     prev.addEventListener("click", function () { strip.scrollBy({ left: -step(), behavior: motion ? "smooth" : "auto" }); });
     next.addEventListener("click", function () { strip.scrollBy({ left: step(), behavior: motion ? "smooth" : "auto" }); });
     strip.addEventListener("scroll", sync, { passive: true }); window.addEventListener("resize", sync); sync();
+  }
+
+  // Film band: the preview plays silently while it is on screen. It waits for a tap
+  // when the visitor prefers reduced motion or has data saver on, and can always be paused.
+  var film = document.querySelector("[data-film]");
+  if (film) {
+    var vid = film.querySelector("video"), big = film.querySelector(".play"), tog = film.querySelector(".film-toggle");
+    var saveData = navigator.connection && navigator.connection.saveData;
+    var auto = motion && !saveData, userPaused = false, loaded = false;
+    function load() { if (!loaded) { vid.preload = "auto"; vid.load(); loaded = true; } }
+    function play() { load(); var p = vid.play(); if (p && p.catch) p.catch(function () {}); }
+    function sync() {
+      var on = !vid.paused;
+      film.classList.toggle("is-playing", on);
+      tog.hidden = !loaded;
+      tog.setAttribute("aria-label", on ? "Pause the film preview" : "Play the film preview");
+    }
+    vid.addEventListener("play", sync); vid.addEventListener("pause", sync);
+    big.addEventListener("click", function () { userPaused = false; play(); });
+    tog.addEventListener("click", function () { if (vid.paused) { userPaused = false; play(); } else { userPaused = true; vid.pause(); } });
+    if ("IntersectionObserver" in window) {
+      new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (e.isIntersecting) { if (auto && !userPaused) play(); }
+          else if (!vid.paused) vid.pause();
+        });
+      }, { rootMargin: "200px 0px", threshold: 0.25 }).observe(film);
+    }
+    sync();
   }
 
   // Request buttons confirm the change of state
