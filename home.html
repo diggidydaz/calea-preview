@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="robots" content="noindex, nofollow">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Calea · Homepage · Round 7</title>
+<title>Calea · Homepage · Round 8</title>
 <script>if(!matchMedia("(prefers-reduced-motion: reduce)").matches&&"IntersectionObserver" in window)document.documentElement.classList.add("motion");</script>
 <link rel="icon" type="image/svg+xml" href="img/calea-leaf-seagrape-a.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -57,7 +57,7 @@
   .split .img img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
   .split .txt { display: flex; flex-direction: column; justify-content: center; gap: 24px; padding: var(--section) var(--gutter); }
 
-  .strip { display: grid; grid-auto-flow: column; grid-auto-columns: minmax(280px, 34vw); gap: 6px; overflow-x: auto; scroll-snap-type: x mandatory; padding-inline: var(--gutter); scrollbar-width: thin; }
+  .strip { display: grid; grid-auto-flow: column; grid-auto-columns: minmax(280px, 34vw); gap: 6px; overflow-x: auto; scroll-snap-type: x mandatory; padding-inline: var(--gutter); scroll-padding-inline: var(--gutter); scrollbar-width: thin; }
   .strip figure { margin: 0; scroll-snap-align: start; display: flex; flex-direction: column; gap: 14px; }
   .strip .ph { position: relative; aspect-ratio: 4/5; overflow: hidden; }
   .strip img { width: 100%; height: 100%; object-fit: cover; }
@@ -217,9 +217,134 @@
     .plant path, .plant circle { stroke-dashoffset: 0 !important; }
     .hero img { animation: none; }
   }
+
+  /* ---------------------------------------------------------------
+     Round 7 · accessibility pass (WCAG 2.2 AA + house standard)
+     --------------------------------------------------------------- */
+  :root { --err: #8A2C1F; }
+  .skip { position: absolute; left: 12px; top: -120px; z-index: 100; background: var(--green-deep); color: #fff; padding: 14px 20px; font-family: var(--display); font-size: 13px; letter-spacing: .14em; text-transform: uppercase; text-decoration: none; }
+  .skip:focus { top: 12px; }
+  main:focus { outline: none; }
+
+  /* Focus: a solid ring that holds 3:1 on every surface */
+  :focus-visible { outline: 2px solid var(--green-deep); outline-offset: 3px; }
+  .hero :focus-visible, .film :focus-visible, .top:not(.scrolled) :focus-visible { outline-color: #fff; }
+  .hero .book-bar :focus-visible { outline-color: var(--green-deep); }
+  .field input:focus, .field textarea:focus, .field select:focus,
+  .book-bar input:focus, .book-bar select:focus { outline: 2px solid var(--green-deep); outline-offset: 2px; }
+
+  /* Hero scrim: built into the section so the headline and menu hold contrast on any photo */
+  .hero::after {
+    background:
+      linear-gradient(to bottom, rgba(18,20,18,.62) 0, rgba(18,20,18,.32) 90px, rgba(18,20,18,0) 170px),
+      linear-gradient(to top, rgba(18,20,18,.82) 0%, rgba(18,20,18,.70) 38%, rgba(18,20,18,.36) 62%, rgba(18,20,18,0) 82%);
+  }
+  .hero-copy .eyebrow, .hero-copy h1 { text-shadow: 0 1px 2px rgba(0,0,0,.3), 0 2px 22px rgba(0,0,0,.35); }
+  .hero-copy .eyebrow { color: #fff; }
+
+  /* Header: 44px targets, phone header that fits on one line */
+  .top-actions { display: flex; gap: 22px; align-items: center; }
+  .top nav a { display: inline-flex; align-items: center; min-height: 44px; padding-bottom: 0; }
+  .top nav a::after { bottom: 10px; }
+  .top .cta { display: inline-flex; align-items: center; min-height: 44px; padding-bottom: 0; white-space: nowrap; border-bottom: 0;
+    background: linear-gradient(currentColor, currentColor) 0 calc(100% - 9px) / 100% 1px no-repeat; }
+  .top .menu-btn, .menu-btn { min-height: 44px; padding: 0 6px; }
+  .top nav a { min-width: 44px; justify-content: center; }
+  .top .brand { display: inline-flex; align-items: center; min-height: 44px; }
+  @media (max-width: 860px) {
+    .top { gap: 12px; padding-block: 14px; }
+    .top .mark-w { height: 36px; }
+    .top .brand .leaf { height: 32px; }
+    .top-actions { gap: 16px; }
+    .top .cta { letter-spacing: .14em; }
+  }
+  @media (max-width: 360px) { .top .cta { letter-spacing: .08em; } .top-actions { gap: 10px; } }
+
+  /* Readable sizes: running text never below 16px */
+  .room details, .room-line, .latin, .strip figcaption, footer.site small { font-size: 16px; }
+  .film .film-note { font-size: 15px; }
+  .host-ph em { color: var(--ink-2); }
+
+  /* Targets */
+  .room summary { display: flex; align-items: center; min-height: 44px; }
+  .sitemap { row-gap: 0; }
+  .sitemap a { display: inline-flex; align-items: center; min-height: 44px; }
+  .film-toggle { width: 44px; height: 44px; }
+  .field input, .field select { min-height: 44px; }
+
+  /* ---------------------------------------------------------------
+     Booking bar (hero) and reservation form
+     --------------------------------------------------------------- */
+  .book-bar { display: block; padding: 16px 18px; overflow: hidden; }
+  .bb-fields { display: grid; grid-template-columns: 172px 172px 92px auto;
+    grid-template-areas: "arr dep gst btn" "earr edep . ."; column-gap: 14px; row-gap: 0; align-items: end; }
+  .bb-arr { grid-area: arr; } .bb-dep { grid-area: dep; } .bb-gst { grid-area: gst; } .bb-btn { grid-area: btn; }
+  .bb-e-arr { grid-area: earr; } .bb-e-dep { grid-area: edep; }
+  .bb-f { display: flex; flex-direction: column; gap: 6px; }
+  .bb-f label { font-family: var(--display); font-size: 12px; letter-spacing: .2em; text-transform: uppercase; color: var(--ink-2); }
+  .book-bar input, .book-bar select { box-sizing: border-box; width: 100%; min-height: 46px; font: inherit; font-size: 16px; letter-spacing: 0; text-transform: none; color: var(--ink); background: #fff; border: 1px solid rgba(48,48,48,.45); padding: 9px 10px; }
+  .bb-btn { min-height: 46px; }
+  .book-bar .f-err { margin-top: 8px; }
+  @media (max-width: 860px) {
+    .book-bar { width: 100%; padding: 16px; }
+    .bb-fields { grid-template-columns: 1fr 1fr; grid-template-areas: "arr dep" "earr edep" "gst btn"; }
+    .bb-gst, .bb-btn { margin-top: 14px; }
+    .bb-btn { width: 100%; padding-inline: 10px; letter-spacing: .12em; white-space: nowrap; }
+  }
+
+  .f-err { font-size: 15px; line-height: 1.4; color: var(--err); display: flex; gap: 6px; align-items: baseline; }
+  .f-err::before { content: "!"; flex: 0 0 auto; display: inline-grid; place-items: center; width: 16px; height: 16px; border-radius: 50%; background: var(--err); color: #fff; font-size: 11px; font-weight: 500; transform: translateY(2px); }
+  [aria-invalid="true"] { border-color: var(--err) !important; box-shadow: inset 0 0 0 1px var(--err); }
+  .field .f-err { margin-top: 2px; }
+
+  .req form { display: block; }
+  .rq-fields { display: grid; grid-template-columns: 1fr 1fr; gap: 28px 32px; align-content: start; }
+  .rq-note { font-size: 16px; color: var(--ink-2); margin: 0; }
+  .opt { text-transform: none; letter-spacing: 0; font-family: var(--body, inherit); font-size: 13px; color: var(--ink-2); }
+  .err-summary { border-left: 3px solid var(--err); background: #F8ECE8; padding: 16px 20px; color: var(--ink); }
+  .err-summary:focus { outline: 2px solid var(--err); outline-offset: 3px; }
+  .err-title { font-weight: 500; font-size: 16px; margin: 0 0 6px; }
+  .err-summary ul { margin: 0; padding-left: 18px; }
+  .err-summary a { color: var(--err); font-size: 16px; text-underline-offset: 3px; display: inline-block; padding-block: 4px; }
+  @media (max-width: 860px) { .rq-fields { grid-template-columns: 1fr; } }
+
+  /* Confirmation view: replaces the fields inside the same box */
+  .done { display: grid; grid-template-columns: 44px minmax(0, 1fr); column-gap: 18px; row-gap: 6px; align-items: start; color: var(--ink); }
+  .done > :not(.tick) { grid-column: 2; margin: 0; }
+  .done .tick { grid-row: 1 / span 3; width: 44px; height: 44px; }
+  .tick circle { fill: none; stroke: var(--green); stroke-width: 1.5; stroke-dasharray: 1; stroke-dashoffset: 0; }
+  .tick path { fill: none; stroke: var(--green-deep); stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 1; stroke-dashoffset: 0; }
+  .done .eyebrow, .hero-copy .book-bar .eyebrow { color: var(--green-deep); text-shadow: none; }
+  .done-title { font-family: var(--display); font-weight: 300; font-size: clamp(20px, 1.8vw, 24px); line-height: 1.3; color: var(--ink); }
+  .done-title:focus { outline: none; }
+  .done-title span { white-space: nowrap; }
+  .done-text { font-size: 16px; line-height: 1.55; color: var(--ink); max-width: 48ch; }
+  .done-actions { display: flex; flex-wrap: wrap; gap: 8px 24px; align-items: center; margin-top: 10px !important; }
+  .text-btn { background: none; border: 0; padding: 0 2px; min-height: 44px; font: inherit; font-size: 16px; color: var(--green-deep); text-decoration: underline; text-underline-offset: 4px; text-decoration-thickness: 1px; cursor: pointer; }
+  .text-btn:hover { text-decoration-thickness: 2px; }
+  .req .done { padding-top: 4px; }
+  .req .done-title { font-size: clamp(24px, 2.2vw, 30px); }
+
+  /* The change of state, eased like a slowing tide: the fields soften away,
+     the box settles to its new height, then the confirmation surfaces line by line */
+  .motion .is-morphing { transition: height 620ms var(--ease-out); }
+  .motion .m-out > * { animation: m-out 280ms var(--ease-in-out) both; }
+  .motion .m-out > :nth-child(2) { animation-delay: 30ms; } .motion .m-out > :nth-child(3) { animation-delay: 60ms; } .motion .m-out > :nth-child(n+4) { animation-delay: 90ms; }
+  @keyframes m-out { to { opacity: 0; transform: translateY(-6px); filter: blur(3px); } }
+  .motion .m-in > * { animation: m-in 680ms var(--ease-out) both; }
+  .motion .m-in > :nth-child(2) { animation-delay: 140ms; } .motion .m-in > :nth-child(3) { animation-delay: 220ms; }
+  .motion .m-in > :nth-child(4) { animation-delay: 300ms; } .motion .m-in > :nth-child(n+5) { animation-delay: 380ms; }
+  @keyframes m-in { from { opacity: 0; transform: translateY(10px); filter: blur(4px); } to { opacity: 1; transform: none; filter: none; } }
+  .motion .m-in .tick { animation: m-tick 700ms var(--ease-out) both; }
+  .motion .m-in .tick circle { animation: draw 900ms var(--ease-out) 60ms both; }
+  .motion .m-in .tick path { animation: draw 520ms var(--ease-out) 560ms both; }
+  @keyframes m-tick { from { opacity: 0; transform: scale(.86); } to { opacity: 1; transform: none; } }
+  @keyframes draw { from { stroke-dashoffset: 1; } to { stroke-dashoffset: 0; } }
+  .motion .f-err.m-err { animation: m-in 380ms var(--ease-out) both; }
 </style>
 </head>
 <body id="home">
+<a class="skip" href="#main">Skip to content</a>
 
 <header class="top" id="top">
   <a class="brand" href="#home" aria-label="Calea St. John, home">
@@ -231,9 +356,10 @@
   <nav aria-label="Main">
     <a href="#villa">The Villa</a><a href="#rooms">Rooms</a><a href="#privacy">Privacy</a><a href="#gallery">Gallery</a><a href="#place">St. John</a><a href="#stay">Stay</a>
   </nav>
-  <div style="display:flex;gap:22px;align-items:center"><button class="menu-btn" type="button" data-menu-open style="color:inherit">Menu</button><a class="cta" href="#request">Request dates</a></div>
+  <div class="top-actions"><button class="menu-btn" type="button" data-menu-open aria-haspopup="dialog" aria-controls="menu" aria-expanded="false">Menu</button><a class="cta" href="#request">Request dates</a></div>
 </header>
 
+<main id="main" tabindex="-1">
 <section class="hero" aria-label="Calea from above">
   <img src="img/aerial.jpg" alt="Calea from the air: terraced stone and concrete levels, a solar roof, and the pool set into the green hillside">
   <div class="hero-copy">
@@ -241,12 +367,22 @@
       <p class="eyebrow">Francis Bay · St. John</p>
       <h1>Private comfort, seclusion and elegance in the heart of St. John.</h1>
     </div>
-    <form class="book-bar" data-request aria-label="Check dates">
-      <label>Arrival<input type="date"></label>
-      <label>Departure<input type="date"></label>
-      <label>Guests<select><option>2</option><option>4</option><option>6</option><option>8</option><option>10</option></select></label>
-      <button class="btn btn-primary" type="submit">Request dates</button>
-      <p class="sent" data-sent hidden style="color:#fff;width:100%">Thank you. Chris and Sarah will reply by email.</p>
+    <form class="book-bar" data-booking="check" aria-label="Check dates" novalidate>
+      <div class="bb-fields" data-fields>
+        <div class="bb-f bb-arr"><label for="h-arr">Arrival</label><input id="h-arr" name="arrival" type="date" required aria-describedby="h-arr-err"></div>
+        <div class="bb-f bb-dep"><label for="h-dep">Departure</label><input id="h-dep" name="departure" type="date" required aria-describedby="h-dep-err"></div>
+        <div class="bb-f bb-gst"><label for="h-guests">Guests</label><select id="h-guests" name="guests"><option>1</option><option selected>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option><option>9</option><option>10</option></select></div>
+        <button class="btn btn-primary bb-btn" type="submit">Request dates</button>
+        <p class="f-err bb-e-arr" id="h-arr-err" hidden></p>
+        <p class="f-err bb-e-dep" id="h-dep-err" hidden></p>
+      </div>
+      <div class="done" data-done hidden>
+        <svg class="tick" viewBox="0 0 44 44" aria-hidden="true" focusable="false"><circle pathLength="1" cx="22" cy="22" r="20"/><path pathLength="1" d="M13.5 22.5l6 6L31 16.5"/></svg>
+        <p class="eyebrow">Dates noted</p>
+        <p class="done-title" tabindex="-1" data-done-focus></p>
+        <p class="done-text">Add your name and email below, and Chris and Sarah will reply personally with availability and rates.</p>
+        <div class="done-actions"><a class="btn btn-primary" href="#request" data-continue>Continue request</a><button class="text-btn" type="button" data-edit>Change dates</button></div>
+      </div>
     </form>
   </div>
 </section>
@@ -356,10 +492,11 @@
     <div style="display:flex;flex-direction:column;gap:16px;max-width:40ch"><p class="muted">Grasses along the terraces and a rock garden inside the covered rooms.</p><p><a class="link" href="#gallery">View the full gallery</a></p></div>
   </div>
   <div class="strip" tabindex="0" aria-label="Garden photographs, scroll sideways">
-    <figure><div class="ph"><img src="img/garden.jpg" alt="Ornamental grasses along a concrete terrace wall, hills beyond"><span class="photo-note">Placeholder</span></div><figcaption>Grasses on the upper terrace wall.</figcaption></figure>
-    <figure><div class="ph"><img src="img/terrace-wood.jpg" alt="The rock garden framed by stone columns under the slatted wood ceiling"><span class="photo-note">Placeholder</span></div><figcaption>The rock garden, inside the covered room.</figcaption></figure>
-    <figure><div class="ph"><img src="img/entry.jpg" alt="The entry: stone columns, planted terraces and a patterned steel door"><span class="photo-note">Placeholder</span></div><figcaption>Arrival, between stone columns.</figcaption></figure>
-    <figure><div class="ph"><img src="img/stone-view.jpg" alt="Stone wall and fire pit on the open terrace"><span class="photo-note">Placeholder</span></div><figcaption>The fire pit on the open terrace.</figcaption></figure>
+    <figure><div class="ph"><img src="img/garden-fern.jpg" width="960" height="1200" alt="Placeholder: A fern rooted in a crevice between grey limestone rocks" loading="lazy"><span class="photo-note">Placeholder</span></div><figcaption>Fern rooted between the stones.</figcaption></figure>
+    <figure><div class="ph"><img src="img/garden-heliconia.jpg" width="960" height="1200" alt="Placeholder: A red and yellow heliconia bud among broad green leaves" loading="lazy"><span class="photo-note">Placeholder</span></div><figcaption>Heliconia in bud.</figcaption></figure>
+    <figure><div class="ph"><img src="img/garden-mango.jpg" width="960" height="1200" alt="Placeholder: A ripening yellow mango and a green one hanging in a mango tree" loading="lazy"><span class="photo-note">Placeholder</span></div><figcaption>Mango, ripening on the branch.</figcaption></figure>
+    <figure><div class="ph"><img src="img/garden-fan-palm.jpg" width="960" height="1200" alt="Placeholder: Sunlit fan palm fronds radiating from their stems" loading="lazy"><span class="photo-note">Placeholder</span></div><figcaption>Fan palm in the afternoon light.</figcaption></figure>
+    <figure><div class="ph"><img src="img/garden-silver-palm.jpg" width="960" height="1200" alt="Placeholder: A silver fan palm against a deep blue evening sky" loading="lazy"><span class="photo-note">Placeholder</span></div><figcaption>Silver palm against a late sky.</figcaption></figure>
   </div>
 </section>
 
@@ -411,19 +548,30 @@
       <h2 class="h-l">Tell us when you would like to come.</h2>
       <p class="muted measure">Every stay is confirmed by hand. Chris and Sarah, who look after the house, will write back with availability and rates.</p>
     </div>
-    <form data-request id="request" aria-label="Reservation request">
-      <div class="field"><label for="a-arr">Arrival</label><input id="a-arr" type="date"></div>
-      <div class="field"><label for="a-dep">Departure</label><input id="a-dep" type="date"></div>
-      <div class="field"><label for="a-guests">Guests</label><select id="a-guests"><option>2</option><option>4</option><option>6</option><option>8</option><option>10</option></select></div>
-      <div class="field"><label for="a-name">Name</label><input id="a-name" type="text" autocomplete="name"></div>
-      <div class="field wide"><label for="a-note">Anything we should know</label><textarea id="a-note" rows="2"></textarea></div>
-      <div class="wide" style="display:flex;flex-wrap:wrap;gap:20px;align-items:center">
-        <button class="btn btn-primary" type="submit">Send request</button>
-        <p class="sent" data-sent hidden>Thank you. Chris and Sarah will reply by email.</p>
+    <form id="request" data-booking="request" aria-label="Reservation request" novalidate>
+      <div class="rq-fields" data-fields>
+        <div class="err-summary wide" data-summary tabindex="-1" hidden><p class="err-title" data-summary-title></p><ul data-summary-list></ul></div>
+        <p class="rq-note wide">All fields are required unless marked optional.</p>
+        <div class="field"><label for="a-arr">Arrival</label><input id="a-arr" name="arrival" type="date" required aria-describedby="a-arr-err"><p class="f-err" id="a-arr-err" hidden></p></div>
+        <div class="field"><label for="a-dep">Departure</label><input id="a-dep" name="departure" type="date" required aria-describedby="a-dep-err"><p class="f-err" id="a-dep-err" hidden></p></div>
+        <div class="field"><label for="a-guests">Guests</label><select id="a-guests" name="guests"><option>1</option><option selected>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option><option>9</option><option>10</option></select></div>
+        <div class="field"><label for="a-name">Name</label><input id="a-name" name="name" type="text" autocomplete="name" required aria-describedby="a-name-err"><p class="f-err" id="a-name-err" hidden></p></div>
+        <div class="field wide"><label for="a-email">Email</label><input id="a-email" name="email" type="email" autocomplete="email" inputmode="email" required aria-describedby="a-email-err"><p class="f-err" id="a-email-err" hidden></p></div>
+        <div class="field wide"><label for="a-note">Anything we should know <span class="opt">(optional)</span></label><textarea id="a-note" name="note" rows="2"></textarea></div>
+        <div class="wide"><button class="btn btn-primary" type="submit">Send request</button></div>
+      </div>
+      <div class="done" data-done hidden>
+        <svg class="tick" viewBox="0 0 44 44" aria-hidden="true" focusable="false"><circle pathLength="1" cx="22" cy="22" r="20"/><path pathLength="1" d="M13.5 22.5l6 6L31 16.5"/></svg>
+        <p class="eyebrow">Request sent</p>
+        <p class="done-title" tabindex="-1" data-done-focus></p>
+        <p class="done-text" data-done-text></p>
+        <div class="done-actions"><button class="text-btn" type="button" data-edit>Edit request</button></div>
       </div>
     </form>
   </div>
 </section>
+
+</main>
 
 <footer class="site band wrap">
   <div class="cols">
@@ -464,7 +612,7 @@
     var groups = [
       [".section .eyebrow, .section h2, .section .lede, .section .muted, .section .measure"],
       [".specs > div"], [".room"], [".amen-row figure"], [".strip:not(.rooms-strip) figure"],
-      [".rates > div"], [".amenities li"], [".host-ph"], [".req form"], [".footer, footer .cols"]
+      [".rates > div"], [".amenities li"], [".host-ph"], [".req .rq-fields"], [".footer, footer .cols"]
     ];
     var targets = [];
     groups.forEach(function (g) {
@@ -535,13 +683,193 @@
     sync();
   }
 
-  // Request buttons confirm the change of state
-  document.querySelectorAll("form[data-request]").forEach(function (f) {
-    f.addEventListener("submit", function () {
-      var b = f.querySelector("button[type=submit]"); if (!b) return;
-      b.classList.add("is-sent"); b.textContent = "Request sent"; b.disabled = true;
-    });
+})();
+</script>
+<script>
+/* Round 7 · booking forms and accessible menu.
+   Both forms validate in plain words next to each field, then turn into their
+   confirmation in place: the box keeps its width, eases to its new height, and
+   focus moves to the confirmation so screen readers announce it. */
+(function () {
+  var motion = document.documentElement.classList.contains("motion");
+  var OUT = 280;
+
+  function pad(n) { return (n < 10 ? "0" : "") + n; }
+  function iso(d) { return d.getFullYear() + "-" + pad(d.getMonth() + 1) + "-" + pad(d.getDate()); }
+  function parse(v) { if (!v) return null; var p = v.split("-"); return new Date(+p[0], +p[1] - 1, +p[2]); }
+  function fmt(d, withYear) { return d.toLocaleDateString("en-US", withYear ? { month: "short", day: "numeric", year: "numeric" } : { month: "short", day: "numeric" }); }
+  function nightsBetween(a, b) { return Math.round((b - a) / 86400000); }
+  function stay(a, b, g) {
+    var n = nightsBetween(a, b);
+    var range = a.getFullYear() !== b.getFullYear() ? fmt(a, true) + " – " + fmt(b, true)
+      : a.getMonth() === b.getMonth() ? fmt(a) + " – " + b.getDate() + ", " + b.getFullYear()
+      : fmt(a) + " – " + fmt(b, true);
+    return range + " · " + n + (n === 1 ? " night" : " nights") + " · " + g + (g == 1 ? " guest" : " guests");
+  }
+  function stayHTML(a, b, g) {
+    var t = stay(a, b, g).split(" · ");
+    var el = document.createDocumentFragment();
+    var s1 = document.createElement("span"); s1.textContent = t[0];
+    var s2 = document.createElement("span"); s2.textContent = t[1] + " · " + t[2];
+    el.appendChild(s1); el.appendChild(document.createTextNode(" · ")); el.appendChild(s2);
+    return el;
+  }
+  var today = new Date(); today.setHours(0, 0, 0, 0);
+
+  // Morph one view into another inside the same box
+  function morph(box, from, to, focusEl) {
+    if (box._busy) return; box._busy = true;
+    if (!motion) {
+      from.hidden = true; to.hidden = false;
+      if (focusEl) focusEl.focus({ preventScroll: true });
+      box._busy = false; return;
+    }
+    var h0 = box.getBoundingClientRect().height;
+    box.style.width = box.getBoundingClientRect().width + "px";
+    box.style.height = h0 + "px";
+    from.classList.add("m-out");
+    setTimeout(function () {
+      from.hidden = true; from.classList.remove("m-out");
+      to.hidden = false; to.classList.add("m-in");
+      box.style.height = "auto";
+      var h1 = box.getBoundingClientRect().height;
+      box.style.height = h0 + "px";
+      void box.offsetHeight;
+      box.classList.add("is-morphing");
+      box.style.height = h1 + "px";
+      if (focusEl) focusEl.focus({ preventScroll: true });
+      setTimeout(function () {
+        box.classList.remove("is-morphing"); box.style.height = "";
+        box._busy = false;
+      }, 640);
+      setTimeout(function () { to.classList.remove("m-in"); }, 1300);
+    }, OUT);
+  }
+  window.addEventListener("resize", function () {
+    document.querySelectorAll("form[data-booking]").forEach(function (f) { if (!f._busy) f.style.width = ""; });
   });
+
+  // Errors: plain words next to the field, linked with aria-describedby
+  function setError(input, msg) {
+    var e = document.getElementById(input.id + "-err");
+    input.setAttribute("aria-invalid", msg ? "true" : "false");
+    if (!e) return;
+    if (msg) { e.textContent = msg; if (e.hidden) { e.hidden = false; e.classList.add("m-err"); } }
+    else { e.hidden = true; e.textContent = ""; e.classList.remove("m-err"); }
+  }
+
+  function wireDates(arr, dep) {
+    arr.min = iso(today);
+    function syncMin() {
+      var a = parse(arr.value);
+      var m = new Date(a || today); m.setDate(m.getDate() + 1);
+      dep.min = iso(m);
+    }
+    arr.addEventListener("change", function () { syncMin(); if (arr.getAttribute("aria-invalid") === "true") validateDates(arr, dep); });
+    dep.addEventListener("change", function () { if (dep.getAttribute("aria-invalid") === "true") validateDates(arr, dep); });
+    syncMin();
+  }
+  function validateDates(arr, dep) {
+    var errs = [], a = parse(arr.value), d = parse(dep.value);
+    if (!a) errs.push([arr, "Choose an arrival date."]);
+    else if (a < today) errs.push([arr, "Choose an arrival date from today on."]);
+    if (!d) errs.push([dep, "Choose a departure date."]);
+    else if (a && d <= a) errs.push([dep, "Choose a departure date after your arrival."]);
+    [arr, dep].forEach(function (i) { var m = errs.filter(function (x) { return x[0] === i; })[0]; setError(i, m ? m[1] : ""); });
+    return errs;
+  }
+
+  // ---- Hero: check dates ----
+  var bar = document.querySelector('form[data-booking="check"]');
+  var rq = document.querySelector('form[data-booking="request"]');
+  if (bar) {
+    var bf = bar.querySelector("[data-fields]"), bd = bar.querySelector("[data-done]");
+    var bArr = bar.querySelector("#h-arr"), bDep = bar.querySelector("#h-dep"), bG = bar.querySelector("#h-guests");
+    wireDates(bArr, bDep);
+    bar.addEventListener("submit", function (e) {
+      e.preventDefault();
+      var errs = validateDates(bArr, bDep);
+      if (errs.length) { errs[0][0].focus(); return; }
+      var tt = bd.querySelector("[data-done-focus]"); tt.textContent = ""; tt.appendChild(stayHTML(parse(bArr.value), parse(bDep.value), bG.value));
+      morph(bar, bf, bd, bd.querySelector("[data-done-focus]"));
+    });
+    bd.querySelector("[data-edit]").addEventListener("click", function () { morph(bar, bd, bf, bArr); });
+    bd.querySelector("[data-continue]").addEventListener("click", function (e) {
+      if (!rq) return;
+      e.preventDefault();
+      rq.querySelector("#a-arr").value = bArr.value;
+      rq.querySelector("#a-dep").value = bDep.value;
+      rq.querySelector("#a-guests").value = bG.value;
+      rq.querySelector("#a-arr").dispatchEvent(new Event("change"));
+      var name = rq.querySelector("#a-name");
+      rq.scrollIntoView({ behavior: motion ? "smooth" : "auto", block: "center" });
+      setTimeout(function () { name.focus({ preventScroll: true }); }, motion ? 650 : 0);
+    });
+  }
+
+  // ---- Reservation request ----
+  if (rq) {
+    var rf = rq.querySelector("[data-fields]"), rd = rq.querySelector("[data-done]");
+    var sum = rq.querySelector("[data-summary]"), sumT = rq.querySelector("[data-summary-title]"), sumL = rq.querySelector("[data-summary-list]");
+    var rArr = rq.querySelector("#a-arr"), rDep = rq.querySelector("#a-dep"), rG = rq.querySelector("#a-guests");
+    var rName = rq.querySelector("#a-name"), rMail = rq.querySelector("#a-email");
+    wireDates(rArr, rDep);
+    [rName, rMail].forEach(function (i) { i.addEventListener("input", function () { if (i.getAttribute("aria-invalid") === "true") validatePeople(); }); });
+    function validatePeople() {
+      var errs = [];
+      var n = rName.value.trim(), m = rMail.value.trim();
+      setError(rName, n ? "" : "Enter your name.");
+      if (!n) errs.push([rName, "Enter your name."]);
+      var mailMsg = !m ? "Enter your email address." : (!rMail.validity.valid || !/\.[^.@\s]+$/.test(m) ? "Enter an email address like name@example.com." : "");
+      setError(rMail, mailMsg);
+      if (mailMsg) errs.push([rMail, mailMsg]);
+      return errs;
+    }
+    rq.addEventListener("submit", function (e) {
+      e.preventDefault();
+      var errs = validateDates(rArr, rDep).concat(validatePeople());
+      // keep the summary in the same order as the fields
+      var order = [rArr, rDep, rName, rMail];
+      errs.sort(function (a, b) { return order.indexOf(a[0]) - order.indexOf(b[0]); });
+      if (errs.length) {
+        sumT.textContent = errs.length === 1 ? "Please check one field:" : "Please check " + errs.length + " fields:";
+        sumL.innerHTML = "";
+        errs.forEach(function (x) {
+          var li = document.createElement("li"), a = document.createElement("a");
+          a.href = "#" + x[0].id; a.textContent = x[1];
+          a.addEventListener("click", function (ev) { ev.preventDefault(); x[0].focus(); });
+          li.appendChild(a); sumL.appendChild(li);
+        });
+        sum.hidden = false; sum.focus();
+        return;
+      }
+      sum.hidden = true;
+      var first = rName.value.trim().split(/\s+/)[0];
+      rd.querySelector("[data-done-focus]").textContent = "Thank you, " + first + ".";
+      rd.querySelector("[data-done-text]").textContent = "Chris and Sarah will reply to " + rMail.value.trim() + " with availability and rates for " + stay(parse(rArr.value), parse(rDep.value), rG.value) + ".";
+      morph(rq, rf, rd, rd.querySelector("[data-done-focus]"));
+    });
+    rd.querySelector("[data-edit]").addEventListener("click", function () { morph(rq, rd, rf, rArr); });
+  }
+
+  // ---- Phone menu: focus moves in, Escape closes, focus returns, Tab stays inside ----
+  var sheet = document.getElementById("menu"), opener = document.querySelector("[data-menu-open]");
+  if (sheet && opener) {
+    sheet.setAttribute("aria-modal", "true");
+    var closeBtn = sheet.querySelector("[data-menu-close]");
+    function open() { opener.setAttribute("aria-expanded", "true"); setTimeout(function () { closeBtn.focus(); }, 0); }
+    function close(returnFocus) { sheet.hidden = true; opener.setAttribute("aria-expanded", "false"); if (returnFocus) opener.focus(); }
+    opener.addEventListener("click", open);
+    closeBtn.addEventListener("click", function () { close(true); });
+    sheet.querySelectorAll("a").forEach(function (a) { a.addEventListener("click", function () { close(false); }); });
+    sheet.addEventListener("keydown", function (e) {
+      if (e.key === "Escape") { e.preventDefault(); close(true); return; }
+      if (e.key !== "Tab") return;
+      var f = sheet.querySelectorAll("a, button"), firstEl = f[0], lastEl = f[f.length - 1];
+      if (e.shiftKey && document.activeElement === firstEl) { e.preventDefault(); lastEl.focus(); }
+      else if (!e.shiftKey && document.activeElement === lastEl) { e.preventDefault(); firstEl.focus(); }
+    });
+  }
 })();
 </script>
 </body>

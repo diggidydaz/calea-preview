@@ -1,0 +1,876 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Calea · Homepage · Round 8</title>
+<script>if(!matchMedia("(prefers-reduced-motion: reduce)").matches&&"IntersectionObserver" in window)document.documentElement.classList.add("motion");</script>
+<link rel="icon" type="image/svg+xml" href="img/calea-leaf-seagrape-a.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500&family=Jost:wght@300;400;500&display=swap">
+<link rel="stylesheet" href="site.css">
+<style>
+  /* Header: absent over the hero, arrives after the first scroll */
+  .top {
+    position: fixed; inset: 0 0 auto 0; z-index: 10;
+    display: flex; align-items: center; justify-content: space-between; gap: 24px;
+    padding: 22px var(--gutter);
+    transition: background var(--t-ui) var(--ease-out), padding var(--t-ui) var(--ease-out), border-color var(--t-ui) var(--ease-out);
+    border-bottom: 1px solid transparent;
+  }
+  .top .mark-w { height: 46px; width: auto; }
+  .top .mark-d { height: 34px; width: auto; display: none; }
+  .top nav { display: flex; gap: 26px; opacity: 1; color: #fff; transition: color var(--t-ui) var(--ease-out); }
+  .top nav a { font-family: var(--display); font-size: 12px; letter-spacing: .22em; text-transform: uppercase; text-decoration: none; }
+  .top .cta { font-family: var(--display); font-size: 12px; letter-spacing: .22em; text-transform: uppercase; color: #fff; text-decoration: none; border-bottom: 1px solid rgba(255,255,255,.6); padding-bottom: 3px; }
+  .top.scrolled { background: rgba(244,243,240,.92); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); padding-block: 14px; border-bottom-color: var(--rule); }
+  .top.scrolled .mark-w { display: none; }
+  .top.scrolled .mark-d { display: block; height: 28px; }
+  .top.scrolled nav { color: var(--ink); }
+  .top .menu-btn { color: #fff; }
+  .top.scrolled .menu-btn { color: var(--ink); }
+  .top.scrolled .cta { color: var(--green); border-bottom-color: var(--green); }
+
+  .hero { position: relative; height: 100vh; min-height: 560px; max-height: 1100px; overflow: hidden; background: #2a2e2a; color: #fff; }
+  .hero img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; animation: drift 18s var(--ease) both; }
+  @keyframes drift { from { transform: scale(1.06); } to { transform: scale(1); } }
+  .hero::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to top, rgba(18,20,18,.62) 0%, rgba(18,20,18,0) 55%), linear-gradient(to bottom, rgba(18,20,18,.35), rgba(18,20,18,0) 22%); }
+  .hero-copy { position: absolute; z-index: 2; left: var(--gutter); right: var(--gutter); bottom: clamp(40px, 7vh, 80px); display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 24px; }
+  .hero-copy h1 { font-size: clamp(30px, 4vw, 56px); line-height: 1.1; max-width: 18ch; }
+  .hero-copy .eyebrow { color: rgba(255,255,255,.85); margin-bottom: 16px; }
+  .scroll-cue { font-family: var(--display); font-size: 11px; letter-spacing: .24em; text-transform: uppercase; color: rgba(255,255,255,.85); }
+
+  .intro { display: grid; grid-template-columns: minmax(0,1.3fr) minmax(0,1fr); gap: clamp(32px, 6vw, 120px); align-items: end; }
+  .specs { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 28px 32px; border-top: 1px solid var(--rule); padding-top: 28px; }
+  .specs b { display: block; font-family: var(--display); font-weight: 300; font-size: clamp(30px, 3vw, 42px); line-height: 1; margin-bottom: 8px; }
+  .specs span { font-family: var(--display); font-size: 11.5px; letter-spacing: .2em; text-transform: uppercase; color: var(--ink-2); }
+
+  .full { position: relative; height: clamp(420px, 88vh, 980px); overflow: hidden; }
+  .full img { width: 100%; height: 100%; object-fit: cover; }
+  .full .cap { position: absolute; left: var(--gutter); bottom: 36px; color: #fff; max-width: 34ch; z-index: 2; }
+  .full::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to top, rgba(18,20,18,.55), rgba(18,20,18,0) 45%); pointer-events: none; }
+  .full .cap .eyebrow { color: rgba(255,255,255,.85); margin-bottom: 10px; }
+
+  .split { display: grid; grid-template-columns: 1fr 1fr; min-height: 80vh; }
+  .split .img { position: relative; overflow: hidden; min-height: 360px; }
+  .split .img img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .split .txt { display: flex; flex-direction: column; justify-content: center; gap: 24px; padding: var(--section) var(--gutter); }
+
+  .strip { display: grid; grid-auto-flow: column; grid-auto-columns: minmax(280px, 34vw); gap: 6px; overflow-x: auto; scroll-snap-type: x mandatory; padding-inline: var(--gutter); scroll-padding-inline: var(--gutter); scrollbar-width: thin; }
+  .strip figure { margin: 0; scroll-snap-align: start; display: flex; flex-direction: column; gap: 14px; }
+  .strip .ph { position: relative; aspect-ratio: 4/5; overflow: hidden; }
+  .strip img { width: 100%; height: 100%; object-fit: cover; }
+  .strip figcaption { font-size: 14px; color: var(--ink-2); max-width: 34ch; }
+  .gardens-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: end; gap: 24px; margin-bottom: 48px; }
+
+  .sust { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: clamp(32px, 6vw, 96px); align-items: center; }
+  .sust .lockup { width: clamp(140px, 16vw, 200px); }
+
+  .cam-band { position: relative; }
+  .cam-band .cam { height: clamp(380px, 70vh, 760px); }
+  .cam-band .cam::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to top, rgba(18,20,18,.6), rgba(18,20,18,0) 50%); }
+  .cam-band .cap { position: absolute; z-index: 2; left: var(--gutter); right: var(--gutter); bottom: 40px; color: #fff; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: end; gap: 16px; }
+
+  .req { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1.2fr); gap: clamp(40px, 7vw, 120px); }
+  .req form { display: grid; grid-template-columns: 1fr 1fr; gap: 28px 32px; align-content: start; }
+  .req .wide { grid-column: 1 / -1; }
+  .sent { font-size: 15px; color: var(--green); }
+
+  @media (max-width: 860px) {
+    .top nav { display: none; }
+    .intro, .req, .sust { grid-template-columns: 1fr; }
+    .split { grid-template-columns: 1fr; min-height: 0; }
+    .split .img { aspect-ratio: 4/3; min-height: 0; }
+    .strip { grid-auto-columns: 78vw; }
+    .req form { grid-template-columns: 1fr; }
+    .hero { height: 88vh; }
+  }
+
+  .top nav a { color: inherit; }
+  .hero-copy { align-items: flex-end; }
+  .book-bar { display:flex; flex-wrap:wrap; gap:14px; align-items:flex-end; background:rgba(244,243,240,.94); color:var(--ink); padding:14px 18px; backdrop-filter:blur(10px); }
+  .book-bar label { display:flex; flex-direction:column; gap:4px; font-family:var(--display); font-size:11px; letter-spacing:.2em; text-transform:uppercase; color:var(--ink-2); }
+  .book-bar input, .book-bar select { font:inherit; font-size:15px; letter-spacing:0; text-transform:none; color:var(--ink); background:#fff; border:1px solid var(--rule); padding:9px 10px; }
+  .rooms { display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); gap:6px; }
+  .rooms figure { margin:0; } .rooms img { aspect-ratio:3/4; width:100%; object-fit:cover; }
+  .rooms figcaption { font-family:var(--display); letter-spacing:.2em; text-transform:uppercase; font-size:12px; padding-top:10px; }
+  .stj { display:grid; grid-template-columns:minmax(0,1.2fr) minmax(0,1fr); gap:clamp(32px,6vw,96px); align-items:center; }
+  .stj .cam { position:relative; aspect-ratio:4/3; overflow:hidden; } .stj .cam img { width:100%; height:100%; object-fit:cover; }
+  .rates { display:flex; flex-wrap:wrap; gap:clamp(32px,6vw,96px); margin-top:20px; }
+  .rates b { display:block; font-family:var(--display); font-weight:300; font-size:clamp(28px,3vw,40px); line-height:1.1; }
+  .rates span { font-family:var(--display); font-size:11.5px; letter-spacing:.2em; text-transform:uppercase; color:var(--ink-2); }
+  @media (max-width:860px){ .rooms{grid-template-columns:repeat(2,minmax(0,1fr));} .stj{grid-template-columns:1fr;} .top nav{display:none;} .book-bar{width:100%;} }
+
+  .rooms-strip { grid-auto-columns: minmax(280px, 26vw); padding-inline: var(--gutter); scroll-padding-inline: var(--gutter); }
+  .room { margin:0; display:flex; flex-direction:column; gap:14px; }
+  .room .ph { position:relative; aspect-ratio:4/5; overflow:hidden; background:var(--band); }
+  .room .ph img { width:100%; height:100%; object-fit:cover; }
+  .room-head { display:flex; align-items:center; gap:14px; }
+  .room-head .plant { width:44px; height:58px; flex:none; }
+  .room-head h3 { font-size:22px; letter-spacing:.18em; text-transform:uppercase; }
+  .latin { font-style:italic; font-size:14px; color:var(--ink-2); }
+  .room-line { font-size:14px; color:var(--ink-2); }
+  .room details { border-top:1px solid var(--rule); padding-top:10px; font-size:14px; color:var(--ink-2); }
+  .room summary { cursor:pointer; font-family:var(--display); font-size:11.5px; letter-spacing:.2em; text-transform:uppercase; color:var(--green); list-style:none; }
+  .room summary::-webkit-details-marker { display:none; }
+  .room summary::after { content:" +"; } .room details[open] summary::after { content:" \2212"; }
+  .room details p { margin-top:8px; } .plant-note { font-style:italic; }
+  .amen-row { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:6px; padding-bottom:var(--section); }
+  .amen-row figure { margin:0; } .amen-row .ph { position:relative; aspect-ratio:4/5; overflow:hidden; background:var(--band); }
+  .amen-row img { width:100%; height:100%; object-fit:cover; }
+  .amen-row figcaption { font-family:var(--display); font-size:11.5px; letter-spacing:.2em; text-transform:uppercase; color:var(--ink-2); padding-top:10px; }
+  .full .photo-note { z-index:3; left:auto; right:12px; }
+  .hosts { display:grid; grid-template-columns:auto minmax(0,1fr); gap:clamp(32px,6vw,96px); align-items:center; }
+  .host-ph { width:clamp(200px,24vw,300px); aspect-ratio:4/5; background:var(--band); border:1px dashed var(--rule); display:flex; flex-direction:column; align-items:center; justify-content:center; gap:10px; }
+  .host-ph span { font-family:var(--display); font-weight:300; font-size:34px; letter-spacing:.2em; color:var(--green); }
+  .host-ph em { font-style:normal; font-family:var(--display); font-size:11px; letter-spacing:.2em; text-transform:uppercase; color:var(--ink-3); }
+  @media (max-width:860px){ .rooms-strip{grid-auto-columns:78vw;} .amen-row{grid-template-columns:repeat(2,minmax(0,1fr));} .hosts{grid-template-columns:1fr;} }
+
+  .brand { display:flex; align-items:center; gap:12px; text-decoration:none; }
+  .brand .leaf { height:44px; width:auto; }
+  .brand .leaf-d { display:none; }
+  .top.scrolled .brand .leaf { height:30px; }
+  .top.scrolled .brand .leaf-w { display:none; }
+  .top.scrolled .brand .leaf-d { display:block; }
+
+  /* ---- Motion language (round 6) ----
+     One personality: calm, unhurried, precise. Nothing bounces.
+     Micro responses 200ms, interface changes 450ms, scroll reveals 700ms.
+     Everything eases out like a slowing tide; all motion stops for reduced-motion users. */
+  :root { --ease-out: cubic-bezier(.22,1,.36,1); --ease-in-out: cubic-bezier(.65,0,.35,1); --t-micro: 200ms; --t-ui: 450ms; --t-reveal: 700ms; }
+
+  /* Hero: the image settles slowly; headline, then booking, arrive in sequence */
+  .motion .hero-copy > * { opacity: 0; transform: translateY(14px); animation: rise var(--t-reveal) var(--ease-out) forwards; }
+  .motion .hero-copy > :nth-child(1) { animation-delay: .25s; }
+  .motion .hero-copy > :nth-child(2) { animation-delay: .55s; }
+  @keyframes rise { to { opacity: 1; transform: none; } }
+
+  /* Scroll story: text and images reveal as each section arrives */
+  .motion .rv { opacity: 0; transform: translateY(18px); transition: opacity var(--t-reveal) var(--ease-out), transform var(--t-reveal) var(--ease-out); }
+  .motion .rv.in { opacity: 1; transform: none; }
+  .motion .rv-img { clip-path: inset(6% 4% 6% 4%); transition: clip-path 900ms var(--ease-out); }
+  .motion .rv-img img { transform: scale(1.06); transition: transform 1200ms var(--ease-out); }
+  .motion .rv-img.in { clip-path: inset(0 0 0 0); }
+  .motion .rv-img.in img { transform: none; }
+
+  /* Images fade in once loaded instead of popping */
+  .motion img.fade { opacity: 0; transition: opacity 600ms var(--ease-out); }
+  .motion img.fade.loaded { opacity: 1; }
+
+  /* Plant illustrations draw themselves when their room arrives */
+  .plant path, .plant circle { stroke-dasharray: 1; stroke-dashoffset: 0; }
+  .motion .room .plant path, .motion .room .plant circle { stroke-dashoffset: 1; transition: stroke-dashoffset 1600ms var(--ease-in-out); }
+  .motion .room.in .plant path, .motion .room.in .plant circle { stroke-dashoffset: 0; transition-delay: .3s; }
+
+  /* Micro-interactions: quick, quiet confirmation that something responds */
+  .btn { transition: background var(--t-micro) var(--ease-out), color var(--t-micro) var(--ease-out), transform var(--t-micro) var(--ease-out); }
+  .btn:active { transform: translateY(1px); }
+  .link { text-decoration: none; background: linear-gradient(currentColor,currentColor) 0 100% / 100% 1px no-repeat; padding-bottom: 2px; transition: background-size var(--t-ui) var(--ease-out); }
+  .link:hover { background-size: 0 1px; background-position: 100% 100%; }
+  .top nav a { position: relative; padding-bottom: 6px; }
+  .top nav a::after { content: ""; position: absolute; left: 0; right: .22em; bottom: 0; height: 1px; background: currentColor; transform: scaleX(0); transform-origin: left; transition: transform var(--t-ui) var(--ease-out); }
+  .top nav a:hover::after, .top nav a.active::after { transform: scaleX(1); }
+  .top .cta { transition: color var(--t-micro) var(--ease-out), border-color var(--t-micro) var(--ease-out); }
+  .film .play { transition: background var(--t-micro) var(--ease-out), transform var(--t-ui) var(--ease-out); }
+  .film .play:hover { transform: translate(-50%,-50%) scale(1.06); }
+  /* Film band, round 7: a silent looping preview stands in until the December film */
+  .film .film-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: .94; }
+  .film .play { transition: background var(--t-micro) var(--ease-out), transform var(--t-ui) var(--ease-out), opacity var(--t-ui) var(--ease-out); }
+  .film.is-playing .play { opacity: 0; pointer-events: none; }
+  .film .film-note { display: inline-flex; align-items: center; gap: 14px; }
+  .film-toggle { width: 34px; height: 34px; border-radius: 50%; border: 1px solid rgba(255,255,255,.6); background: rgba(20,20,20,.25); color: #fff; display: inline-grid; place-items: center; cursor: pointer; transition: background var(--t-micro) var(--ease-out); }
+  .film-toggle:hover { background: rgba(20,20,20,.5); }
+  .film-toggle:focus-visible, .film .play:focus-visible { outline: 2px solid #fff; outline-offset: 3px; }
+  .film-toggle svg { width: 14px; height: 14px; fill: currentColor; }
+  .film-toggle .i-play { display: none; margin-left: 2px; }
+  .film:not(.is-playing) .film-toggle .i-pause { display: none; }
+  .film:not(.is-playing) .film-toggle .i-play { display: block; }
+  @media (hover: hover) {
+    .room .ph img, .amen-row .ph img, .strip .ph img { transition: transform 900ms var(--ease-out), opacity 600ms var(--ease-out); }
+    .room:hover .ph img, .amen-row figure:hover .ph img, .strip figure:hover .ph img { transform: scale(1.035); }
+  }
+  .room details > p { animation: none; }
+  .motion .room details[open] > p { animation: rise var(--t-ui) var(--ease-out) both; }
+  .motion .room details[open] > p + p { animation-delay: 80ms; }
+  .room summary::after { display: inline-block; margin-left: .45em; transition: transform var(--t-micro) var(--ease-out); }
+
+  /* Bedroom strip arrows show it scrolls, and dim at either end */
+  .strip-nav { display: flex; gap: 8px; }
+  .strip-nav button { width: 44px; height: 44px; border: 1px solid var(--rule); background: transparent; color: var(--ink); cursor: pointer; display: grid; place-items: center; transition: background var(--t-micro) var(--ease-out), border-color var(--t-micro) var(--ease-out), opacity var(--t-ui) var(--ease-out); }
+  .strip-nav button:hover:not(:disabled) { background: var(--green); border-color: var(--green); color: #fff; }
+  .strip-nav button:disabled { opacity: .3; cursor: default; }
+  .strip-nav svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 1.4; }
+  .rooms-strip { scroll-behavior: smooth; }
+
+  /* Request status: the button and message confirm the change of state */
+  .btn.is-sent { background: var(--green-deep); }
+  .motion [data-sent]:not([hidden]) { animation: rise var(--t-ui) var(--ease-out) both; }
+
+  @media (max-width: 860px) {
+    .motion .rv { transform: translateY(10px); }
+    .motion .rv-img { clip-path: none; }
+    .motion .rv-img img { transform: none; }
+    .strip-nav { display: none; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .plant path, .plant circle { stroke-dashoffset: 0 !important; }
+    .hero img { animation: none; }
+  }
+
+  /* ---------------------------------------------------------------
+     Round 7 · accessibility pass (WCAG 2.2 AA + house standard)
+     --------------------------------------------------------------- */
+  :root { --err: #8A2C1F; }
+  .skip { position: absolute; left: 12px; top: -120px; z-index: 100; background: var(--green-deep); color: #fff; padding: 14px 20px; font-family: var(--display); font-size: 13px; letter-spacing: .14em; text-transform: uppercase; text-decoration: none; }
+  .skip:focus { top: 12px; }
+  main:focus { outline: none; }
+
+  /* Focus: a solid ring that holds 3:1 on every surface */
+  :focus-visible { outline: 2px solid var(--green-deep); outline-offset: 3px; }
+  .hero :focus-visible, .film :focus-visible, .top:not(.scrolled) :focus-visible { outline-color: #fff; }
+  .hero .book-bar :focus-visible { outline-color: var(--green-deep); }
+  .field input:focus, .field textarea:focus, .field select:focus,
+  .book-bar input:focus, .book-bar select:focus { outline: 2px solid var(--green-deep); outline-offset: 2px; }
+
+  /* Hero scrim: built into the section so the headline and menu hold contrast on any photo */
+  .hero::after {
+    background:
+      linear-gradient(to bottom, rgba(18,20,18,.62) 0, rgba(18,20,18,.32) 90px, rgba(18,20,18,0) 170px),
+      linear-gradient(to top, rgba(18,20,18,.82) 0%, rgba(18,20,18,.70) 38%, rgba(18,20,18,.36) 62%, rgba(18,20,18,0) 82%);
+  }
+  .hero-copy .eyebrow, .hero-copy h1 { text-shadow: 0 1px 2px rgba(0,0,0,.3), 0 2px 22px rgba(0,0,0,.35); }
+  .hero-copy .eyebrow { color: #fff; }
+
+  /* Header: 44px targets, phone header that fits on one line */
+  .top-actions { display: flex; gap: 22px; align-items: center; }
+  .top nav a { display: inline-flex; align-items: center; min-height: 44px; padding-bottom: 0; }
+  .top nav a::after { bottom: 10px; }
+  .top .cta { display: inline-flex; align-items: center; min-height: 44px; padding-bottom: 0; white-space: nowrap; border-bottom: 0;
+    background: linear-gradient(currentColor, currentColor) 0 calc(100% - 9px) / 100% 1px no-repeat; }
+  .top .menu-btn, .menu-btn { min-height: 44px; padding: 0 6px; }
+  .top nav a { min-width: 44px; justify-content: center; }
+  .top .brand { display: inline-flex; align-items: center; min-height: 44px; }
+  @media (max-width: 860px) {
+    .top { gap: 12px; padding-block: 14px; }
+    .top .mark-w { height: 36px; }
+    .top .brand .leaf { height: 32px; }
+    .top-actions { gap: 16px; }
+    .top .cta { letter-spacing: .14em; }
+  }
+  @media (max-width: 360px) { .top .cta { letter-spacing: .08em; } .top-actions { gap: 10px; } }
+
+  /* Readable sizes: running text never below 16px */
+  .room details, .room-line, .latin, .strip figcaption, footer.site small { font-size: 16px; }
+  .film .film-note { font-size: 15px; }
+  .host-ph em { color: var(--ink-2); }
+
+  /* Targets */
+  .room summary { display: flex; align-items: center; min-height: 44px; }
+  .sitemap { row-gap: 0; }
+  .sitemap a { display: inline-flex; align-items: center; min-height: 44px; }
+  .film-toggle { width: 44px; height: 44px; }
+  .field input, .field select { min-height: 44px; }
+
+  /* ---------------------------------------------------------------
+     Booking bar (hero) and reservation form
+     --------------------------------------------------------------- */
+  .book-bar { display: block; padding: 16px 18px; overflow: hidden; }
+  .bb-fields { display: grid; grid-template-columns: 172px 172px 92px auto;
+    grid-template-areas: "arr dep gst btn" "earr edep . ."; column-gap: 14px; row-gap: 0; align-items: end; }
+  .bb-arr { grid-area: arr; } .bb-dep { grid-area: dep; } .bb-gst { grid-area: gst; } .bb-btn { grid-area: btn; }
+  .bb-e-arr { grid-area: earr; } .bb-e-dep { grid-area: edep; }
+  .bb-f { display: flex; flex-direction: column; gap: 6px; }
+  .bb-f label { font-family: var(--display); font-size: 12px; letter-spacing: .2em; text-transform: uppercase; color: var(--ink-2); }
+  .book-bar input, .book-bar select { box-sizing: border-box; width: 100%; min-height: 46px; font: inherit; font-size: 16px; letter-spacing: 0; text-transform: none; color: var(--ink); background: #fff; border: 1px solid rgba(48,48,48,.45); padding: 9px 10px; }
+  .bb-btn { min-height: 46px; }
+  .book-bar .f-err { margin-top: 8px; }
+  @media (max-width: 860px) {
+    .book-bar { width: 100%; padding: 16px; }
+    .bb-fields { grid-template-columns: 1fr 1fr; grid-template-areas: "arr dep" "earr edep" "gst btn"; }
+    .bb-gst, .bb-btn { margin-top: 14px; }
+    .bb-btn { width: 100%; padding-inline: 10px; letter-spacing: .12em; white-space: nowrap; }
+  }
+
+  .f-err { font-size: 15px; line-height: 1.4; color: var(--err); display: flex; gap: 6px; align-items: baseline; }
+  .f-err::before { content: "!"; flex: 0 0 auto; display: inline-grid; place-items: center; width: 16px; height: 16px; border-radius: 50%; background: var(--err); color: #fff; font-size: 11px; font-weight: 500; transform: translateY(2px); }
+  [aria-invalid="true"] { border-color: var(--err) !important; box-shadow: inset 0 0 0 1px var(--err); }
+  .field .f-err { margin-top: 2px; }
+
+  .req form { display: block; }
+  .rq-fields { display: grid; grid-template-columns: 1fr 1fr; gap: 28px 32px; align-content: start; }
+  .rq-note { font-size: 16px; color: var(--ink-2); margin: 0; }
+  .opt { text-transform: none; letter-spacing: 0; font-family: var(--body, inherit); font-size: 13px; color: var(--ink-2); }
+  .err-summary { border-left: 3px solid var(--err); background: #F8ECE8; padding: 16px 20px; color: var(--ink); }
+  .err-summary:focus { outline: 2px solid var(--err); outline-offset: 3px; }
+  .err-title { font-weight: 500; font-size: 16px; margin: 0 0 6px; }
+  .err-summary ul { margin: 0; padding-left: 18px; }
+  .err-summary a { color: var(--err); font-size: 16px; text-underline-offset: 3px; display: inline-block; padding-block: 4px; }
+  @media (max-width: 860px) { .rq-fields { grid-template-columns: 1fr; } }
+
+  /* Confirmation view: replaces the fields inside the same box */
+  .done { display: grid; grid-template-columns: 44px minmax(0, 1fr); column-gap: 18px; row-gap: 6px; align-items: start; color: var(--ink); }
+  .done > :not(.tick) { grid-column: 2; margin: 0; }
+  .done .tick { grid-row: 1 / span 3; width: 44px; height: 44px; }
+  .tick circle { fill: none; stroke: var(--green); stroke-width: 1.5; stroke-dasharray: 1; stroke-dashoffset: 0; }
+  .tick path { fill: none; stroke: var(--green-deep); stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 1; stroke-dashoffset: 0; }
+  .done .eyebrow, .hero-copy .book-bar .eyebrow { color: var(--green-deep); text-shadow: none; }
+  .done-title { font-family: var(--display); font-weight: 300; font-size: clamp(20px, 1.8vw, 24px); line-height: 1.3; color: var(--ink); }
+  .done-title:focus { outline: none; }
+  .done-title span { white-space: nowrap; }
+  .done-text { font-size: 16px; line-height: 1.55; color: var(--ink); max-width: 48ch; }
+  .done-actions { display: flex; flex-wrap: wrap; gap: 8px 24px; align-items: center; margin-top: 10px !important; }
+  .text-btn { background: none; border: 0; padding: 0 2px; min-height: 44px; font: inherit; font-size: 16px; color: var(--green-deep); text-decoration: underline; text-underline-offset: 4px; text-decoration-thickness: 1px; cursor: pointer; }
+  .text-btn:hover { text-decoration-thickness: 2px; }
+  .req .done { padding-top: 4px; }
+  .req .done-title { font-size: clamp(24px, 2.2vw, 30px); }
+
+  /* The change of state, eased like a slowing tide: the fields soften away,
+     the box settles to its new height, then the confirmation surfaces line by line */
+  .motion .is-morphing { transition: height 620ms var(--ease-out); }
+  .motion .m-out > * { animation: m-out 280ms var(--ease-in-out) both; }
+  .motion .m-out > :nth-child(2) { animation-delay: 30ms; } .motion .m-out > :nth-child(3) { animation-delay: 60ms; } .motion .m-out > :nth-child(n+4) { animation-delay: 90ms; }
+  @keyframes m-out { to { opacity: 0; transform: translateY(-6px); filter: blur(3px); } }
+  .motion .m-in > * { animation: m-in 680ms var(--ease-out) both; }
+  .motion .m-in > :nth-child(2) { animation-delay: 140ms; } .motion .m-in > :nth-child(3) { animation-delay: 220ms; }
+  .motion .m-in > :nth-child(4) { animation-delay: 300ms; } .motion .m-in > :nth-child(n+5) { animation-delay: 380ms; }
+  @keyframes m-in { from { opacity: 0; transform: translateY(10px); filter: blur(4px); } to { opacity: 1; transform: none; filter: none; } }
+  .motion .m-in .tick { animation: m-tick 700ms var(--ease-out) both; }
+  .motion .m-in .tick circle { animation: draw 900ms var(--ease-out) 60ms both; }
+  .motion .m-in .tick path { animation: draw 520ms var(--ease-out) 560ms both; }
+  @keyframes m-tick { from { opacity: 0; transform: scale(.86); } to { opacity: 1; transform: none; } }
+  @keyframes draw { from { stroke-dashoffset: 1; } to { stroke-dashoffset: 0; } }
+  .motion .f-err.m-err { animation: m-in 380ms var(--ease-out) both; }
+</style>
+</head>
+<body id="home">
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="top" id="top">
+  <a class="brand" href="#home" aria-label="Calea St. John, home">
+    <img class="leaf leaf-w" src="img/calea-leaf-seagrape-b-white.svg" alt="" aria-hidden="true">
+    <img class="leaf leaf-d" src="img/calea-leaf-seagrape-b.svg" alt="" aria-hidden="true">
+    <img class="mark-w" src="img/calea-wordmark-white.svg" alt="">
+    <img class="mark-d" src="img/calea-wordmark.svg" alt="" aria-hidden="true">
+  </a>
+  <nav aria-label="Main">
+    <a href="#villa">The Villa</a><a href="#rooms">Rooms</a><a href="#privacy">Privacy</a><a href="#gallery">Gallery</a><a href="#place">St. John</a><a href="#stay">Stay</a>
+  </nav>
+  <div class="top-actions"><button class="menu-btn" type="button" data-menu-open aria-haspopup="dialog" aria-controls="menu" aria-expanded="false">Menu</button><a class="cta" href="#request">Request dates</a></div>
+</header>
+
+<main id="main" tabindex="-1">
+<section class="hero" aria-label="Calea from above">
+  <img src="img/aerial.jpg" alt="Calea from the air: terraced stone and concrete levels, a solar roof, and the pool set into the green hillside">
+  <div class="hero-copy">
+    <div>
+      <p class="eyebrow">Francis Bay · St. John</p>
+      <h1>Private comfort, seclusion and elegance in the heart of St. John.</h1>
+    </div>
+    <form class="book-bar" data-booking="check" aria-label="Check dates" novalidate>
+      <div class="bb-fields" data-fields>
+        <div class="bb-f bb-arr"><label for="h-arr">Arrival</label><input id="h-arr" name="arrival" type="date" required aria-describedby="h-arr-err"></div>
+        <div class="bb-f bb-dep"><label for="h-dep">Departure</label><input id="h-dep" name="departure" type="date" required aria-describedby="h-dep-err"></div>
+        <div class="bb-f bb-gst"><label for="h-guests">Guests</label><select id="h-guests" name="guests"><option>1</option><option selected>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option><option>9</option><option>10</option></select></div>
+        <button class="btn btn-primary bb-btn" type="submit">Request dates</button>
+        <p class="f-err bb-e-arr" id="h-arr-err" hidden></p>
+        <p class="f-err bb-e-dep" id="h-dep-err" hidden></p>
+      </div>
+      <div class="done" data-done hidden>
+        <svg class="tick" viewBox="0 0 44 44" aria-hidden="true" focusable="false"><circle pathLength="1" cx="22" cy="22" r="20"/><path pathLength="1" d="M13.5 22.5l6 6L31 16.5"/></svg>
+        <p class="eyebrow">Dates noted</p>
+        <p class="done-title" tabindex="-1" data-done-focus></p>
+        <p class="done-text">Add your name and email below, and Chris and Sarah will reply personally with availability and rates.</p>
+        <div class="done-actions"><a class="btn btn-primary" href="#request" data-continue>Continue request</a><button class="text-btn" type="button" data-edit>Change dates</button></div>
+      </div>
+    </form>
+  </div>
+</section>
+
+<section class="film-band" aria-label="The Calea film">
+  <div class="film" style="height:100vh;min-height:520px" data-film>
+      <video class="film-video" muted loop playsinline preload="none" poster="video/calea-film-poster.jpg" aria-label="Placeholder footage: a planted stone walkway leading to glass doors and the sea, then an infinity pool at dusk">
+        <source src="video/calea-film-1080.mp4" type="video/mp4" media="(min-width: 901px)">
+        <source src="video/calea-film-720.mp4" type="video/mp4">
+      </video>
+      <button class="play" type="button" aria-label="Play the film preview"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4.5v15l12-7.5z"/></svg></button>
+      <div class="film-cap"><p class="eyebrow">The Calea film · 2–3 minutes</p><span class="film-note">Placeholder footage, not Calea · the film is shot in December <button class="film-toggle" type="button" aria-label="Pause the film preview" hidden><svg class="i-pause" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 5h3.5v14H7zM13.5 5H17v14h-3.5z"/></svg><svg class="i-play" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4.5v15l12-7.5z"/></svg></button></span></div>
+    </div>
+</section>
+
+<section class="wrap section" id="villa">
+  <div class="intro">
+    <div style="display:flex;flex-direction:column;gap:28px">
+      <p class="eyebrow">The villa</p>
+      <h2 class="h-l">Stone, concrete and a wood ceiling that carries from the covered rooms out over the terrace.</h2>
+    </div>
+    <div class="specs">
+      <div><b>5</b><span>Bedrooms</span></div>
+      <div><b>5</b><span>En suite baths</span></div>
+      <div><b>2</b><span>Powder rooms</span></div>
+      <div><b><span class="tbc">~10,000</span></b><span>Square feet</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="full">
+  <img src="https://images.unsplash.com/photo-1790276317950-cd0cad99655d?w=2000&q=75&auto=format&fit=crop" alt="Placeholder: a modern living space opening onto an infinity pool and the sea"><span class="photo-note">Placeholder · reference image</span>
+  <div class="cap">
+    <p class="eyebrow">Indoors and out</p>
+    <p class="h-m" style="font-family:var(--display);font-weight:300">The glass walls slide away. The room becomes the terrace.</p>
+  </div>
+</section>
+
+<section class="section" id="rooms">
+  <div class="wrap gardens-head"><div style="display:flex;flex-direction:column;gap:20px"><p class="eyebrow">Five bedrooms</p><h2 class="h-l">Each room is named for a native plant.</h2></div><div class="strip-nav" aria-label="Scroll bedrooms"><button type="button" data-strip-prev aria-label="Previous bedroom"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button><button type="button" data-strip-next aria-label="Next bedroom"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button></div></div>
+  <div class="strip rooms-strip" id="rooms-strip" tabindex="0" aria-label="Bedrooms, scroll sideways">
+    <figure class="room">
+      <div class="ph"><img src="https://images.unsplash.com/photo-1760067537376-265afef0f362?w=900&q=75&auto=format&fit=crop" alt="Placeholder bedroom image for Agave" loading="lazy"><span class="photo-note">Placeholder</span></div>
+      <div class="room-head"><svg class="plant" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 160" fill="none" stroke="#597140" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"><path pathLength="1" stroke-width=".9" d="M60 150 L60 22"/><path pathLength="1" stroke-width=".6" d="M60 46 L46 40"/><circle pathLength="1" cx="46" cy="40" r="1.0"/><path pathLength="1" stroke-width=".5" d="M47.2 40.0 L50.0 40.0"/><circle cx="50.0" cy="40.0" r=".5" fill="#597140" stroke="none"/><path pathLength="1" stroke-width=".5" d="M46.8 40.8 L48.8 42.8"/><circle cx="48.8" cy="42.8" r=".5" fill="#597140" stroke="none"/><path pathLength="1" stroke-width=".5" d="M46.0 41.2 L46.0 44.0"/><circle cx="46.0" cy="44.0" r=".5" fill="#597140" stroke="none"/><path pathLength="1" stroke-width=".5" d="M45.2 40.8 L43.2 42.8"/><circle cx="43.2" cy="42.8" r=".5" fill="#597140" stroke="none"/><path pathLength="1" stroke-width=".5" d="M44.8 40.0 L42.0 40.0"/><circle cx="42.0" cy="40.0" r=".5" fill="#597140" stroke="none"/><path pathLength="1" stroke-width=".5" d="M45.2 39.2 L43.2 37.2"/><circle cx="43.2" cy="37.2" r=".5" fill="#597140" stroke="none"/><path pathLength="1" stroke-width=".5" d="M46.0 38.8 L46.0 36.0"/><circle cx="46.0" cy="36.0" r=".5" fill="#597140" stroke="none"/><path pathLength="1" stroke-width=".5" d="M46.8 39.2 L48.8 37.2"/><circle cx="48.8" cy="37.2" r=".5" fill="#597140" stroke="none"/><path pathLength="1" stroke-width=".6" d="M60 40 L74 34"/><circle pathLength="1" cx="74" cy="34" r="1.0"/><path pathLength="1" stroke-width=".5" d="M75.2 34.0 L78.0 34.0"/><circle cx="78.0" cy="34.0" r=".5" fill="#597140" stroke="none"/><path pathLength="1" stroke-width=".5" d="M74.8 34.8 L76.8 36.8"/><circle cx="76.8" cy="36.8" r=".5" fill="#597140" stroke="none"/><path pathLength="1" stroke-width=".5" d="M74.0 35.2 L74.0 38.0"/><circle cx="74.0" cy="38.0" r=".5" fill="#597140" stroke="none"/><path pathLength="1" stroke-width=".5" d="M73.2 34.8 L71.2 36.8"/><circle cx="71.2" cy="36.8" r=".5" fill="#597140" stroke="none"/><path pathLength="1" stroke-width=".5" d="M72.8 34.0 L70.0 34.0"/><circle cx="70.0" cy="34.0" r=".5" fill="#597140" stroke="none"/><path pathLength="1" stroke-width=".5" d="M73.2 33.2 L71.2 31.2"/><circle cx="71.2" cy="31.2" r=".5" fill="#597140" stroke="none"/><path pathLength="1" stroke-width=".5" d="M74.0 32.8 L74.0 30.0"/><circle cx="74.0" cy="30.0" r=".5" fill="#597140" stroke="none"/><path pathLength="1" stroke-width=".5" d="M74.8 33.2 L76.8 31.2"/><circle cx="76.8" cy="31.2" r=".5" fill="#597140" stroke="none"/><path pathLength="1" stroke-width=".6" d="M60 64 L48 58"/><circle pathLength="1" cx="48" cy="58" r="1.0"/><path pathLength="1" stroke-width=".5" d="M49.2 58.0 L52.0 58.0"/><circle cx="52.0" cy="58.0" r=".5" fill="#597140" stroke="none"/><path pathLength="1" stroke-width=".5" d="M48.8 58.8 L50.8 60.8"/><circle cx="50.8" cy="60.8" r=".5" fill="#597140" stroke="none"/><path pathLength="1" stroke-width=".5" d="M48.0 59.2 L48.0 62.0"/><circle cx="48.0" cy="62.0" r=".5" fill="#597140" stroke="none"/><path pathLength="1" stroke-width=".5" d="M47.2 58.8 L45.2 60.8"/><circle cx="45.2" cy="60.8" r=".5" fill="#597140" stroke="none"/><path pathLength="1" stroke-width=".5" d="M46.8 58.0 L44.0 58.0"/><circle cx="44.0" cy="58.0" r=".5" fill="#597140" stroke="none"/><path pathLength="1" stroke-width=".5" d="M47.2 57.2 L45.2 55.2"/><circle cx="45.2" cy="55.2" r=".5" fill="#597140" stroke="none"/><path pathLength="1" stroke-width=".5" d="M48.0 56.8 L48.0 54.0"/><circle cx="48.0" cy="54.0" r=".5" fill="#597140" stroke="none"/><path pathLength="1" stroke-width=".5" d="M48.8 57.2 L50.8 55.2"/><circle cx="50.8" cy="55.2" r=".5" fill="#597140" stroke="none"/><path pathLength="1" stroke-width=".6" d="M60 58 L72 52"/><circle pathLength="1" cx="72" cy="52" r="1.0"/><path pathLength="1" stroke-width=".5" d="M73.2 52.0 L76.0 52.0"/><circle cx="76.0" cy="52.0" r=".5" fill="#597140" stroke="none"/><path pathLength="1" stroke-width=".5" d="M72.8 52.8 L74.8 54.8"/><circle cx="74.8" cy="54.8" r=".5" fill="#597140" stroke="none"/><path pathLength="1" stroke-width=".5" d="M72.0 53.2 L72.0 56.0"/><circle cx="72.0" cy="56.0" r=".5" fill="#597140" stroke="none"/><path pathLength="1" stroke-width=".5" d="M71.2 52.8 L69.2 54.8"/><circle cx="69.2" cy="54.8" r=".5" fill="#597140" stroke="none"/><path pathLength="1" stroke-width=".5" d="M70.8 52.0 L68.0 52.0"/><circle cx="68.0" cy="52.0" r=".5" fill="#597140" stroke="none"/><path pathLength="1" stroke-width=".5" d="M71.2 51.2 L69.2 49.2"/><circle cx="69.2" cy="49.2" r=".5" fill="#597140" stroke="none"/><path pathLength="1" stroke-width=".5" d="M72.0 50.8 L72.0 48.0"/><circle cx="72.0" cy="48.0" r=".5" fill="#597140" stroke="none"/><path pathLength="1" stroke-width=".5" d="M72.8 51.2 L74.8 49.2"/><circle cx="74.8" cy="49.2" r=".5" fill="#597140" stroke="none"/><path pathLength="1" stroke-width=".6" d="M60 80 L50 74"/><circle pathLength="1" cx="50" cy="74" r="1.0"/><path pathLength="1" stroke-width=".5" d="M51.2 74.0 L54.0 74.0"/><circle cx="54.0" cy="74.0" r=".5" fill="#597140" stroke="none"/><path pathLength="1" stroke-width=".5" d="M50.8 74.8 L52.8 76.8"/><circle cx="52.8" cy="76.8" r=".5" fill="#597140" stroke="none"/><path pathLength="1" stroke-width=".5" d="M50.0 75.2 L50.0 78.0"/><circle cx="50.0" cy="78.0" r=".5" fill="#597140" stroke="none"/><path pathLength="1" stroke-width=".5" d="M49.2 74.8 L47.2 76.8"/><circle cx="47.2" cy="76.8" r=".5" fill="#597140" stroke="none"/><path pathLength="1" stroke-width=".5" d="M48.8 74.0 L46.0 74.0"/><circle cx="46.0" cy="74.0" r=".5" fill="#597140" stroke="none"/><path pathLength="1" stroke-width=".5" d="M49.2 73.2 L47.2 71.2"/><circle cx="47.2" cy="71.2" r=".5" fill="#597140" stroke="none"/><path pathLength="1" stroke-width=".5" d="M50.0 72.8 L50.0 70.0"/><circle cx="50.0" cy="70.0" r=".5" fill="#597140" stroke="none"/><path pathLength="1" stroke-width=".5" d="M50.8 73.2 L52.8 71.2"/><circle cx="52.8" cy="71.2" r=".5" fill="#597140" stroke="none"/><path pathLength="1" stroke-width=".5" d="M48.6 138.6 l-0.3 -2.5"/><path pathLength="1" stroke-width=".5" d="M39.0 134.4 l-0.3 -2.5"/><path pathLength="1" stroke-width=".5" d="M29.4 130.2 l-0.3 -2.5"/><path pathLength="1" stroke-width=".5" d="M53.5 133.3 l0.8 -2.4"/><path pathLength="1" stroke-width=".5" d="M45.8 124.5 l0.8 -2.4"/><path pathLength="1" stroke-width=".5" d="M38.2 115.7 l0.8 -2.4"/><path pathLength="1" stroke-width=".5" d="M61.6 135.1 l1.7 -1.8"/><path pathLength="1" stroke-width=".5" d="M58.8 125.8 l1.7 -1.8"/><path pathLength="1" stroke-width=".5" d="M55.9 116.6 l1.7 -1.8"/><path pathLength="1" stroke-width=".5" d="M66.6 136.5 l2.2 -1.1"/><path pathLength="1" stroke-width=".5" d="M67.1 126.9 l2.2 -1.1"/><path pathLength="1" stroke-width=".5" d="M67.6 117.2 l2.2 -1.1"/><path pathLength="1" stroke-width=".5" d="M73.4 138.2 l2.5 -0.1"/><path pathLength="1" stroke-width=".5" d="M79.1 128.0 l2.5 -0.1"/><path pathLength="1" stroke-width=".5" d="M84.8 117.8 l2.5 -0.1"/><path pathLength="1" stroke-width=".5" d="M75.6 145.8 l2.3 1.0"/><path pathLength="1" stroke-width=".5" d="M84.0 139.6 l2.3 1.0"/><path pathLength="1" stroke-width=".5" d="M92.4 133.4 l2.3 1.0"/><path pathLength="1" stroke-width=".5" d="M48.9 143.8 l-1.1 -2.2"/><path pathLength="1" stroke-width=".5" d="M40.8 143.6 l-1.1 -2.2"/><path pathLength="1" stroke-width=".5" d="M32.7 143.4 l-1.1 -2.2"/><path pathLength="1" stroke-width=".5" d="M72.5 152.1 l1.8 1.7"/><path pathLength="1" stroke-width=".5" d="M80.2 149.5 l1.8 1.7"/><path pathLength="1" stroke-width=".5" d="M87.9 146.9 l1.8 1.7"/><path pathLength="1" d="M57.0 150 Q35.5 137.0 15.0 124.0 Q40.5 139.0 63.0 150"/><path pathLength="1" d="M57.0 150 Q41.4 126.2 26.7 102.5 Q46.4 128.2 63.0 150"/><path pathLength="1" d="M57.0 150 Q53.7 125.4 51.3 100.8 Q58.7 127.4 63.0 150"/><path pathLength="1" d="M59.0 150 Q62.3 125.4 68.7 100.8 Q67.3 127.4 63.0 150"/><path pathLength="1" d="M59.0 150 Q74.6 126.2 93.3 102.5 Q79.6 128.2 63.0 150"/><path pathLength="1" d="M59.0 150 Q80.5 137.0 105.0 124.0 Q85.5 139.0 63.0 150"/><path pathLength="1" d="M57.0 150 Q38.7 144.8 21.4 139.6 Q43.7 146.8 63.0 150"/><path pathLength="1" d="M59.0 150 Q77.3 144.8 98.6 139.6 Q82.3 146.8 63.0 150"/></svg><div><h3>Agave</h3><p class="latin">Agave missionum</p></div></div>
+      <p class="room-line">Main level · 1 King</p>
+      <details><summary>Room details</summary><p>Partial ocean and garden view, private terrace, outdoor shower. En suite bath.</p><p class="plant-note">The native century plant, crowned with yellow blooms.</p></details>
+    </figure>
+    <figure class="room">
+      <div class="ph"><img src="https://images.unsplash.com/photo-1721369483526-62f48a00b949?w=900&q=75&auto=format&fit=crop" alt="Placeholder bedroom image for Plumeria" loading="lazy"><span class="photo-note">Placeholder</span></div>
+      <div class="room-head"><svg class="plant" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 160" fill="none" stroke="#597140" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"><path pathLength="1" transform="rotate(0 62 58)" d="M62 58 C64 50 74 41 83 44 C89 47 84 56 72 59 C68 60 64 59 62 58Z"/><path pathLength="1" transform="rotate(72 62 58)" d="M62 58 C64 50 74 41 83 44 C89 47 84 56 72 59 C68 60 64 59 62 58Z"/><path pathLength="1" transform="rotate(144 62 58)" d="M62 58 C64 50 74 41 83 44 C89 47 84 56 72 59 C68 60 64 59 62 58Z"/><path pathLength="1" transform="rotate(216 62 58)" d="M62 58 C64 50 74 41 83 44 C89 47 84 56 72 59 C68 60 64 59 62 58Z"/><path pathLength="1" transform="rotate(288 62 58)" d="M62 58 C64 50 74 41 83 44 C89 47 84 56 72 59 C68 60 64 59 62 58Z"/><circle pathLength="1" cx="62" cy="58" r="3"/><path pathLength="1" d="M60.0 150.0 C64.8 125.4 56.9 91.1 46.5 73.2 C42.8 93.6 47.1 128.5 60.0 150.0Z"/><path pathLength="1" stroke-width=".6" d="M60.0 150.0 L47.5 79.3"/><path pathLength="1" stroke-width=".45" d="M55.9 127.0 L59.6 116.8"/><path pathLength="1" stroke-width=".45" d="M55.9 127.0 L49.0 118.7"/><path pathLength="1" stroke-width=".45" d="M53.2 111.6 L56.9 101.4"/><path pathLength="1" stroke-width=".45" d="M53.2 111.6 L46.3 103.3"/><path pathLength="1" stroke-width=".45" d="M50.5 96.2 L54.2 86.1"/><path pathLength="1" stroke-width=".45" d="M50.5 96.2 L43.6 87.9"/><path pathLength="1" d="M58.0 150.0 C52.9 130.4 34.4 109.4 19.8 101.1 C24.3 117.3 40.2 140.3 58.0 150.0Z"/><path pathLength="1" stroke-width=".6" d="M58.0 150.0 L22.9 105.1"/><path pathLength="1" stroke-width=".45" d="M46.5 135.3 L45.8 126.5"/><path pathLength="1" stroke-width=".45" d="M46.5 135.3 L38.2 132.4"/><path pathLength="1" stroke-width=".45" d="M38.9 125.6 L38.1 116.8"/><path pathLength="1" stroke-width=".45" d="M38.9 125.6 L30.6 122.7"/><path pathLength="1" stroke-width=".45" d="M31.3 115.8 L30.5 107.0"/><path pathLength="1" stroke-width=".45" d="M31.3 115.8 L22.9 112.9"/><path pathLength="1" d="M62.0 150.0 C77.2 138.4 88.1 114.6 89.2 98.8 C76.8 108.6 63.1 130.9 62.0 150.0Z"/><path pathLength="1" stroke-width=".6" d="M62.0 150.0 L87.1 102.9"/><path pathLength="1" stroke-width=".45" d="M70.2 134.6 L77.7 130.7"/><path pathLength="1" stroke-width=".45" d="M70.2 134.6 L69.2 126.2"/><path pathLength="1" stroke-width=".45" d="M75.6 124.4 L83.1 120.5"/><path pathLength="1" stroke-width=".45" d="M75.6 124.4 L74.6 116.0"/><path pathLength="1" stroke-width=".45" d="M81.1 114.2 L88.6 110.3"/><path pathLength="1" stroke-width=".45" d="M81.1 114.2 L80.1 105.8"/><path pathLength="1" d="M60 150 L60 156"/></svg><div><h3>Plumeria</h3><p class="latin">Plumeria alba</p></div></div>
+      <p class="room-line">Upper level · Primary suite · 1 King</p>
+      <details><summary>Room details</summary><p>Ocean view, private terrace, walk-in closet, outdoor shower. En suite bath.</p><p class="plant-note">Star-shaped blossoms of the dry tropical forest.</p></details>
+    </figure>
+    <figure class="room">
+      <div class="ph"><img src="https://images.unsplash.com/photo-1668277155881-9d3bccb1683a?w=900&q=75&auto=format&fit=crop" alt="Placeholder bedroom image for Bay Rum" loading="lazy"><span class="photo-note">Placeholder</span></div>
+      <div class="room-head"><svg class="plant" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 160" fill="none" stroke="#597140" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"><path pathLength="1" d="M60 156 C60 120 59 80 60 40"/><path pathLength="1" d="M60.0 140.0 C72.3 144.0 86.2 137.3 91.9 128.4 C81.8 125.3 66.8 129.0 60.0 140.0Z"/><path pathLength="1" stroke-width=".6" d="M60.0 140.0 L89.4 129.3"/><path pathLength="1" stroke-width=".45" d="M69.6 136.5 L75.1 139.6"/><path pathLength="1" stroke-width=".45" d="M69.6 136.5 L71.8 130.6"/><path pathLength="1" stroke-width=".45" d="M76.0 134.2 L81.5 137.3"/><path pathLength="1" stroke-width=".45" d="M76.0 134.2 L78.2 128.3"/><path pathLength="1" stroke-width=".45" d="M82.4 131.9 L87.8 135.0"/><path pathLength="1" stroke-width=".45" d="M82.4 131.9 L84.6 126.0"/><path pathLength="1" d="M60.0 140.0 C53.2 129.0 38.2 125.3 28.1 128.4 C33.8 137.3 47.7 144.0 60.0 140.0Z"/><path pathLength="1" stroke-width=".6" d="M60.0 140.0 L30.6 129.3"/><path pathLength="1" stroke-width=".45" d="M50.4 136.5 L48.2 130.6"/><path pathLength="1" stroke-width=".45" d="M50.4 136.5 L44.9 139.6"/><path pathLength="1" stroke-width=".45" d="M44.0 134.2 L41.8 128.3"/><path pathLength="1" stroke-width=".45" d="M44.0 134.2 L38.5 137.3"/><path pathLength="1" stroke-width=".45" d="M37.6 131.9 L35.4 126.0"/><path pathLength="1" stroke-width=".45" d="M37.6 131.9 L32.2 135.0"/><path pathLength="1" d="M60.0 115.0 C71.3 118.2 83.0 111.3 87.4 102.8 C78.1 100.4 65.2 104.5 60.0 115.0Z"/><path pathLength="1" stroke-width=".6" d="M60.0 115.0 L85.2 103.8"/><path pathLength="1" stroke-width=".45" d="M68.2 111.3 L73.3 114.0"/><path pathLength="1" stroke-width=".45" d="M68.2 111.3 L69.7 105.8"/><path pathLength="1" stroke-width=".45" d="M73.7 108.9 L78.8 111.5"/><path pathLength="1" stroke-width=".45" d="M73.7 108.9 L75.2 103.3"/><path pathLength="1" stroke-width=".45" d="M79.2 106.5 L84.3 109.1"/><path pathLength="1" stroke-width=".45" d="M79.2 106.5 L80.6 100.9"/><path pathLength="1" d="M60.0 115.0 C54.8 104.5 41.9 100.4 32.6 102.8 C37.0 111.3 48.7 118.2 60.0 115.0Z"/><path pathLength="1" stroke-width=".6" d="M60.0 115.0 L34.8 103.8"/><path pathLength="1" stroke-width=".45" d="M51.8 111.3 L50.3 105.8"/><path pathLength="1" stroke-width=".45" d="M51.8 111.3 L46.7 114.0"/><path pathLength="1" stroke-width=".45" d="M46.3 108.9 L44.8 103.3"/><path pathLength="1" stroke-width=".45" d="M46.3 108.9 L41.2 111.5"/><path pathLength="1" stroke-width=".45" d="M40.8 106.5 L39.4 100.9"/><path pathLength="1" stroke-width=".45" d="M40.8 106.5 L35.7 109.1"/><path pathLength="1" d="M60.0 90.0 C70.2 92.5 79.8 85.8 83.0 77.8 C74.6 75.9 63.6 80.2 60.0 90.0Z"/><path pathLength="1" stroke-width=".6" d="M60.0 90.0 L81.1 78.8"/><path pathLength="1" stroke-width=".45" d="M66.9 86.3 L71.6 88.6"/><path pathLength="1" stroke-width=".45" d="M66.9 86.3 L67.7 81.2"/><path pathLength="1" stroke-width=".45" d="M71.5 83.9 L76.2 86.1"/><path pathLength="1" stroke-width=".45" d="M71.5 83.9 L72.3 78.7"/><path pathLength="1" stroke-width=".45" d="M76.1 81.5 L80.8 83.7"/><path pathLength="1" stroke-width=".45" d="M76.1 81.5 L76.9 76.3"/><path pathLength="1" d="M60.0 90.0 C56.4 80.2 45.4 75.9 37.0 77.8 C40.2 85.8 49.8 92.5 60.0 90.0Z"/><path pathLength="1" stroke-width=".6" d="M60.0 90.0 L38.9 78.8"/><path pathLength="1" stroke-width=".45" d="M53.1 86.3 L52.3 81.2"/><path pathLength="1" stroke-width=".45" d="M53.1 86.3 L48.4 88.6"/><path pathLength="1" stroke-width=".45" d="M48.5 83.9 L47.7 78.7"/><path pathLength="1" stroke-width=".45" d="M48.5 83.9 L43.8 86.1"/><path pathLength="1" stroke-width=".45" d="M43.9 81.5 L43.1 76.3"/><path pathLength="1" stroke-width=".45" d="M43.9 81.5 L39.2 83.7"/><path pathLength="1" d="M60.0 66.0 C69.0 68.0 76.7 61.7 78.7 54.3 C71.2 52.8 62.2 57.0 60.0 66.0Z"/><path pathLength="1" stroke-width=".6" d="M60.0 66.0 L77.2 55.3"/><path pathLength="1" stroke-width=".45" d="M65.6 62.5 L69.9 64.4"/><path pathLength="1" stroke-width=".45" d="M65.6 62.5 L65.8 57.8"/><path pathLength="1" stroke-width=".45" d="M69.3 60.2 L73.6 62.1"/><path pathLength="1" stroke-width=".45" d="M69.3 60.2 L69.5 55.5"/><path pathLength="1" stroke-width=".45" d="M73.1 57.8 L77.4 59.7"/><path pathLength="1" stroke-width=".45" d="M73.1 57.8 L73.2 53.1"/><path pathLength="1" d="M60.0 66.0 C57.8 57.0 48.8 52.8 41.3 54.3 C43.3 61.7 51.0 68.0 60.0 66.0Z"/><path pathLength="1" stroke-width=".6" d="M60.0 66.0 L42.8 55.3"/><path pathLength="1" stroke-width=".45" d="M54.4 62.5 L54.2 57.8"/><path pathLength="1" stroke-width=".45" d="M54.4 62.5 L50.1 64.4"/><path pathLength="1" stroke-width=".45" d="M50.7 60.2 L50.5 55.5"/><path pathLength="1" stroke-width=".45" d="M50.7 60.2 L46.4 62.1"/><path pathLength="1" stroke-width=".45" d="M46.9 57.8 L46.8 53.1"/><path pathLength="1" stroke-width=".45" d="M46.9 57.8 L42.6 59.7"/><path pathLength="1" stroke-width=".5" d="M60 40 L60 30"/><circle pathLength="1" cx="60" cy="30" r="1.2"/><path pathLength="1" stroke-width=".5" d="M61.5 30.0 L65.0 30.0"/><circle cx="65.0" cy="30.0" r=".5" fill="#597140" stroke="none"/><path pathLength="1" stroke-width=".5" d="M61.2 30.9 L64.0 32.9"/><circle cx="64.0" cy="32.9" r=".5" fill="#597140" stroke="none"/><path pathLength="1" stroke-width=".5" d="M60.5 31.4 L61.5 34.8"/><circle cx="61.5" cy="34.8" r=".5" fill="#597140" stroke="none"/><path pathLength="1" stroke-width=".5" d="M59.5 31.4 L58.5 34.8"/><circle cx="58.5" cy="34.8" r=".5" fill="#597140" stroke="none"/><path pathLength="1" stroke-width=".5" d="M58.8 30.9 L56.0 32.9"/><circle cx="56.0" cy="32.9" r=".5" fill="#597140" stroke="none"/><path pathLength="1" stroke-width=".5" d="M58.5 30.0 L55.0 30.0"/><circle cx="55.0" cy="30.0" r=".5" fill="#597140" stroke="none"/><path pathLength="1" stroke-width=".5" d="M58.8 29.1 L56.0 27.1"/><circle cx="56.0" cy="27.1" r=".5" fill="#597140" stroke="none"/><path pathLength="1" stroke-width=".5" d="M59.5 28.6 L58.5 25.2"/><circle cx="58.5" cy="25.2" r=".5" fill="#597140" stroke="none"/><path pathLength="1" stroke-width=".5" d="M60.5 28.6 L61.5 25.2"/><circle cx="61.5" cy="25.2" r=".5" fill="#597140" stroke="none"/><path pathLength="1" stroke-width=".5" d="M61.2 29.1 L64.0 27.1"/><circle cx="64.0" cy="27.1" r=".5" fill="#597140" stroke="none"/><path pathLength="1" stroke-width=".5" d="M60 40 L50 36"/><circle pathLength="1" cx="50" cy="36" r="1.2"/><path pathLength="1" stroke-width=".5" d="M51.5 36.0 L55.0 36.0"/><circle cx="55.0" cy="36.0" r=".5" fill="#597140" stroke="none"/><path pathLength="1" stroke-width=".5" d="M51.2 36.9 L54.0 38.9"/><circle cx="54.0" cy="38.9" r=".5" fill="#597140" stroke="none"/><path pathLength="1" stroke-width=".5" d="M50.5 37.4 L51.5 40.8"/><circle cx="51.5" cy="40.8" r=".5" fill="#597140" stroke="none"/><path pathLength="1" stroke-width=".5" d="M49.5 37.4 L48.5 40.8"/><circle cx="48.5" cy="40.8" r=".5" fill="#597140" stroke="none"/><path pathLength="1" stroke-width=".5" d="M48.8 36.9 L46.0 38.9"/><circle cx="46.0" cy="38.9" r=".5" fill="#597140" stroke="none"/><path pathLength="1" stroke-width=".5" d="M48.5 36.0 L45.0 36.0"/><circle cx="45.0" cy="36.0" r=".5" fill="#597140" stroke="none"/><path pathLength="1" stroke-width=".5" d="M48.8 35.1 L46.0 33.1"/><circle cx="46.0" cy="33.1" r=".5" fill="#597140" stroke="none"/><path pathLength="1" stroke-width=".5" d="M49.5 34.6 L48.5 31.2"/><circle cx="48.5" cy="31.2" r=".5" fill="#597140" stroke="none"/><path pathLength="1" stroke-width=".5" d="M50.5 34.6 L51.5 31.2"/><circle cx="51.5" cy="31.2" r=".5" fill="#597140" stroke="none"/><path pathLength="1" stroke-width=".5" d="M51.2 35.1 L54.0 33.1"/><circle cx="54.0" cy="33.1" r=".5" fill="#597140" stroke="none"/><path pathLength="1" stroke-width=".5" d="M60 40 L70 36"/><circle pathLength="1" cx="70" cy="36" r="1.2"/><path pathLength="1" stroke-width=".5" d="M71.5 36.0 L75.0 36.0"/><circle cx="75.0" cy="36.0" r=".5" fill="#597140" stroke="none"/><path pathLength="1" stroke-width=".5" d="M71.2 36.9 L74.0 38.9"/><circle cx="74.0" cy="38.9" r=".5" fill="#597140" stroke="none"/><path pathLength="1" stroke-width=".5" d="M70.5 37.4 L71.5 40.8"/><circle cx="71.5" cy="40.8" r=".5" fill="#597140" stroke="none"/><path pathLength="1" stroke-width=".5" d="M69.5 37.4 L68.5 40.8"/><circle cx="68.5" cy="40.8" r=".5" fill="#597140" stroke="none"/><path pathLength="1" stroke-width=".5" d="M68.8 36.9 L66.0 38.9"/><circle cx="66.0" cy="38.9" r=".5" fill="#597140" stroke="none"/><path pathLength="1" stroke-width=".5" d="M68.5 36.0 L65.0 36.0"/><circle cx="65.0" cy="36.0" r=".5" fill="#597140" stroke="none"/><path pathLength="1" stroke-width=".5" d="M68.8 35.1 L66.0 33.1"/><circle cx="66.0" cy="33.1" r=".5" fill="#597140" stroke="none"/><path pathLength="1" stroke-width=".5" d="M69.5 34.6 L68.5 31.2"/><circle cx="68.5" cy="31.2" r=".5" fill="#597140" stroke="none"/><path pathLength="1" stroke-width=".5" d="M70.5 34.6 L71.5 31.2"/><circle cx="71.5" cy="31.2" r=".5" fill="#597140" stroke="none"/><path pathLength="1" stroke-width=".5" d="M71.2 35.1 L74.0 33.1"/><circle cx="74.0" cy="33.1" r=".5" fill="#597140" stroke="none"/><path pathLength="1" stroke-width=".5" d="M60 40 L55 22"/><circle pathLength="1" cx="55" cy="22" r="1.2"/><path pathLength="1" stroke-width=".5" d="M56.5 22.0 L60.0 22.0"/><circle cx="60.0" cy="22.0" r=".5" fill="#597140" stroke="none"/><path pathLength="1" stroke-width=".5" d="M56.2 22.9 L59.0 24.9"/><circle cx="59.0" cy="24.9" r=".5" fill="#597140" stroke="none"/><path pathLength="1" stroke-width=".5" d="M55.5 23.4 L56.5 26.8"/><circle cx="56.5" cy="26.8" r=".5" fill="#597140" stroke="none"/><path pathLength="1" stroke-width=".5" d="M54.5 23.4 L53.5 26.8"/><circle cx="53.5" cy="26.8" r=".5" fill="#597140" stroke="none"/><path pathLength="1" stroke-width=".5" d="M53.8 22.9 L51.0 24.9"/><circle cx="51.0" cy="24.9" r=".5" fill="#597140" stroke="none"/><path pathLength="1" stroke-width=".5" d="M53.5 22.0 L50.0 22.0"/><circle cx="50.0" cy="22.0" r=".5" fill="#597140" stroke="none"/><path pathLength="1" stroke-width=".5" d="M53.8 21.1 L51.0 19.1"/><circle cx="51.0" cy="19.1" r=".5" fill="#597140" stroke="none"/><path pathLength="1" stroke-width=".5" d="M54.5 20.6 L53.5 17.2"/><circle cx="53.5" cy="17.2" r=".5" fill="#597140" stroke="none"/><path pathLength="1" stroke-width=".5" d="M55.5 20.6 L56.5 17.2"/><circle cx="56.5" cy="17.2" r=".5" fill="#597140" stroke="none"/><path pathLength="1" stroke-width=".5" d="M56.2 21.1 L59.0 19.1"/><circle cx="59.0" cy="19.1" r=".5" fill="#597140" stroke="none"/><path pathLength="1" stroke-width=".5" d="M60 40 L66 23"/><circle pathLength="1" cx="66" cy="23" r="1.2"/><path pathLength="1" stroke-width=".5" d="M67.5 23.0 L71.0 23.0"/><circle cx="71.0" cy="23.0" r=".5" fill="#597140" stroke="none"/><path pathLength="1" stroke-width=".5" d="M67.2 23.9 L70.0 25.9"/><circle cx="70.0" cy="25.9" r=".5" fill="#597140" stroke="none"/><path pathLength="1" stroke-width=".5" d="M66.5 24.4 L67.5 27.8"/><circle cx="67.5" cy="27.8" r=".5" fill="#597140" stroke="none"/><path pathLength="1" stroke-width=".5" d="M65.5 24.4 L64.5 27.8"/><circle cx="64.5" cy="27.8" r=".5" fill="#597140" stroke="none"/><path pathLength="1" stroke-width=".5" d="M64.8 23.9 L62.0 25.9"/><circle cx="62.0" cy="25.9" r=".5" fill="#597140" stroke="none"/><path pathLength="1" stroke-width=".5" d="M64.5 23.0 L61.0 23.0"/><circle cx="61.0" cy="23.0" r=".5" fill="#597140" stroke="none"/><path pathLength="1" stroke-width=".5" d="M64.8 22.1 L62.0 20.1"/><circle cx="62.0" cy="20.1" r=".5" fill="#597140" stroke="none"/><path pathLength="1" stroke-width=".5" d="M65.5 21.6 L64.5 18.2"/><circle cx="64.5" cy="18.2" r=".5" fill="#597140" stroke="none"/><path pathLength="1" stroke-width=".5" d="M66.5 21.6 L67.5 18.2"/><circle cx="67.5" cy="18.2" r=".5" fill="#597140" stroke="none"/><path pathLength="1" stroke-width=".5" d="M67.2 22.1 L70.0 20.1"/><circle cx="70.0" cy="20.1" r=".5" fill="#597140" stroke="none"/></svg><div><h3>Bay Rum</h3><p class="latin">Pimenta racemosa</p></div></div>
+      <p class="room-line">Upper level · 1 King</p>
+      <details><summary>Room details</summary><p>Ocean view, private terrace, walk-in closet, outdoor shower. En suite bath.</p><p class="plant-note">The aromatic leaf behind St. John's bay rum.</p></details>
+    </figure>
+    <figure class="room">
+      <div class="ph"><img src="https://images.unsplash.com/photo-1776876648949-63ccabf63b10?w=900&q=75&auto=format&fit=crop" alt="Placeholder bedroom image for Eugenia" loading="lazy"><span class="photo-note">Placeholder</span></div>
+      <div class="room-head"><svg class="plant" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 160" fill="none" stroke="#597140" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"><path pathLength="1" stroke-width="1.6" d="M58 156 C57 130 62 100 58 70 C56 52 60 36 64 20"/><path pathLength="1" d="M58 98 C70 90 80 84 92 70"/><path pathLength="1" d="M58 76 C48 68 40 60 30 50"/><path pathLength="1" d="M92.0 70.0 C100.1 70.4 106.3 63.7 107.3 57.1 C100.7 57.0 93.1 61.9 92.0 70.0Z"/><path pathLength="1" stroke-width=".6" d="M92.0 70.0 L106.1 58.2"/><path pathLength="1" stroke-width=".45" d="M96.6 66.1 L100.6 67.1"/><path pathLength="1" stroke-width=".45" d="M96.6 66.1 L96.3 62.1"/><path pathLength="1" stroke-width=".45" d="M99.7 63.6 L103.6 64.6"/><path pathLength="1" stroke-width=".45" d="M99.7 63.6 L99.4 59.5"/><path pathLength="1" stroke-width=".45" d="M102.7 61.0 L106.7 62.0"/><path pathLength="1" stroke-width=".45" d="M102.7 61.0 L102.4 56.9"/><path pathLength="1" d="M30.0 50.0 C27.6 42.2 19.2 38.7 12.7 40.0 C14.8 46.3 22.1 51.8 30.0 50.0Z"/><path pathLength="1" stroke-width=".6" d="M30.0 50.0 L14.1 40.8"/><path pathLength="1" stroke-width=".45" d="M24.8 47.0 L24.4 42.9"/><path pathLength="1" stroke-width=".45" d="M24.8 47.0 L21.1 48.7"/><path pathLength="1" stroke-width=".45" d="M21.3 45.0 L20.9 40.9"/><path pathLength="1" stroke-width=".45" d="M21.3 45.0 L17.6 46.7"/><path pathLength="1" stroke-width=".45" d="M17.9 43.0 L17.4 38.9"/><path pathLength="1" stroke-width=".45" d="M17.9 43.0 L14.1 44.7"/><path pathLength="1" d="M64.0 20.0 C70.5 15.0 70.9 6.0 67.5 0.3 C62.3 4.5 59.6 13.1 64.0 20.0Z"/><path pathLength="1" stroke-width=".6" d="M64.0 20.0 L67.2 1.9"/><path pathLength="1" stroke-width=".45" d="M65.0 14.1 L68.7 12.3"/><path pathLength="1" stroke-width=".45" d="M65.0 14.1 L62.2 11.2"/><path pathLength="1" stroke-width=".45" d="M65.7 10.2 L69.4 8.4"/><path pathLength="1" stroke-width=".45" d="M65.7 10.2 L62.9 7.2"/><path pathLength="1" stroke-width=".45" d="M66.4 6.2 L70.1 4.4"/><path pathLength="1" stroke-width=".45" d="M66.4 6.2 L63.6 3.3"/><path pathLength="1" d="M80.0 82.0 C87.5 85.1 95.6 81.0 98.8 75.2 C92.6 72.7 83.8 74.8 80.0 82.0Z"/><path pathLength="1" stroke-width=".6" d="M80.0 82.0 L97.3 75.7"/><path pathLength="1" stroke-width=".45" d="M85.6 79.9 L89.0 82.2"/><path pathLength="1" stroke-width=".45" d="M85.6 79.9 L86.8 76.0"/><path pathLength="1" stroke-width=".45" d="M89.4 78.6 L92.8 80.9"/><path pathLength="1" stroke-width=".45" d="M89.4 78.6 L90.5 74.7"/><path pathLength="1" stroke-width=".45" d="M93.2 77.2 L96.5 79.5"/><path pathLength="1" stroke-width=".45" d="M93.2 77.2 L94.3 73.3"/><path pathLength="1" d="M42.0 62.0 C37.0 55.5 28.0 55.1 22.3 58.5 C26.5 63.7 35.1 66.4 42.0 62.0Z"/><path pathLength="1" stroke-width=".6" d="M42.0 62.0 L23.9 58.8"/><path pathLength="1" stroke-width=".45" d="M36.1 61.0 L34.3 57.3"/><path pathLength="1" stroke-width=".45" d="M36.1 61.0 L33.2 63.8"/><path pathLength="1" stroke-width=".45" d="M32.2 60.3 L30.4 56.6"/><path pathLength="1" stroke-width=".45" d="M32.2 60.3 L29.2 63.1"/><path pathLength="1" stroke-width=".45" d="M28.2 59.6 L26.4 55.9"/><path pathLength="1" stroke-width=".45" d="M28.2 59.6 L25.3 62.4"/><path pathLength="1" d="M61.0 40.0 C68.5 43.1 76.6 39.0 79.8 33.2 C73.6 30.7 64.8 32.8 61.0 40.0Z"/><path pathLength="1" stroke-width=".6" d="M61.0 40.0 L78.3 33.7"/><path pathLength="1" stroke-width=".45" d="M66.6 37.9 L70.0 40.2"/><path pathLength="1" stroke-width=".45" d="M66.6 37.9 L67.8 34.0"/><path pathLength="1" stroke-width=".45" d="M70.4 36.6 L73.8 38.9"/><path pathLength="1" stroke-width=".45" d="M70.4 36.6 L71.5 32.7"/><path pathLength="1" stroke-width=".45" d="M74.2 35.2 L77.5 37.5"/><path pathLength="1" stroke-width=".45" d="M74.2 35.2 L75.3 31.3"/><path pathLength="1" d="M60.0 30.0 C57.6 22.2 49.2 18.7 42.7 20.0 C44.8 26.3 52.1 31.8 60.0 30.0Z"/><path pathLength="1" stroke-width=".6" d="M60.0 30.0 L44.1 20.8"/><path pathLength="1" stroke-width=".45" d="M54.8 27.0 L54.4 22.9"/><path pathLength="1" stroke-width=".45" d="M54.8 27.0 L51.1 28.7"/><path pathLength="1" stroke-width=".45" d="M51.3 25.0 L50.9 20.9"/><path pathLength="1" stroke-width=".45" d="M51.3 25.0 L47.6 26.7"/><path pathLength="1" stroke-width=".45" d="M47.9 23.0 L47.4 18.9"/><path pathLength="1" stroke-width=".45" d="M47.9 23.0 L44.1 24.7"/><circle pathLength="1" cx="63" cy="124" r="1.5"/><path pathLength="1" stroke-width=".5" d="M64.8 124.0 L69.0 124.0"/><circle cx="69.0" cy="124.0" r=".5" fill="#597140" stroke="none"/><path pathLength="1" stroke-width=".5" d="M64.6 124.9 L68.2 127.0"/><circle cx="68.2" cy="127.0" r=".5" fill="#597140" stroke="none"/><path pathLength="1" stroke-width=".5" d="M63.9 125.6 L66.0 129.2"/><circle cx="66.0" cy="129.2" r=".5" fill="#597140" stroke="none"/><path pathLength="1" stroke-width=".5" d="M63.0 125.8 L63.0 130.0"/><circle cx="63.0" cy="130.0" r=".5" fill="#597140" stroke="none"/><path pathLength="1" stroke-width=".5" d="M62.1 125.6 L60.0 129.2"/><circle cx="60.0" cy="129.2" r=".5" fill="#597140" stroke="none"/><path pathLength="1" stroke-width=".5" d="M61.4 124.9 L57.8 127.0"/><circle cx="57.8" cy="127.0" r=".5" fill="#597140" stroke="none"/><path pathLength="1" stroke-width=".5" d="M61.2 124.0 L57.0 124.0"/><circle cx="57.0" cy="124.0" r=".5" fill="#597140" stroke="none"/><path pathLength="1" stroke-width=".5" d="M61.4 123.1 L57.8 121.0"/><circle cx="57.8" cy="121.0" r=".5" fill="#597140" stroke="none"/><path pathLength="1" stroke-width=".5" d="M62.1 122.4 L60.0 118.8"/><circle cx="60.0" cy="118.8" r=".5" fill="#597140" stroke="none"/><path pathLength="1" stroke-width=".5" d="M63.0 122.2 L63.0 118.0"/><circle cx="63.0" cy="118.0" r=".5" fill="#597140" stroke="none"/><path pathLength="1" stroke-width=".5" d="M63.9 122.4 L66.0 118.8"/><circle cx="66.0" cy="118.8" r=".5" fill="#597140" stroke="none"/><path pathLength="1" stroke-width=".5" d="M64.6 123.1 L68.2 121.0"/><circle cx="68.2" cy="121.0" r=".5" fill="#597140" stroke="none"/><circle pathLength="1" cx="65" cy="110" r="1.5"/><path pathLength="1" stroke-width=".5" d="M66.8 110.0 L71.0 110.0"/><circle cx="71.0" cy="110.0" r=".5" fill="#597140" stroke="none"/><path pathLength="1" stroke-width=".5" d="M66.6 110.9 L70.2 113.0"/><circle cx="70.2" cy="113.0" r=".5" fill="#597140" stroke="none"/><path pathLength="1" stroke-width=".5" d="M65.9 111.6 L68.0 115.2"/><circle cx="68.0" cy="115.2" r=".5" fill="#597140" stroke="none"/><path pathLength="1" stroke-width=".5" d="M65.0 111.8 L65.0 116.0"/><circle cx="65.0" cy="116.0" r=".5" fill="#597140" stroke="none"/><path pathLength="1" stroke-width=".5" d="M64.1 111.6 L62.0 115.2"/><circle cx="62.0" cy="115.2" r=".5" fill="#597140" stroke="none"/><path pathLength="1" stroke-width=".5" d="M63.4 110.9 L59.8 113.0"/><circle cx="59.8" cy="113.0" r=".5" fill="#597140" stroke="none"/><path pathLength="1" stroke-width=".5" d="M63.2 110.0 L59.0 110.0"/><circle cx="59.0" cy="110.0" r=".5" fill="#597140" stroke="none"/><path pathLength="1" stroke-width=".5" d="M63.4 109.1 L59.8 107.0"/><circle cx="59.8" cy="107.0" r=".5" fill="#597140" stroke="none"/><path pathLength="1" stroke-width=".5" d="M64.1 108.4 L62.0 104.8"/><circle cx="62.0" cy="104.8" r=".5" fill="#597140" stroke="none"/><path pathLength="1" stroke-width=".5" d="M65.0 108.2 L65.0 104.0"/><circle cx="65.0" cy="104.0" r=".5" fill="#597140" stroke="none"/><path pathLength="1" stroke-width=".5" d="M65.9 108.4 L68.0 104.8"/><circle cx="68.0" cy="104.8" r=".5" fill="#597140" stroke="none"/><path pathLength="1" stroke-width=".5" d="M66.6 109.1 L70.2 107.0"/><circle cx="70.2" cy="107.0" r=".5" fill="#597140" stroke="none"/><circle pathLength="1" cx="62" cy="88" r="1.5"/><path pathLength="1" stroke-width=".5" d="M63.8 88.0 L68.0 88.0"/><circle cx="68.0" cy="88.0" r=".5" fill="#597140" stroke="none"/><path pathLength="1" stroke-width=".5" d="M63.6 88.9 L67.2 91.0"/><circle cx="67.2" cy="91.0" r=".5" fill="#597140" stroke="none"/><path pathLength="1" stroke-width=".5" d="M62.9 89.6 L65.0 93.2"/><circle cx="65.0" cy="93.2" r=".5" fill="#597140" stroke="none"/><path pathLength="1" stroke-width=".5" d="M62.0 89.8 L62.0 94.0"/><circle cx="62.0" cy="94.0" r=".5" fill="#597140" stroke="none"/><path pathLength="1" stroke-width=".5" d="M61.1 89.6 L59.0 93.2"/><circle cx="59.0" cy="93.2" r=".5" fill="#597140" stroke="none"/><path pathLength="1" stroke-width=".5" d="M60.4 88.9 L56.8 91.0"/><circle cx="56.8" cy="91.0" r=".5" fill="#597140" stroke="none"/><path pathLength="1" stroke-width=".5" d="M60.2 88.0 L56.0 88.0"/><circle cx="56.0" cy="88.0" r=".5" fill="#597140" stroke="none"/><path pathLength="1" stroke-width=".5" d="M60.4 87.1 L56.8 85.0"/><circle cx="56.8" cy="85.0" r=".5" fill="#597140" stroke="none"/><path pathLength="1" stroke-width=".5" d="M61.1 86.4 L59.0 82.8"/><circle cx="59.0" cy="82.8" r=".5" fill="#597140" stroke="none"/><path pathLength="1" stroke-width=".5" d="M62.0 86.2 L62.0 82.0"/><circle cx="62.0" cy="82.0" r=".5" fill="#597140" stroke="none"/><path pathLength="1" stroke-width=".5" d="M62.9 86.4 L65.0 82.8"/><circle cx="65.0" cy="82.8" r=".5" fill="#597140" stroke="none"/><path pathLength="1" stroke-width=".5" d="M63.6 87.1 L67.2 85.0"/><circle cx="67.2" cy="85.0" r=".5" fill="#597140" stroke="none"/><circle pathLength="1" cx="64" cy="60" r="1.5"/><path pathLength="1" stroke-width=".5" d="M65.8 60.0 L70.0 60.0"/><circle cx="70.0" cy="60.0" r=".5" fill="#597140" stroke="none"/><path pathLength="1" stroke-width=".5" d="M65.6 60.9 L69.2 63.0"/><circle cx="69.2" cy="63.0" r=".5" fill="#597140" stroke="none"/><path pathLength="1" stroke-width=".5" d="M64.9 61.6 L67.0 65.2"/><circle cx="67.0" cy="65.2" r=".5" fill="#597140" stroke="none"/><path pathLength="1" stroke-width=".5" d="M64.0 61.8 L64.0 66.0"/><circle cx="64.0" cy="66.0" r=".5" fill="#597140" stroke="none"/><path pathLength="1" stroke-width=".5" d="M63.1 61.6 L61.0 65.2"/><circle cx="61.0" cy="65.2" r=".5" fill="#597140" stroke="none"/><path pathLength="1" stroke-width=".5" d="M62.4 60.9 L58.8 63.0"/><circle cx="58.8" cy="63.0" r=".5" fill="#597140" stroke="none"/><path pathLength="1" stroke-width=".5" d="M62.2 60.0 L58.0 60.0"/><circle cx="58.0" cy="60.0" r=".5" fill="#597140" stroke="none"/><path pathLength="1" stroke-width=".5" d="M62.4 59.1 L58.8 57.0"/><circle cx="58.8" cy="57.0" r=".5" fill="#597140" stroke="none"/><path pathLength="1" stroke-width=".5" d="M63.1 58.4 L61.0 54.8"/><circle cx="61.0" cy="54.8" r=".5" fill="#597140" stroke="none"/><path pathLength="1" stroke-width=".5" d="M64.0 58.2 L64.0 54.0"/><circle cx="64.0" cy="54.0" r=".5" fill="#597140" stroke="none"/><path pathLength="1" stroke-width=".5" d="M64.9 58.4 L67.0 54.8"/><circle cx="67.0" cy="54.8" r=".5" fill="#597140" stroke="none"/><path pathLength="1" stroke-width=".5" d="M65.6 59.1 L69.2 57.0"/><circle cx="69.2" cy="57.0" r=".5" fill="#597140" stroke="none"/></svg><div><h3>Eugenia</h3><p class="latin">Eugenia earhartii</p></div></div>
+      <p class="room-line">Upper level · 1 King, plus a bunk room with 1 Full and 1 Twin</p>
+      <details><summary>Room details</summary><p>Ocean view, private terrace, two walk-in closets. En suite bath.</p><p class="plant-note">A rare native found in only two places, both on St. John.</p></details>
+    </figure>
+    <figure class="room">
+      <div class="ph"><img src="https://images.unsplash.com/photo-1760067538083-b9d87cd6706c?w=900&q=75&auto=format&fit=crop" alt="Placeholder bedroom image for Wattapama" loading="lazy"><span class="photo-note">Placeholder</span></div>
+      <div class="room-head"><svg class="plant" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 160" fill="none" stroke="#597140" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"><path pathLength="1" d="M40 156 C44 120 50 90 62 62"/><path pathLength="1" d="M40.0 150.0 C37.5 143.8 30.8 142.4 25.9 144.9 C28.1 149.9 34.1 153.2 40.0 150.0Z"/><path pathLength="1" d="M40.0 150.0 C45.9 153.2 51.9 149.9 54.1 144.9 C49.2 142.4 42.5 143.8 40.0 150.0Z"/><path pathLength="1" d="M43.7 135.3 C41.0 129.2 34.2 128.0 29.4 130.6 C31.7 135.6 37.8 138.7 43.7 135.3Z"/><path pathLength="1" d="M43.7 135.3 C49.5 138.7 55.6 135.6 57.9 130.6 C53.1 128.0 46.4 129.2 43.7 135.3Z"/><path pathLength="1" d="M47.3 120.7 C44.5 114.6 37.7 113.6 33.0 116.4 C35.4 121.3 41.6 124.2 47.3 120.7Z"/><path pathLength="1" d="M47.3 120.7 C53.1 124.2 59.3 121.3 61.7 116.4 C57.0 113.6 50.2 114.6 47.3 120.7Z"/><path pathLength="1" d="M51.0 106.0 C47.9 100.0 41.2 99.2 36.5 102.1 C39.1 107.0 45.4 109.7 51.0 106.0Z"/><path pathLength="1" d="M51.0 106.0 C56.6 109.7 62.9 107.0 65.5 102.1 C60.8 99.2 54.1 100.0 51.0 106.0Z"/><path pathLength="1" d="M54.7 91.3 C51.4 85.4 44.6 84.8 40.1 87.9 C42.8 92.6 49.1 95.2 54.7 91.3Z"/><path pathLength="1" d="M54.7 91.3 C60.2 95.2 66.5 92.6 69.3 87.9 C64.7 84.8 57.9 85.4 54.7 91.3Z"/><path pathLength="1" d="M58.3 76.7 C54.9 70.9 48.1 70.5 43.6 73.6 C46.5 78.3 52.9 80.7 58.3 76.7Z"/><path pathLength="1" d="M58.3 76.7 C63.8 80.7 70.2 78.3 73.0 73.6 C68.5 70.5 61.7 70.9 58.3 76.7Z"/><path pathLength="1" d="M62.0 62.0 C58.4 56.3 51.6 56.1 47.2 59.4 C50.2 64.0 56.7 66.1 62.0 62.0Z"/><path pathLength="1" d="M62.0 62.0 C67.3 66.1 73.8 64.0 76.8 59.4 C72.4 56.1 65.6 56.3 62.0 62.0Z"/><path pathLength="1" d="M62.0 62.0 C68.2 59.5 69.6 52.8 67.1 47.9 C62.1 50.1 58.8 56.1 62.0 62.0Z"/><path pathLength="1" d="M62 62 C74 52 84 46 92 40"/><path pathLength="1" d="M92 40 C96 58 96 80 92 104"/><path pathLength="1" stroke-width=".5" d="M94 48 L86 52"/><path pathLength="1" d="M86 52 c-3 2 -3 9 0 11 c3 -2 3 -9 0 -11z"/><path pathLength="1" d="M86 52 c-4 -2 -7 1 -6 4"/><path pathLength="1" stroke-width=".5" d="M94 60 L100 64"/><path pathLength="1" d="M100 64 c-3 2 -3 9 0 11 c3 -2 3 -9 0 -11z"/><path pathLength="1" d="M100 64 c-4 -2 -7 1 -6 4"/><path pathLength="1" stroke-width=".5" d="M94 72 L86 76"/><path pathLength="1" d="M86 76 c-3 2 -3 9 0 11 c3 -2 3 -9 0 -11z"/><path pathLength="1" d="M86 76 c-4 -2 -7 1 -6 4"/><path pathLength="1" stroke-width=".5" d="M94 84 L100 88"/><path pathLength="1" d="M100 88 c-3 2 -3 9 0 11 c3 -2 3 -9 0 -11z"/><path pathLength="1" d="M100 88 c-4 -2 -7 1 -6 4"/><path pathLength="1" stroke-width=".5" d="M94 96 L86 100"/><path pathLength="1" d="M86 100 c-3 2 -3 9 0 11 c3 -2 3 -9 0 -11z"/><path pathLength="1" d="M86 100 c-4 -2 -7 1 -6 4"/></svg><div><h3>Wattapama</h3><p class="latin">Poitea florida</p></div></div>
+      <p class="room-line">Lower level · 1 King</p>
+      <details><summary>Room details</summary><p>Partial ocean and salt pond view. En suite bath.</p><p class="plant-note">An ancient native tree, shaped by sun and wind.</p></details>
+    </figure>
+  </div>
+</section>
+
+<section class="split" id="privacy">
+  <div class="img"><img src="img/entry.jpg" alt="The entry: stone columns, planted terraces and a steel door"><span class="photo-note">Placeholder · site-visit photo</span></div>
+  <div class="txt">
+    <p class="eyebrow">Privacy</p>
+    <h2 class="h-l">Behind the entry gate, the hillside is yours.</h2>
+    <p class="muted measure">Guests enter through a handcrafted gate, tucked away from public view. Coded access keeps arrival effortless and private.</p>
+  </div>
+</section>
+
+<section class="wrap section" id="amenities">
+  <div class="intro" style="align-items:start">
+    <div style="display:flex;flex-direction:column;gap:22px">
+      <p class="eyebrow">Amenities</p>
+      <h2 class="h-l">Everything is on site.</h2>
+    </div>
+    <ul class="amenities"><li>Pool and deck</li><li>Outdoor dining</li><li>Billiards and rock garden</li><li>Gym</li><li>Family and TV room</li><li>Secondary kitchen</li><li>Roof sun deck</li><li>Gardens and tropical landscaping</li><li>Garage and parking for 8 vehicles</li></ul>
+  </div>
+</section>
+
+<section class="wrap amen-row" aria-label="Amenity images">
+  <figure><div class="ph"><img src="https://images.unsplash.com/photo-1786204413545-cc7f6d87a112?w=900&q=75&auto=format&fit=crop" alt="Placeholder: a home gym with large windows onto planting" loading="lazy"><span class="photo-note">Placeholder</span></div><figcaption>Fitness studio</figcaption></figure>
+  <figure><div class="ph"><img src="https://images.unsplash.com/photo-1718931162137-add643ee948f?w=900&q=75&auto=format&fit=crop" alt="Placeholder: sunset over the sea from a deck" loading="lazy"><span class="photo-note">Placeholder</span></div><figcaption>Rooftop viewing deck</figcaption></figure>
+  <figure><div class="ph"><img src="https://images.unsplash.com/photo-1661069543192-98a5a598ae9e?w=900&q=75&auto=format&fit=crop" alt="Placeholder: an outdoor shower surrounded by tropical planting" loading="lazy"><span class="photo-note">Placeholder</span></div><figcaption>Outdoor showers</figcaption></figure>
+  <figure><div class="ph"><img src="https://images.unsplash.com/photo-1756079664354-34944e001f6d?w=900&q=75&auto=format&fit=crop" alt="Placeholder: a modern bathroom with a stone vanity and two sinks" loading="lazy"><span class="photo-note">Placeholder</span></div><figcaption>En suite baths</figcaption></figure>
+</section>
+
+<section class="section" id="gallery">
+  <div class="wrap gardens-head">
+    <div style="display:flex;flex-direction:column;gap:20px;max-width:640px">
+      <p class="eyebrow">The gardens</p>
+      <h2 class="h-l">The planting came first.</h2>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:16px;max-width:40ch"><p class="muted">Grasses along the terraces and a rock garden inside the covered rooms.</p><p><a class="link" href="#gallery">View the full gallery</a></p></div>
+  </div>
+  <div class="strip" tabindex="0" aria-label="Garden photographs, scroll sideways">
+    <figure><div class="ph"><img src="img/garden-fern.jpg" width="960" height="1200" alt="Placeholder: A fern rooted in a crevice between grey limestone rocks" loading="lazy"><span class="photo-note">Placeholder</span></div><figcaption>Fern rooted between the stones.</figcaption></figure>
+    <figure><div class="ph"><img src="img/garden-heliconia.jpg" width="960" height="1200" alt="Placeholder: A red and yellow heliconia bud among broad green leaves" loading="lazy"><span class="photo-note">Placeholder</span></div><figcaption>Heliconia in bud.</figcaption></figure>
+    <figure><div class="ph"><img src="img/garden-mango.jpg" width="960" height="1200" alt="Placeholder: A ripening yellow mango and a green one hanging in a mango tree" loading="lazy"><span class="photo-note">Placeholder</span></div><figcaption>Mango, ripening on the branch.</figcaption></figure>
+    <figure><div class="ph"><img src="img/garden-fan-palm.jpg" width="960" height="1200" alt="Placeholder: Sunlit fan palm fronds radiating from their stems" loading="lazy"><span class="photo-note">Placeholder</span></div><figcaption>Fan palm in the afternoon light.</figcaption></figure>
+    <figure><div class="ph"><img src="img/garden-silver-palm.jpg" width="960" height="1200" alt="Placeholder: A silver fan palm against a deep blue evening sky" loading="lazy"><span class="photo-note">Placeholder</span></div><figcaption>Silver palm against a late sky.</figcaption></figure>
+  </div>
+</section>
+
+<section class="on-dark wrap section" id="sustainability">
+  <div class="sust">
+    <img class="lockup" src="img/calea-logo-reversed.svg" alt="Calea St. John">
+    <div style="display:flex;flex-direction:column;gap:22px;max-width:640px">
+      <p class="eyebrow">Sustainability</p>
+      <h2 class="h-l">Built to run on its own power.</h2>
+      <p class="muted">Solar powered, with a backup generator. <span class="tbc">System details</span></p>
+    </div>
+  </div>
+</section>
+
+<section class="wrap section" id="place">
+  <div class="stj">
+    <div style="display:flex;flex-direction:column;gap:22px">
+      <p class="eyebrow">Francis Bay &amp; St. John</p>
+      <h2 class="h-l">Twenty-five minutes from Cruz Bay, and a world away.</h2>
+      <p class="muted measure">Beaches, trails and the national park on your doorstep.</p>
+    </div>
+    <div class="cam">
+      <img src="img/pool-deck.jpg" alt="View across the pool toward Francis Bay">
+      <span class="cam-live"><i></i>Live · webcam preview</span>
+      <span class="cam-time" data-cam-time>St. John</span>
+    </div>
+  </div>
+</section>
+
+<section class="wrap section" id="rates" style="padding-bottom:0">
+  <p class="eyebrow">Rates · per week</p>
+  <div class="rates"><div><b>$25,000</b><span>Winter</span></div><div><b>$20,000</b><span>Summer</span></div><div><b><span class="tbc">Rate TBC</span></b><span>Holiday · Dec 18 to Jan 7</span></div></div>
+  <p class="muted" style="margin-top:16px;font-size:14px">Rates are plus tax and may vary with the number of guests, travel dates and length of stay.</p>
+</section>
+
+<section class="wrap section hosts" id="hosts">
+  <div class="host-ph" role="img" aria-label="Placeholder for a portrait of Chris and Sarah"><span>C&nbsp;&amp;&nbsp;S</span><em>Portrait to come</em></div>
+  <div style="display:flex;flex-direction:column;gap:20px;max-width:46ch">
+    <p class="eyebrow">Your hosts</p>
+    <h2 class="h-l">Chris and Sarah look after Calea, and every stay.</h2>
+    <p class="muted">They answer each request personally, and can arrange an in-villa massage, a Caribbean cooking class or a day on the water. <span class="tbc">Bio</span></p>
+  </div>
+</section>
+
+<section class="wrap section" id="stay">
+  <div class="req">
+    <div style="display:flex;flex-direction:column;gap:24px">
+      <p class="eyebrow">Stay at Calea</p>
+      <h2 class="h-l">Tell us when you would like to come.</h2>
+      <p class="muted measure">Every stay is confirmed by hand. Chris and Sarah, who look after the house, will write back with availability and rates.</p>
+    </div>
+    <form id="request" data-booking="request" aria-label="Reservation request" novalidate>
+      <div class="rq-fields" data-fields>
+        <div class="err-summary wide" data-summary tabindex="-1" hidden><p class="err-title" data-summary-title></p><ul data-summary-list></ul></div>
+        <p class="rq-note wide">All fields are required unless marked optional.</p>
+        <div class="field"><label for="a-arr">Arrival</label><input id="a-arr" name="arrival" type="date" required aria-describedby="a-arr-err"><p class="f-err" id="a-arr-err" hidden></p></div>
+        <div class="field"><label for="a-dep">Departure</label><input id="a-dep" name="departure" type="date" required aria-describedby="a-dep-err"><p class="f-err" id="a-dep-err" hidden></p></div>
+        <div class="field"><label for="a-guests">Guests</label><select id="a-guests" name="guests"><option>1</option><option selected>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option><option>9</option><option>10</option></select></div>
+        <div class="field"><label for="a-name">Name</label><input id="a-name" name="name" type="text" autocomplete="name" required aria-describedby="a-name-err"><p class="f-err" id="a-name-err" hidden></p></div>
+        <div class="field wide"><label for="a-email">Email</label><input id="a-email" name="email" type="email" autocomplete="email" inputmode="email" required aria-describedby="a-email-err"><p class="f-err" id="a-email-err" hidden></p></div>
+        <div class="field wide"><label for="a-note">Anything we should know <span class="opt">(optional)</span></label><textarea id="a-note" name="note" rows="2"></textarea></div>
+        <div class="wide"><button class="btn btn-primary" type="submit">Send request</button></div>
+      </div>
+      <div class="done" data-done hidden>
+        <svg class="tick" viewBox="0 0 44 44" aria-hidden="true" focusable="false"><circle pathLength="1" cx="22" cy="22" r="20"/><path pathLength="1" d="M13.5 22.5l6 6L31 16.5"/></svg>
+        <p class="eyebrow">Request sent</p>
+        <p class="done-title" tabindex="-1" data-done-focus></p>
+        <p class="done-text" data-done-text></p>
+        <div class="done-actions"><button class="text-btn" type="button" data-edit>Edit request</button></div>
+      </div>
+    </form>
+  </div>
+</section>
+
+</main>
+
+<footer class="site band wrap">
+  <div class="cols">
+    <img src="img/calea-wordmark.svg" alt="Calea St. John" style="height:44px;width:auto">
+    <small>Francis Bay, St. John, U.S. Virgin Islands · <a href="mailto:info@caleastjohn.com">info@caleastjohn.com</a></small>
+  </div>
+  <nav aria-label="All pages"><ul class="sitemap"><li><a href="#home">Home</a></li><li><a href="#villa">The Villa</a></li><li><a href="#rooms">Rooms</a></li><li><a href="#amenities">Amenities</a></li><li><a href="#privacy">Privacy</a></li><li><a href="#sustainability">Sustainability</a></li><li><a href="#gallery">Gallery</a></li><li><a href="#place">Francis Bay &amp; St. John</a></li><li><a href="#stay">Stay at Calea</a></li><li><a href="#request">Reservation Request &amp; Contact</a></li></ul></nav>
+</footer>
+
+<div class="menu-sheet" id="menu" hidden role="dialog" aria-label="Site menu">
+  <div class="row"><img src="img/calea-wordmark.svg" alt="Calea St. John" style="height:36px;width:auto"><button class="menu-btn" style="display:inline-block" type="button" data-menu-close>Close</button></div>
+  <ul><li><a href="#home">Home</a></li><li><a href="#villa">The Villa</a></li><li><a href="#rooms">Rooms</a></li><li><a href="#amenities">Amenities</a></li><li><a href="#privacy">Privacy</a></li><li><a href="#sustainability">Sustainability</a></li><li><a href="#gallery">Gallery</a></li><li><a href="#place">Francis Bay &amp; St. John</a></li><li><a href="#stay">Stay at Calea</a></li><li><a href="#request">Reservation Request &amp; Contact</a></li></ul>
+</div>
+<script src="site.js"></script>
+<script>
+  (function () {
+    var top = document.getElementById("top");
+    function onScroll() { top.classList.toggle("scrolled", window.scrollY > window.innerHeight * 0.6); }
+    window.addEventListener("scroll", onScroll, { passive: true });
+    onScroll();
+  })();
+</script>
+<script>
+/* Motion behaviour, round 6. Every effect here has a job: pacing the story,
+   showing where you are, or confirming that something happened. */
+(function () {
+  var motion = document.documentElement.classList.contains("motion");
+
+  // Images fade in once they have loaded
+  document.querySelectorAll(".ph img, .full img, .split .img img, .film img, .stj .cam img").forEach(function (img) {
+    img.classList.add("fade");
+    if (img.complete && img.naturalWidth) img.classList.add("loaded");
+    else { img.addEventListener("load", function () { img.classList.add("loaded"); }); img.addEventListener("error", function () { img.classList.add("loaded"); }); }
+  });
+
+  // Scroll-triggered reveals, staggered within each group
+  if (motion) {
+    var groups = [
+      [".section .eyebrow, .section h2, .section .lede, .section .muted, .section .measure"],
+      [".specs > div"], [".room"], [".amen-row figure"], [".strip:not(.rooms-strip) figure"],
+      [".rates > div"], [".amenities li"], [".host-ph"], [".req .rq-fields"], [".footer, footer .cols"]
+    ];
+    var targets = [];
+    groups.forEach(function (g) {
+      var els = Array.prototype.slice.call(document.querySelectorAll(g[0])).filter(function (el) { return !el.closest(".hero"); });
+      var byParent = new Map();
+      els.forEach(function (el) {
+        var p = el.parentNode, i = byParent.get(p) || 0; byParent.set(p, i + 1);
+        el.classList.add("rv"); el.style.transitionDelay = Math.min(i * 90, 450) + "ms"; targets.push(el);
+      });
+    });
+    document.querySelectorAll(".full, .split .img").forEach(function (el) { el.classList.add("rv-img"); targets.push(el); });
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } });
+    }, { rootMargin: "0px 0px -10% 0px", threshold: 0.12 });
+    targets.forEach(function (el) { io.observe(el); });
+  }
+
+  // Navigation shows which section you are in
+  var links = Array.prototype.slice.call(document.querySelectorAll(".top nav a"));
+  var map = links.map(function (a) { return [a, document.querySelector(a.getAttribute("href"))]; }).filter(function (x) { return x[1]; });
+  if ("IntersectionObserver" in window && map.length) {
+    var spy = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (!e.isIntersecting) return;
+        links.forEach(function (a) { a.classList.toggle("active", a.getAttribute("href") === "#" + e.target.id); });
+      });
+    }, { rootMargin: "-45% 0px -50% 0px" });
+    map.forEach(function (x) { spy.observe(x[1]); });
+  }
+
+  // Bedroom strip arrows
+  var strip = document.getElementById("rooms-strip");
+  var prev = document.querySelector("[data-strip-prev]"), next = document.querySelector("[data-strip-next]");
+  if (strip && prev && next) {
+    function step() { var c = strip.querySelector(".room"); return c ? c.getBoundingClientRect().width + 6 : 300; }
+    function sync() { prev.disabled = strip.scrollLeft < 4; next.disabled = strip.scrollLeft + strip.clientWidth > strip.scrollWidth - 4; }
+    prev.addEventListener("click", function () { strip.scrollBy({ left: -step(), behavior: motion ? "smooth" : "auto" }); });
+    next.addEventListener("click", function () { strip.scrollBy({ left: step(), behavior: motion ? "smooth" : "auto" }); });
+    strip.addEventListener("scroll", sync, { passive: true }); window.addEventListener("resize", sync); sync();
+  }
+
+  // Film band: the preview plays silently while it is on screen. It waits for a tap
+  // when the visitor prefers reduced motion or has data saver on, and can always be paused.
+  var film = document.querySelector("[data-film]");
+  if (film) {
+    var vid = film.querySelector("video"), big = film.querySelector(".play"), tog = film.querySelector(".film-toggle");
+    var saveData = navigator.connection && navigator.connection.saveData;
+    var auto = motion && !saveData, userPaused = false, loaded = false;
+    function load() { if (!loaded) { vid.preload = "auto"; vid.load(); loaded = true; } }
+    function play() { load(); var p = vid.play(); if (p && p.catch) p.catch(function () {}); }
+    function sync() {
+      var on = !vid.paused;
+      film.classList.toggle("is-playing", on);
+      tog.hidden = !loaded;
+      tog.setAttribute("aria-label", on ? "Pause the film preview" : "Play the film preview");
+    }
+    vid.addEventListener("play", sync); vid.addEventListener("pause", sync);
+    big.addEventListener("click", function () { userPaused = false; play(); });
+    tog.addEventListener("click", function () { if (vid.paused) { userPaused = false; play(); } else { userPaused = true; vid.pause(); } });
+    if ("IntersectionObserver" in window) {
+      new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (e.isIntersecting) { if (auto && !userPaused) play(); }
+          else if (!vid.paused) vid.pause();
+        });
+      }, { rootMargin: "200px 0px", threshold: 0.25 }).observe(film);
+    }
+    sync();
+  }
+
+})();
+</script>
+<script>
+/* Round 7 · booking forms and accessible menu.
+   Both forms validate in plain words next to each field, then turn into their
+   confirmation in place: the box keeps its width, eases to its new height, and
+   focus moves to the confirmation so screen readers announce it. */
+(function () {
+  var motion = document.documentElement.classList.contains("motion");
+  var OUT = 280;
+
+  function pad(n) { return (n < 10 ? "0" : "") + n; }
+  function iso(d) { return d.getFullYear() + "-" + pad(d.getMonth() + 1) + "-" + pad(d.getDate()); }
+  function parse(v) { if (!v) return null; var p = v.split("-"); return new Date(+p[0], +p[1] - 1, +p[2]); }
+  function fmt(d, withYear) { return d.toLocaleDateString("en-US", withYear ? { month: "short", day: "numeric", year: "numeric" } : { month: "short", day: "numeric" }); }
+  function nightsBetween(a, b) { return Math.round((b - a) / 86400000); }
+  function stay(a, b, g) {
+    var n = nightsBetween(a, b);
+    var range = a.getFullYear() !== b.getFullYear() ? fmt(a, true) + " – " + fmt(b, true)
+      : a.getMonth() === b.getMonth() ? fmt(a) + " – " + b.getDate() + ", " + b.getFullYear()
+      : fmt(a) + " – " + fmt(b, true);
+    return range + " · " + n + (n === 1 ? " night" : " nights") + " · " + g + (g == 1 ? " guest" : " guests");
+  }
+  function stayHTML(a, b, g) {
+    var t = stay(a, b, g).split(" · ");
+    var el = document.createDocumentFragment();
+    var s1 = document.createElement("span"); s1.textContent = t[0];
+    var s2 = document.createElement("span"); s2.textContent = t[1] + " · " + t[2];
+    el.appendChild(s1); el.appendChild(document.createTextNode(" · ")); el.appendChild(s2);
+    return el;
+  }
+  var today = new Date(); today.setHours(0, 0, 0, 0);
+
+  // Morph one view into another inside the same box
+  function morph(box, from, to, focusEl) {
+    if (box._busy) return; box._busy = true;
+    if (!motion) {
+      from.hidden = true; to.hidden = false;
+      if (focusEl) focusEl.focus({ preventScroll: true });
+      box._busy = false; return;
+    }
+    var h0 = box.getBoundingClientRect().height;
+    box.style.width = box.getBoundingClientRect().width + "px";
+    box.style.height = h0 + "px";
+    from.classList.add("m-out");
+    setTimeout(function () {
+      from.hidden = true; from.classList.remove("m-out");
+      to.hidden = false; to.classList.add("m-in");
+      box.style.height = "auto";
+      var h1 = box.getBoundingClientRect().height;
+      box.style.height = h0 + "px";
+      void box.offsetHeight;
+      box.classList.add("is-morphing");
+      box.style.height = h1 + "px";
+      if (focusEl) focusEl.focus({ preventScroll: true });
+      setTimeout(function () {
+        box.classList.remove("is-morphing"); box.style.height = "";
+        box._busy = false;
+      }, 640);
+      setTimeout(function () { to.classList.remove("m-in"); }, 1300);
+    }, OUT);
+  }
+  window.addEventListener("resize", function () {
+    document.querySelectorAll("form[data-booking]").forEach(function (f) { if (!f._busy) f.style.width = ""; });
+  });
+
+  // Errors: plain words next to the field, linked with aria-describedby
+  function setError(input, msg) {
+    var e = document.getElementById(input.id + "-err");
+    input.setAttribute("aria-invalid", msg ? "true" : "false");
+    if (!e) return;
+    if (msg) { e.textContent = msg; if (e.hidden) { e.hidden = false; e.classList.add("m-err"); } }
+    else { e.hidden = true; e.textContent = ""; e.classList.remove("m-err"); }
+  }
+
+  function wireDates(arr, dep) {
+    arr.min = iso(today);
+    function syncMin() {
+      var a = parse(arr.value);
+      var m = new Date(a || today); m.setDate(m.getDate() + 1);
+      dep.min = iso(m);
+    }
+    arr.addEventListener("change", function () { syncMin(); if (arr.getAttribute("aria-invalid") === "true") validateDates(arr, dep); });
+    dep.addEventListener("change", function () { if (dep.getAttribute("aria-invalid") === "true") validateDates(arr, dep); });
+    syncMin();
+  }
+  function validateDates(arr, dep) {
+    var errs = [], a = parse(arr.value), d = parse(dep.value);
+    if (!a) errs.push([arr, "Choose an arrival date."]);
+    else if (a < today) errs.push([arr, "Choose an arrival date from today on."]);
+    if (!d) errs.push([dep, "Choose a departure date."]);
+    else if (a && d <= a) errs.push([dep, "Choose a departure date after your arrival."]);
+    [arr, dep].forEach(function (i) { var m = errs.filter(function (x) { return x[0] === i; })[0]; setError(i, m ? m[1] : ""); });
+    return errs;
+  }
+
+  // ---- Hero: check dates ----
+  var bar = document.querySelector('form[data-booking="check"]');
+  var rq = document.querySelector('form[data-booking="request"]');
+  if (bar) {
+    var bf = bar.querySelector("[data-fields]"), bd = bar.querySelector("[data-done]");
+    var bArr = bar.querySelector("#h-arr"), bDep = bar.querySelector("#h-dep"), bG = bar.querySelector("#h-guests");
+    wireDates(bArr, bDep);
+    bar.addEventListener("submit", function (e) {
+      e.preventDefault();
+      var errs = validateDates(bArr, bDep);
+      if (errs.length) { errs[0][0].focus(); return; }
+      var tt = bd.querySelector("[data-done-focus]"); tt.textContent = ""; tt.appendChild(stayHTML(parse(bArr.value), parse(bDep.value), bG.value));
+      morph(bar, bf, bd, bd.querySelector("[data-done-focus]"));
+    });
+    bd.querySelector("[data-edit]").addEventListener("click", function () { morph(bar, bd, bf, bArr); });
+    bd.querySelector("[data-continue]").addEventListener("click", function (e) {
+      if (!rq) return;
+      e.preventDefault();
+      rq.querySelector("#a-arr").value = bArr.value;
+      rq.querySelector("#a-dep").value = bDep.value;
+      rq.querySelector("#a-guests").value = bG.value;
+      rq.querySelector("#a-arr").dispatchEvent(new Event("change"));
+      var name = rq.querySelector("#a-name");
+      rq.scrollIntoView({ behavior: motion ? "smooth" : "auto", block: "center" });
+      setTimeout(function () { name.focus({ preventScroll: true }); }, motion ? 650 : 0);
+    });
+  }
+
+  // ---- Reservation request ----
+  if (rq) {
+    var rf = rq.querySelector("[data-fields]"), rd = rq.querySelector("[data-done]");
+    var sum = rq.querySelector("[data-summary]"), sumT = rq.querySelector("[data-summary-title]"), sumL = rq.querySelector("[data-summary-list]");
+    var rArr = rq.querySelector("#a-arr"), rDep = rq.querySelector("#a-dep"), rG = rq.querySelector("#a-guests");
+    var rName = rq.querySelector("#a-name"), rMail = rq.querySelector("#a-email");
+    wireDates(rArr, rDep);
+    [rName, rMail].forEach(function (i) { i.addEventListener("input", function () { if (i.getAttribute("aria-invalid") === "true") validatePeople(); }); });
+    function validatePeople() {
+      var errs = [];
+      var n = rName.value.trim(), m = rMail.value.trim();
+      setError(rName, n ? "" : "Enter your name.");
+      if (!n) errs.push([rName, "Enter your name."]);
+      var mailMsg = !m ? "Enter your email address." : (!rMail.validity.valid || !/\.[^.@\s]+$/.test(m) ? "Enter an email address like name@example.com." : "");
+      setError(rMail, mailMsg);
+      if (mailMsg) errs.push([rMail, mailMsg]);
+      return errs;
+    }
+    rq.addEventListener("submit", function (e) {
+      e.preventDefault();
+      var errs = validateDates(rArr, rDep).concat(validatePeople());
+      // keep the summary in the same order as the fields
+      var order = [rArr, rDep, rName, rMail];
+      errs.sort(function (a, b) { return order.indexOf(a[0]) - order.indexOf(b[0]); });
+      if (errs.length) {
+        sumT.textContent = errs.length === 1 ? "Please check one field:" : "Please check " + errs.length + " fields:";
+        sumL.innerHTML = "";
+        errs.forEach(function (x) {
+          var li = document.createElement("li"), a = document.createElement("a");
+          a.href = "#" + x[0].id; a.textContent = x[1];
+          a.addEventListener("click", function (ev) { ev.preventDefault(); x[0].focus(); });
+          li.appendChild(a); sumL.appendChild(li);
+        });
+        sum.hidden = false; sum.focus();
+        return;
+      }
+      sum.hidden = true;
+      var first = rName.value.trim().split(/\s+/)[0];
+      rd.querySelector("[data-done-focus]").textContent = "Thank you, " + first + ".";
+      rd.querySelector("[data-done-text]").textContent = "Chris and Sarah will reply to " + rMail.value.trim() + " with availability and rates for " + stay(parse(rArr.value), parse(rDep.value), rG.value) + ".";
+      morph(rq, rf, rd, rd.querySelector("[data-done-focus]"));
+    });
+    rd.querySelector("[data-edit]").addEventListener("click", function () { morph(rq, rd, rf, rArr); });
+  }
+
+  // ---- Phone menu: focus moves in, Escape closes, focus returns, Tab stays inside ----
+  var sheet = document.getElementById("menu"), opener = document.querySelector("[data-menu-open]");
+  if (sheet && opener) {
+    sheet.setAttribute("aria-modal", "true");
+    var closeBtn = sheet.querySelector("[data-menu-close]");
+    function open() { opener.setAttribute("aria-expanded", "true"); setTimeout(function () { closeBtn.focus(); }, 0); }
+    function close(returnFocus) { sheet.hidden = true; opener.setAttribute("aria-expanded", "false"); if (returnFocus) opener.focus(); }
+    opener.addEventListener("click", open);
+    closeBtn.addEventListener("click", function () { close(true); });
+    sheet.querySelectorAll("a").forEach(function (a) { a.addEventListener("click", function () { close(false); }); });
+    sheet.addEventListener("keydown", function (e) {
+      if (e.key === "Escape") { e.preventDefault(); close(true); return; }
+      if (e.key !== "Tab") return;
+      var f = sheet.querySelectorAll("a, button"), firstEl = f[0], lastEl = f[f.length - 1];
+      if (e.shiftKey && document.activeElement === firstEl) { e.preventDefault(); lastEl.focus(); }
+      else if (!e.shiftKey && document.activeElement === lastEl) { e.preventDefault(); firstEl.focus(); }
+    });
+  }
+})();
+</script>
+</body>
+</html>
