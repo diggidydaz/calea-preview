@@ -352,7 +352,8 @@
   .duo .shot { aspect-ratio: 4 / 3; min-height: 0; }
   .duo .pic { position: relative; aspect-ratio: 4 / 3; overflow: hidden; background: var(--band); }
   .duo .pic img { width: 100%; height: 100%; object-fit: cover; display: block; }
-  @media (max-width: 860px) { .duo { grid-template-columns: 1fr; } }
+  .duo.trio { grid-template-columns: repeat(3, 1fr); }
+  @media (max-width: 860px) { .duo, .duo.trio { grid-template-columns: 1fr; } }
   /* Round 9 · video landing */
   .hero .hero-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
   .hero-film-note { position: absolute; z-index: 3; right: var(--gutter); top: 96px; display: inline-flex; align-items: center; gap: 12px; font-size: 13px; color: rgba(255,255,255,.9); text-shadow: 0 1px 2px rgba(0,0,0,.4); }
@@ -472,6 +473,31 @@
     <p class="eyebrow">Dining · Kitchens</p>
     <h2 class="h-l">The outdoor kitchen</h2>
     <p class="muted measure">The outdoor kitchen is furnished with a deluxe grill, a griddle, a beverage refrigerator, a bar, and counter space to serve meals and drinks.</p>
+  </div>
+</div>
+</section>
+
+<section id="lifestyle" aria-label="Lifestyle and entertainment">
+<div class="wrap section">
+  <div class="intro" style="align-items:start">
+    <div style="display:flex;flex-direction:column;gap:22px">
+      <p class="eyebrow">Lifestyle &amp; entertainment</p>
+      <h2 class="h-l">Day into night by the water</h2>
+    </div>
+    <p class="muted measure">A heated pool with an infinity edge, a hot tub, a gas fire table, and sun loungers on the pool deck provide laid-back spaces to enjoy family and friends, unwind, and soak in the surrounding beauty. An outdoor TV and a billiards table set against the backdrop of a natural rock garden planted with native species offer entertainment through day and night.</p>
+  </div>
+  <div class="duo trio">
+    <div class="pic"><img src="https://images.unsplash.com/photo-1760943006664-3278c14068d6?w=1000&q=75&auto=format&fit=crop" alt="Placeholder: a pool deck framed by palms" loading="lazy"><span class="photo-note">Placeholder · final: pool and hot tub</span></div>
+    <div class="pic"><img src="https://images.unsplash.com/photo-1779202730803-e5a924592475?w=1000&q=75&auto=format&fit=crop" alt="Placeholder: lounge chairs around an outdoor fire" loading="lazy"><span class="photo-note">Placeholder · final: fire table</span></div>
+    <div class="pic"><img src="https://images.unsplash.com/photo-1759173084016-08b0fffd377c?w=1000&q=75&auto=format&fit=crop" alt="Placeholder: a billiards table in a lounge" loading="lazy"><span class="photo-note">Placeholder · final: garden and billiards</span></div>
+  </div>
+</div>
+<div class="split rev">
+  <div class="img"><img src="https://images.unsplash.com/photo-1774542846770-8ea79ba63145?w=1600&q=75&auto=format&fit=crop" alt="Placeholder: drinks on a table over the sea at sunset" loading="lazy"><span class="photo-note">Placeholder · final: roof deck at sunset, wine and appetizers</span></div>
+  <div class="txt">
+    <p class="eyebrow">Lifestyle · Rooftop</p>
+    <h2 class="h-l">The rooftop at sunset</h2>
+    <p class="muted measure">Nothing is more glorious than a St. John sunset after a day of swimming, sunbathing, hiking, or sailing. The rooftop viewing deck provides a perfect spot for savoring the last rays of the day along with island cocktails, refreshments, and soft Caribbean rhythms.</p>
   </div>
 </div>
 </section>
