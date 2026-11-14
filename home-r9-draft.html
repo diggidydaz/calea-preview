@@ -350,6 +350,8 @@
   .shot span { font-family: var(--display); font-size: 12px; letter-spacing: .18em; text-transform: uppercase; color: var(--ink-2); text-align: center; padding: 0 24px; }
   .duo { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: clamp(40px, 5vw, 72px); }
   .duo .shot { aspect-ratio: 4 / 3; min-height: 0; }
+  .duo .pic { position: relative; aspect-ratio: 4 / 3; overflow: hidden; background: var(--band); }
+  .duo .pic img { width: 100%; height: 100%; object-fit: cover; display: block; }
   @media (max-width: 860px) { .duo { grid-template-columns: 1fr; } }
   /* Round 9 · video landing */
   .hero .hero-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
@@ -452,12 +454,12 @@
     <p class="muted measure">The indoor and outdoor dining tables accommodate 10 to 14 people with additional seating available at smaller tables, bars and counters.</p>
   </div>
   <div class="duo">
-    <div class="shot" role="img" aria-label="Photo to come: indoor dining area"><span>Photo to come · Indoor dining</span></div>
-    <div class="shot" role="img" aria-label="Photo to come: outdoor dining area"><span>Photo to come · Outdoor dining</span></div>
+    <div class="pic"><img src="https://images.unsplash.com/photo-1779903726785-7cf25bed78f7?w=1200&q=75&auto=format&fit=crop" alt="Placeholder: an indoor dining table with a wide ocean view" loading="lazy"><span class="photo-note">Placeholder · final: indoor dining area</span></div>
+    <div class="pic"><img src="https://images.unsplash.com/photo-1726108955303-3856d5c0b30a?w=1200&q=75&auto=format&fit=crop" alt="Placeholder: a covered outdoor dining terrace" loading="lazy"><span class="photo-note">Placeholder · final: outdoor dining area</span></div>
   </div>
 </div>
 <div class="split">
-  <div class="img shot" role="img" aria-label="Photo to come: main kitchen"><span>Photo to come · Main kitchen</span></div>
+  <div class="img"><img src="https://images.unsplash.com/photo-1760072513457-651955c7074d?w=1600&q=75&auto=format&fit=crop" alt="Placeholder: a modern kitchen with a stone island" loading="lazy"><span class="photo-note">Placeholder · final: main kitchen</span></div>
   <div class="txt">
     <p class="eyebrow">Dining · Kitchens</p>
     <h2 class="h-l">The main kitchen</h2>
@@ -465,7 +467,7 @@
   </div>
 </div>
 <div class="split rev">
-  <div class="img shot" role="img" aria-label="Photo to come: outdoor kitchen"><span>Photo to come · Outdoor kitchen</span></div>
+  <div class="img"><img src="https://images.unsplash.com/photo-1762117360871-f11fbad00ee1?w=1600&q=75&auto=format&fit=crop" alt="Placeholder: an outdoor kitchen beside a pool" loading="lazy"><span class="photo-note">Placeholder · final: outdoor kitchen</span></div>
   <div class="txt">
     <p class="eyebrow">Dining · Kitchens</p>
     <h2 class="h-l">The outdoor kitchen</h2>
@@ -628,7 +630,7 @@
   var motion = document.documentElement.classList.contains("motion");
 
   // Images fade in once they have loaded
-  document.querySelectorAll(".ph img, .full img, .split .img img, .film img, .stj .cam img").forEach(function (img) {
+  document.querySelectorAll(".ph img, .full img, .split .img img, .duo .pic img, .film img, .stj .cam img").forEach(function (img) {
     img.classList.add("fade");
     if (img.complete && img.naturalWidth) img.classList.add("loaded");
     else { img.addEventListener("load", function () { img.classList.add("loaded"); }); img.addEventListener("error", function () { img.classList.add("loaded"); }); }
