@@ -344,6 +344,13 @@
   /* Round 9 · alternating image/text rows */
   .split.rev .img { order: 2; }
   @media (max-width: 860px) { .split.rev .img { order: 0; } }
+  /* Round 9 · photo-to-come blocks and two-up images */
+  .shot { position: relative; display: grid; place-items: center; background: var(--band); min-height: 260px; }
+  .shot::before { content: ""; position: absolute; inset: 14px; border: 1px solid var(--rule); pointer-events: none; }
+  .shot span { font-family: var(--display); font-size: 12px; letter-spacing: .18em; text-transform: uppercase; color: var(--ink-2); text-align: center; padding: 0 24px; }
+  .duo { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: clamp(40px, 5vw, 72px); }
+  .duo .shot { aspect-ratio: 4 / 3; min-height: 0; }
+  @media (max-width: 860px) { .duo { grid-template-columns: 1fr; } }
   /* Round 9 · video landing */
   .hero .hero-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
   .hero-film-note { position: absolute; z-index: 3; right: var(--gutter); top: 96px; display: inline-flex; align-items: center; gap: 12px; font-size: 13px; color: rgba(255,255,255,.9); text-shadow: 0 1px 2px rgba(0,0,0,.4); }
@@ -431,6 +438,38 @@
     <p class="eyebrow">Living spaces · Outdoor</p>
     <h2 class="h-l">Open to the west</h2>
     <p class="muted measure">Tucked into lush island foliage, the outdoor living space opens westward to the majestic Caribbean sea and glorious sunsets.</p>
+  </div>
+</div>
+</section>
+
+<section id="dining" aria-label="Dining">
+<div class="wrap section">
+  <div class="intro" style="align-items:start">
+    <div style="display:flex;flex-direction:column;gap:22px">
+      <p class="eyebrow">Dining</p>
+      <h2 class="h-l">A table for every gathering</h2>
+    </div>
+    <p class="muted measure">The indoor and outdoor dining tables accommodate 10 to 14 people with additional seating available at smaller tables, bars and counters.</p>
+  </div>
+  <div class="duo">
+    <div class="shot" role="img" aria-label="Photo to come: indoor dining area"><span>Photo to come · Indoor dining</span></div>
+    <div class="shot" role="img" aria-label="Photo to come: outdoor dining area"><span>Photo to come · Outdoor dining</span></div>
+  </div>
+</div>
+<div class="split">
+  <div class="img shot" role="img" aria-label="Photo to come: main kitchen"><span>Photo to come · Main kitchen</span></div>
+  <div class="txt">
+    <p class="eyebrow">Dining · Kitchens</p>
+    <h2 class="h-l">The main kitchen</h2>
+    <p class="muted measure">The main kitchen centers around a large island. Custom cabinets, quartzite countertops, and Sub-Zero and Wolf appliances create a dream space for amateur and professional chefs. Larger gatherings and catered events are managed from an adjacent butler's pantry with ample storage, cleanup and prep areas.</p>
+  </div>
+</div>
+<div class="split rev">
+  <div class="img shot" role="img" aria-label="Photo to come: outdoor kitchen"><span>Photo to come · Outdoor kitchen</span></div>
+  <div class="txt">
+    <p class="eyebrow">Dining · Kitchens</p>
+    <h2 class="h-l">The outdoor kitchen</h2>
+    <p class="muted measure">The outdoor kitchen is furnished with a deluxe grill, a griddle, a beverage refrigerator, a bar, and counter space to serve meals and drinks.</p>
   </div>
 </div>
 </section>
