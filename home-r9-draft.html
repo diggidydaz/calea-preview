@@ -341,6 +341,9 @@
   @keyframes m-tick { from { opacity: 0; transform: scale(.86); } to { opacity: 1; transform: none; } }
   @keyframes draw { from { stroke-dashoffset: 1; } to { stroke-dashoffset: 0; } }
   .motion .f-err.m-err { animation: m-in 380ms var(--ease-out) both; }
+  /* Round 9 · alternating image/text rows */
+  .split.rev .img { order: 2; }
+  @media (max-width: 860px) { .split.rev .img { order: 0; } }
   /* Round 9 · video landing */
   .hero .hero-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
   .hero-film-note { position: absolute; z-index: 3; right: var(--gutter); top: 96px; display: inline-flex; align-items: center; gap: 12px; font-size: 13px; color: rgba(255,255,255,.9); text-shadow: 0 1px 2px rgba(0,0,0,.4); }
@@ -413,12 +416,23 @@
   </div>
 </section>
 
-<section class="full">
-  <img src="https://images.unsplash.com/photo-1790276317950-cd0cad99655d?w=2000&q=75&auto=format&fit=crop" alt="Placeholder: a modern living space opening onto an infinity pool and the sea"><span class="photo-note">Placeholder · reference image</span>
-  <div class="cap">
-    <p class="eyebrow">Indoors and out</p>
-    <p class="h-m" style="font-family:var(--display);font-weight:300">The glass walls slide away. The room becomes the terrace.</p>
+<section id="living" aria-label="Living spaces">
+<div class="split">
+  <div class="img"><img src="img/great-room.jpg" alt="Placeholder: the main living room" loading="lazy"><span class="photo-note">Placeholder · final: main living room</span></div>
+  <div class="txt">
+    <p class="eyebrow">Living spaces · Indoor</p>
+    <h2 class="h-l">The great room</h2>
+    <p class="muted measure">The best features of the main living area are the floor to ceiling windows and doors that slide open onto the pool deck and provide panoramic 270-degree views of the Caribbean sea, neighboring islands, a salt pond, and vibrant vegetation. Deep inviting sofas, oversized coffee tables, relaxed daybeds, board games, disappearing TV, and tropical plants create a comfortable but refined setting for relaxation and entertainment.</p>
   </div>
+</div>
+<div class="split rev">
+  <div class="img"><img src="img/pool-deck.jpg" alt="Placeholder: the pool deck overlooking Francis Bay" loading="lazy"><span class="photo-note">Placeholder · final: pool deck over Francis Bay and the salt pond</span></div>
+  <div class="txt">
+    <p class="eyebrow">Living spaces · Outdoor</p>
+    <h2 class="h-l">Open to the west</h2>
+    <p class="muted measure">Tucked into lush island foliage, the outdoor living space opens westward to the majestic Caribbean sea and glorious sunsets.</p>
+  </div>
+</div>
 </section>
 
 <section class="section" id="rooms">
