@@ -354,6 +354,7 @@
   .duo .pic img { width: 100%; height: 100%; object-fit: cover; display: block; }
   .duo.trio { grid-template-columns: repeat(3, 1fr); }
   @media (max-width: 860px) { .duo, .duo.trio { grid-template-columns: 1fr; } }
+  .wellness-note { margin-top: 28px; font-family: var(--display); font-size: clamp(18px, 1.6vw, 22px); font-weight: 300; color: var(--ink); }
   /* Round 9 · video landing */
   .hero .hero-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
   .hero-film-note { position: absolute; z-index: 3; right: var(--gutter); top: 96px; display: inline-flex; align-items: center; gap: 12px; font-size: 13px; color: rgba(255,255,255,.9); text-shadow: 0 1px 2px rgba(0,0,0,.4); }
@@ -536,6 +537,24 @@
       <details><summary>Room details</summary><p>Partial ocean and salt pond view. En suite bath.</p><p class="plant-note">An ancient native tree, shaped by sun and wind.</p></details>
     </figure>
   </div>
+</section>
+
+<section id="wellness" aria-label="Fitness and wellness">
+<div class="split">
+  <div class="img"><img src="https://images.unsplash.com/photo-1786204413545-cc7f6d87a112?w=1600&q=75&auto=format&fit=crop" alt="Placeholder: a home gym with large windows onto greenery" loading="lazy"><span class="photo-note">Placeholder · final: fitness studio</span></div>
+  <div class="txt">
+    <p class="eyebrow">Fitness &amp; wellness</p>
+    <h2 class="h-l">The fitness studio</h2>
+    <p class="muted measure">The fitness studio is furnished with commercial-grade Matrix equipment: a treadmill, an elliptical trainer, and a functional trainer with an extended weight stack. Wall-to-wall mirrors create a sense of openness while allowing guests to monitor form throughout workouts.</p>
+  </div>
+</div>
+<div class="wrap section">
+  <div class="duo" style="margin-top:0">
+    <div class="pic"><img src="https://images.unsplash.com/photo-1600334089648-b0d9d3028eb2?w=1200&q=75&auto=format&fit=crop" alt="Placeholder: a hot stone massage" loading="lazy"><span class="photo-note">Placeholder · final: in-villa massage</span></div>
+    <div class="pic"><img src="https://images.unsplash.com/photo-1646166624936-d93c08117e02?w=1200&q=75&auto=format&fit=crop" alt="Placeholder: yoga by the sea" loading="lazy"><span class="photo-note">Placeholder · final: yoga or meditation</span></div>
+  </div>
+  <p class="muted measure wellness-note">Organize morning yoga or a massage after an active day outdoors.</p>
+</div>
 </section>
 
 <section class="wrap section" id="amenities">
