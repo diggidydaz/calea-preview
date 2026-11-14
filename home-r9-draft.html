@@ -364,6 +364,12 @@
   .amen-group h3 { margin: 0 0 14px; }
   .amenities.amen-sm { grid-template-columns: 1fr; }
   .amenities.amen-sm li { font-size: 17px; padding: 11px 0; line-height: 1.35; }
+  .hosts { padding-bottom: clamp(40px, 5vw, 64px); }
+  .services { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,2fr); gap: 48px clamp(32px, 5vw, 96px); padding-bottom: var(--section); }
+  .services h3 { margin: 0 0 14px; }
+  .services .muted { margin: 0 0 14px; }
+  .svc-list { grid-template-columns: repeat(2, minmax(0,1fr)) !important; column-gap: 40px; }
+  @media (max-width: 860px) { .services, .svc-list { grid-template-columns: 1fr !important; } }
   /* Round 9 · video landing */
   .hero .hero-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
   .hero-film-note { position: absolute; z-index: 3; right: var(--gutter); top: 96px; display: inline-flex; align-items: center; gap: 12px; font-size: 13px; color: rgba(255,255,255,.9); text-shadow: 0 1px 2px rgba(0,0,0,.4); }
@@ -613,6 +619,28 @@
   <div class="amen-groups"><div class="amen-group"><h3 class="eyebrow">Accommodations</h3><ul class="amenities amen-sm"><li>Accommodations for up to 12 guests</li><li>4 king bedroom suites</li><li>1 family suite with 1 king bed, and separate bunk room with 1 full and 1 twin bed</li><li>5 full bathrooms</li><li>2 powder rooms</li><li>Full air conditioning throughout the villa</li><li>Ceiling fans in all bedrooms</li><li>Fine bed linens and bath towels</li></ul></div><div class="amen-group"><h3 class="eyebrow">Kitchens &amp; dining</h3><ul class="amenities amen-sm"><li>Fully equipped main kitchen</li><li>Fully equipped guest suite kitchen</li><li>3 refrigerators with icemakers</li><li>2 refrigerated wine/beverage centers</li><li>3 dishwashers</li><li>Outdoor kitchen/bar with grill and griddle</li><li>2 coffee makers with filters</li></ul></div><div class="amen-group"><h3 class="eyebrow">Outdoor living</h3><ul class="amenities amen-sm"><li>Infinity edge heated pool</li><li>Hot tub</li><li>Gas fire table</li><li>Expansive pool deck and outdoor lounge areas</li><li>Billiards table</li><li>Rooftop viewing deck</li><li>Sunset views throughout the villa</li><li>Lush tropical landscaping</li><li>Steps away from Francis Beach</li></ul></div><div class="amen-group"><h3 class="eyebrow">Wellness &amp; entertainment</h3><ul class="amenities amen-sm"><li>Fitness studio with commercial-grade Matrix equipment</li><li>3 theater size smart TVs</li><li>3 bedroom smart TVs</li><li>Crestron controls and Sonos speakers throughout the villa</li><li>High end lighting with mood settings</li><li>Starlink wireless internet</li></ul></div><div class="amen-group"><h3 class="eyebrow">Property &amp; power</h3><ul class="amenities amen-sm"><li>High-end design and furnishings</li><li>Entirely solar powered with automatic back-up generator</li><li>On-site parking for 7-8 cars</li><li>Easy driveway access with ample turning space</li><li>Driveway entry gate with code access</li><li>Exterior security cameras</li><li>3 washers and dryers</li></ul></div><div class="amen-group"><h3 class="eyebrow">Supplied for your stay</h3><ul class="amenities amen-sm"><li>Paper goods stocked in bathrooms and kitchens</li><li>Makeup mirrors and hairdryers in all bathrooms</li><li>Toiletries: shampoo, conditioner, body lotion, shower and hand soap, and makeup remover</li><li>Iron and ironing board</li><li>Hard-sided and soft-sided coolers</li><li>Pool towels and floats</li><li>Beach towels</li><li>Beach chairs</li></ul></div></div>
 </section>
 
+<section class="wrap section hosts" id="hosts">
+  <div class="host-ph" role="img" aria-label="Placeholder for a portrait of Chris and Sarah"><span>C&nbsp;&amp;&nbsp;S</span><em>Portrait to come</em></div>
+  <div style="display:flex;flex-direction:column;gap:20px;max-width:46ch">
+    <p class="eyebrow">Staff &amp; services · Your hosts</p>
+    <h2 class="h-l">Chris and Sarah look after Calea, and every stay.</h2>
+    <p class="muted">They answer each request personally, and can arrange an in-villa massage, a Caribbean cooking class or a day on the water. <span class="tbc">Bio</span></p>
+    <p class="muted"><span class="tbc">Phone and email for Chris and Sarah</span></p>
+  </div>
+</section>
+
+<section class="wrap services" id="services" aria-label="Staff and optional services">
+  <div class="svc-col">
+    <h3 class="eyebrow">Staff</h3>
+    <ul class="amenities amen-sm"><li>Concierge with booking</li><li>Greeting upon arrival</li><li>24-hour contact number</li></ul>
+  </div>
+  <div class="svc-col">
+    <h3 class="eyebrow">Optional services</h3>
+    <p class="muted">Additional services can be arranged upon request through the concierge to enhance your stay:</p>
+    <ul class="amenities amen-sm svc-list"><li>Chef Services</li><li>Childcare</li><li>Grocery Provisioning</li><li>Wine, Beer &amp; Spirits Procurement</li><li>In-Villa Massage</li><li>Gifts &amp; Flowers</li><li>Music &amp; Entertainment</li><li>Art and Craft Lessons</li><li>Historical Tours</li><li>Cultural Events</li><li>Cooking Lessons</li><li>Yoga &amp; Pilates Classes</li><li>Rental Car or On-Demand Driver</li></ul>
+  </div>
+</section>
+
 <section class="on-dark wrap section" id="sustainability">
   <div class="sust">
     <img class="lockup" src="img/calea-logo-reversed.svg" alt="Calea St. John">
@@ -643,15 +671,6 @@
   <p class="eyebrow">Rates · per week</p>
   <div class="rates"><div><b>$25,000</b><span>Winter</span></div><div><b>$20,000</b><span>Summer</span></div><div><b><span class="tbc">Rate TBC</span></b><span>Holiday · Dec 18 to Jan 7</span></div></div>
   <p class="muted" style="margin-top:16px;font-size:14px">Rates are plus tax and may vary with the number of guests, travel dates and length of stay.</p>
-</section>
-
-<section class="wrap section hosts" id="hosts">
-  <div class="host-ph" role="img" aria-label="Placeholder for a portrait of Chris and Sarah"><span>C&nbsp;&amp;&nbsp;S</span><em>Portrait to come</em></div>
-  <div style="display:flex;flex-direction:column;gap:20px;max-width:46ch">
-    <p class="eyebrow">Your hosts</p>
-    <h2 class="h-l">Chris and Sarah look after Calea, and every stay.</h2>
-    <p class="muted">They answer each request personally, and can arrange an in-villa massage, a Caribbean cooking class or a day on the water. <span class="tbc">Bio</span></p>
-  </div>
 </section>
 
 <section class="wrap section" id="stay">
