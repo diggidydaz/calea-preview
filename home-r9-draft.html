@@ -370,6 +370,9 @@
   .services .muted { margin: 0 0 14px; }
   .svc-list { grid-template-columns: repeat(2, minmax(0,1fr)) !important; column-gap: 40px; }
   @media (max-width: 860px) { .services, .svc-list { grid-template-columns: 1fr !important; } }
+  /* Round 9 · short top bar; the full section list lives under Menu at every width */
+  .top .menu-btn { display: inline-block; }
+  @media (max-width: 1140px) { .top nav { display: none; } }
   /* Round 9 · video landing */
   .hero .hero-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
   .hero-film-note { position: absolute; z-index: 3; right: var(--gutter); top: 96px; display: inline-flex; align-items: center; gap: 12px; font-size: 13px; color: rgba(255,255,255,.9); text-shadow: 0 1px 2px rgba(0,0,0,.4); }
@@ -390,7 +393,7 @@
     <img class="mark-d" src="img/calea-wordmark.svg" alt="" aria-hidden="true">
   </a>
   <nav aria-label="Main">
-    <a href="#villa">The Villa</a><a href="#rooms">Rooms</a><a href="#place">St. John</a>
+    <a href="#living">Living</a><a href="#dining">Dining</a><a href="#rooms">Bedrooms</a><a href="#amenities">Amenities</a><a href="#location">Location</a><a href="#hosts">Services</a>
   </nav>
   <div class="top-actions"><button class="menu-btn" type="button" data-menu-open aria-haspopup="dialog" aria-controls="menu" aria-expanded="false">Menu</button><a class="cta" href="#request">Request dates</a></div>
 </header>
@@ -710,12 +713,12 @@
     <img src="img/calea-wordmark.svg" alt="Calea St. John" style="height:44px;width:auto">
     <small>Francis Bay, St. John, U.S. Virgin Islands · <a href="mailto:info@caleastjohn.com">info@caleastjohn.com</a></small>
   </div>
-  <nav aria-label="All pages"><ul class="sitemap"><li><a href="#home">Home</a></li><li><a href="#villa">The Villa</a></li><li><a href="#rooms">Rooms</a></li><li><a href="#amenities">Amenities</a></li><li><a href="#sustainability">Sustainability</a></li><li><a href="#place">Francis Bay &amp; St. John</a></li><li><a href="#request">Reservation Request &amp; Contact</a></li></ul></nav>
+  <nav aria-label="All pages"><ul class="sitemap"><li><a href="#home">Home</a></li><li><a href="#living">Living Spaces</a></li><li><a href="#dining">Dining</a></li><li><a href="#lifestyle">Lifestyle &amp; Entertainment</a></li><li><a href="#rooms">Bedrooms</a></li><li><a href="#wellness">Fitness &amp; Wellness</a></li><li><a href="#suite">Guest Suite</a></li><li><a href="#location">Location &amp; Floor Plans</a></li><li><a href="#amenities">Amenities &amp; Features</a></li><li><a href="#hosts">Staff &amp; Services</a></li><li><a href="#sustainability">Sustainability</a></li><li><a href="#place">Francis Bay &amp; St. John</a></li><li><a href="#request">Reservation Request &amp; Contact</a></li></ul></nav>
 </footer>
 
 <div class="menu-sheet" id="menu" hidden role="dialog" aria-label="Site menu">
   <div class="row"><img src="img/calea-wordmark.svg" alt="Calea St. John" style="height:36px;width:auto"><button class="menu-btn" style="display:inline-block" type="button" data-menu-close>Close</button></div>
-  <ul><li><a href="#home">Home</a></li><li><a href="#villa">The Villa</a></li><li><a href="#rooms">Rooms</a></li><li><a href="#amenities">Amenities</a></li><li><a href="#sustainability">Sustainability</a></li><li><a href="#place">Francis Bay &amp; St. John</a></li><li><a href="#request">Reservation Request &amp; Contact</a></li></ul>
+  <ul><li><a href="#home">Home</a></li><li><a href="#living">Living Spaces</a></li><li><a href="#dining">Dining</a></li><li><a href="#lifestyle">Lifestyle &amp; Entertainment</a></li><li><a href="#rooms">Bedrooms</a></li><li><a href="#wellness">Fitness &amp; Wellness</a></li><li><a href="#suite">Guest Suite</a></li><li><a href="#location">Location &amp; Floor Plans</a></li><li><a href="#amenities">Amenities &amp; Features</a></li><li><a href="#hosts">Staff &amp; Services</a></li><li><a href="#sustainability">Sustainability</a></li><li><a href="#place">Francis Bay &amp; St. John</a></li><li><a href="#request">Reservation Request &amp; Contact</a></li></ul>
 </div>
 <script src="site.js"></script>
 <script>
