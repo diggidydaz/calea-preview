@@ -355,6 +355,11 @@
   .duo.trio { grid-template-columns: repeat(3, 1fr); }
   @media (max-width: 860px) { .duo, .duo.trio { grid-template-columns: 1fr; } }
   .wellness-note { margin-top: 28px; font-family: var(--display); font-size: clamp(18px, 1.6vw, 22px); font-weight: 300; color: var(--ink); }
+  .map-frame { position: relative; margin-top: clamp(40px, 5vw, 72px); aspect-ratio: 16 / 7; background: var(--band); }
+  .map-frame iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; filter: grayscale(.35) contrast(.95); }
+  .map-frame .photo-note { pointer-events: none; }
+  .plans .shot { aspect-ratio: 1 / 1; }
+  @media (max-width: 860px) { .map-frame { aspect-ratio: 4 / 3; } }
   /* Round 9 · video landing */
   .hero .hero-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
   .hero-film-note { position: absolute; z-index: 3; right: var(--gutter); top: 96px; display: inline-flex; align-items: center; gap: 12px; font-size: 13px; color: rgba(255,255,255,.9); text-shadow: 0 1px 2px rgba(0,0,0,.4); }
@@ -572,6 +577,25 @@
     <div class="pic"><img src="https://images.unsplash.com/photo-1745429523635-ad375f836bf2?w=1000&q=75&auto=format&fit=crop" alt="Placeholder: a compact modern kitchen" loading="lazy"><span class="photo-note">Placeholder · final: suite kitchen</span></div>
   </div>
 </div>
+</section>
+
+<section id="location" class="wrap section" aria-label="Location and floor plans">
+  <div class="intro" style="align-items:start">
+    <div style="display:flex;flex-direction:column;gap:22px">
+      <p class="eyebrow">Location &amp; floor plans</p>
+      <h2 class="h-l">Above Francis Bay, St. John</h2>
+    </div>
+    <p class="muted measure">About 25 minutes from Cruz Bay. The map shows the general area; the exact address is shared with confirmed guests.</p>
+  </div>
+  <div class="map-frame">
+    <iframe title="Map of the Francis Bay area of St. John" src="https://www.openstreetmap.org/export/embed.html?bbox=-64.815%2C18.318%2C-64.705%2C18.382&amp;layer=mapnik" loading="lazy"></iframe>
+    <span class="photo-note">General area · Francis Bay and Cruz Bay</span>
+  </div>
+  <div class="duo trio plans">
+    <div class="shot" role="img" aria-label="Floor plan to come: level 1"><span>Floor plan to come · Level 1</span></div>
+    <div class="shot" role="img" aria-label="Floor plan to come: level 2"><span>Floor plan to come · Level 2</span></div>
+    <div class="shot" role="img" aria-label="Floor plan to come: level 3"><span>Floor plan to come · Level 3</span></div>
+  </div>
 </section>
 
 <section class="wrap section" id="amenities">
