@@ -360,6 +360,10 @@
   .map-frame .photo-note { pointer-events: none; }
   .plans .shot { aspect-ratio: 1 / 1; }
   @media (max-width: 860px) { .map-frame { aspect-ratio: 4 / 3; } }
+  .amen-groups { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(340px, 100%), 1fr)); gap: 48px clamp(32px, 4vw, 64px); margin-top: clamp(40px, 5vw, 72px); }
+  .amen-group h3 { margin: 0 0 14px; }
+  .amenities.amen-sm { grid-template-columns: 1fr; }
+  .amenities.amen-sm li { font-size: 17px; padding: 11px 0; line-height: 1.35; }
   /* Round 9 · video landing */
   .hero .hero-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
   .hero-film-note { position: absolute; z-index: 3; right: var(--gutter); top: 96px; display: inline-flex; align-items: center; gap: 12px; font-size: 13px; color: rgba(255,255,255,.9); text-shadow: 0 1px 2px rgba(0,0,0,.4); }
@@ -601,18 +605,12 @@
 <section class="wrap section" id="amenities">
   <div class="intro" style="align-items:start">
     <div style="display:flex;flex-direction:column;gap:22px">
-      <p class="eyebrow">Amenities</p>
+      <p class="eyebrow">Amenities &amp; features</p>
       <h2 class="h-l">Everything is on site.</h2>
     </div>
-    <ul class="amenities"><li>Pool and deck</li><li>Outdoor dining</li><li>Billiards and rock garden</li><li>Gym</li><li>Family and TV room</li><li>Secondary kitchen</li><li>Roof sun deck</li><li>Gardens and tropical landscaping</li><li>Garage and parking for 8 vehicles</li></ul>
+    <p class="muted measure">Accommodations for up to 12 guests, and everything you need for the stay is already here.</p>
   </div>
-</section>
-
-<section class="wrap amen-row" aria-label="Amenity images">
-  <figure><div class="ph"><img src="https://images.unsplash.com/photo-1786204413545-cc7f6d87a112?w=900&q=75&auto=format&fit=crop" alt="Placeholder: a home gym with large windows onto planting" loading="lazy"><span class="photo-note">Placeholder</span></div><figcaption>Fitness studio</figcaption></figure>
-  <figure><div class="ph"><img src="https://images.unsplash.com/photo-1718931162137-add643ee948f?w=900&q=75&auto=format&fit=crop" alt="Placeholder: sunset over the sea from a deck" loading="lazy"><span class="photo-note">Placeholder</span></div><figcaption>Rooftop viewing deck</figcaption></figure>
-  <figure><div class="ph"><img src="https://images.unsplash.com/photo-1661069543192-98a5a598ae9e?w=900&q=75&auto=format&fit=crop" alt="Placeholder: an outdoor shower surrounded by tropical planting" loading="lazy"><span class="photo-note">Placeholder</span></div><figcaption>Outdoor showers</figcaption></figure>
-  <figure><div class="ph"><img src="https://images.unsplash.com/photo-1756079664354-34944e001f6d?w=900&q=75&auto=format&fit=crop" alt="Placeholder: a modern bathroom with a stone vanity and two sinks" loading="lazy"><span class="photo-note">Placeholder</span></div><figcaption>En suite baths</figcaption></figure>
+  <div class="amen-groups"><div class="amen-group"><h3 class="eyebrow">Accommodations</h3><ul class="amenities amen-sm"><li>Accommodations for up to 12 guests</li><li>4 king bedroom suites</li><li>1 family suite with 1 king bed, and separate bunk room with 1 full and 1 twin bed</li><li>5 full bathrooms</li><li>2 powder rooms</li><li>Full air conditioning throughout the villa</li><li>Ceiling fans in all bedrooms</li><li>Fine bed linens and bath towels</li></ul></div><div class="amen-group"><h3 class="eyebrow">Kitchens &amp; dining</h3><ul class="amenities amen-sm"><li>Fully equipped main kitchen</li><li>Fully equipped guest suite kitchen</li><li>3 refrigerators with icemakers</li><li>2 refrigerated wine/beverage centers</li><li>3 dishwashers</li><li>Outdoor kitchen/bar with grill and griddle</li><li>2 coffee makers with filters</li></ul></div><div class="amen-group"><h3 class="eyebrow">Outdoor living</h3><ul class="amenities amen-sm"><li>Infinity edge heated pool</li><li>Hot tub</li><li>Gas fire table</li><li>Expansive pool deck and outdoor lounge areas</li><li>Billiards table</li><li>Rooftop viewing deck</li><li>Sunset views throughout the villa</li><li>Lush tropical landscaping</li><li>Steps away from Francis Beach</li></ul></div><div class="amen-group"><h3 class="eyebrow">Wellness &amp; entertainment</h3><ul class="amenities amen-sm"><li>Fitness studio with commercial-grade Matrix equipment</li><li>3 theater size smart TVs</li><li>3 bedroom smart TVs</li><li>Crestron controls and Sonos speakers throughout the villa</li><li>High end lighting with mood settings</li><li>Starlink wireless internet</li></ul></div><div class="amen-group"><h3 class="eyebrow">Property &amp; power</h3><ul class="amenities amen-sm"><li>High-end design and furnishings</li><li>Entirely solar powered with automatic back-up generator</li><li>On-site parking for 7-8 cars</li><li>Easy driveway access with ample turning space</li><li>Driveway entry gate with code access</li><li>Exterior security cameras</li><li>3 washers and dryers</li></ul></div><div class="amen-group"><h3 class="eyebrow">Supplied for your stay</h3><ul class="amenities amen-sm"><li>Paper goods stocked in bathrooms and kitchens</li><li>Makeup mirrors and hairdryers in all bathrooms</li><li>Toiletries: shampoo, conditioner, body lotion, shower and hand soap, and makeup remover</li><li>Iron and ironing board</li><li>Hard-sided and soft-sided coolers</li><li>Pool towels and floats</li><li>Beach towels</li><li>Beach chairs</li></ul></div></div>
 </section>
 
 <section class="on-dark wrap section" id="sustainability">
