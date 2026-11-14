@@ -341,6 +341,13 @@
   @keyframes m-tick { from { opacity: 0; transform: scale(.86); } to { opacity: 1; transform: none; } }
   @keyframes draw { from { stroke-dashoffset: 1; } to { stroke-dashoffset: 0; } }
   .motion .f-err.m-err { animation: m-in 380ms var(--ease-out) both; }
+  /* Round 9 · video landing */
+  .hero .hero-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .hero-film-note { position: absolute; z-index: 3; right: var(--gutter); top: 96px; display: inline-flex; align-items: center; gap: 12px; font-size: 13px; color: rgba(255,255,255,.9); text-shadow: 0 1px 2px rgba(0,0,0,.4); }
+  .hero:not(.is-playing) .film-toggle .i-pause { display: none; }
+  .hero:not(.is-playing) .film-toggle .i-play { display: block; }
+  .hero.is-playing .film-toggle .i-play { display: none; }
+  @media (max-width: 600px) { .hero-film-note span { display: none; } .hero-film-note { top: 84px; } }
 </style>
 </head>
 <body id="home">
@@ -360,8 +367,12 @@
 </header>
 
 <main id="main" tabindex="-1">
-<section class="hero" aria-label="Calea from above">
-  <img src="img/aerial.jpg" alt="Calea from the air: terraced stone and concrete levels, a solar roof, and the pool set into the green hillside">
+<section class="hero" aria-label="Calea" data-film>
+  <video class="hero-video" muted loop playsinline preload="none" poster="img/aerial.jpg" aria-label="Placeholder footage until the December film: a planted stone walkway leading to glass doors and the sea, then an infinity pool at dusk">
+    <source src="video/calea-film-1080.mp4" type="video/mp4" media="(min-width: 901px)">
+    <source src="video/calea-film-720.mp4" type="video/mp4">
+  </video>
+  <div class="hero-film-note"><span>Placeholder footage · Calea film in December</span><button class="film-toggle" type="button" aria-label="Pause the film"><svg class="i-pause" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 5h3.5v14H7zM13.5 5H17v14h-3.5z"/></svg><svg class="i-play" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4.5v15l12-7.5z"/></svg></button></div>
   <div class="hero-copy">
     <div>
       <p class="eyebrow">Francis Bay · St. John</p>
@@ -385,17 +396,6 @@
       </div>
     </form>
   </div>
-</section>
-
-<section class="film-band" aria-label="The Calea film">
-  <div class="film" style="height:100vh;min-height:520px" data-film>
-      <video class="film-video" muted loop playsinline preload="none" poster="video/calea-film-poster.jpg" aria-label="Placeholder footage: a planted stone walkway leading to glass doors and the sea, then an infinity pool at dusk">
-        <source src="video/calea-film-1080.mp4" type="video/mp4" media="(min-width: 901px)">
-        <source src="video/calea-film-720.mp4" type="video/mp4">
-      </video>
-      <button class="play" type="button" aria-label="Play the film preview"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4.5v15l12-7.5z"/></svg></button>
-      <div class="film-cap"><p class="eyebrow">The Calea film · 2–3 minutes</p><span class="film-note">Placeholder footage, not Calea · the film is shot in December <button class="film-toggle" type="button" aria-label="Pause the film preview" hidden><svg class="i-pause" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 5h3.5v14H7zM13.5 5H17v14h-3.5z"/></svg><svg class="i-play" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4.5v15l12-7.5z"/></svg></button></span></div>
-    </div>
 </section>
 
 <section class="wrap section" id="villa">
@@ -666,11 +666,11 @@
     function sync() {
       var on = !vid.paused;
       film.classList.toggle("is-playing", on);
-      tog.hidden = !loaded;
-      tog.setAttribute("aria-label", on ? "Pause the film preview" : "Play the film preview");
+      tog.hidden = big ? !loaded : false;
+      tog.setAttribute("aria-label", on ? "Pause the film" : "Play the film");
     }
     vid.addEventListener("play", sync); vid.addEventListener("pause", sync);
-    big.addEventListener("click", function () { userPaused = false; play(); });
+    if (big) big.addEventListener("click", function () { userPaused = false; play(); });
     tog.addEventListener("click", function () { if (vid.paused) { userPaused = false; play(); } else { userPaused = true; vid.pause(); } });
     if ("IntersectionObserver" in window) {
       new IntersectionObserver(function (entries) {
