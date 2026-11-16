@@ -371,9 +371,9 @@
   .services .muted { margin: 0 0 14px; }
   .svc-list { grid-template-columns: repeat(2, minmax(0,1fr)) !important; column-gap: 40px; }
   @media (max-width: 860px) { .services, .svc-list { grid-template-columns: 1fr !important; } }
-  /* Round 9 · short top bar; the full section list lives under Menu at every width */
-  .top .menu-btn { display: inline-block; }
-  @media (max-width: 1240px) { .top nav { display: none; } }
+  /* Round 9 · wide screens: top bar links only; narrower screens: Menu button */
+  .top .menu-btn { display: none; }
+  @media (max-width: 1240px) { .top nav { display: none; } .top .menu-btn { display: inline-block; } }
   /* Round 9 · room lines stay on one line so every card lines up */
   .room-line { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
   /* Round 9 · video landing */
