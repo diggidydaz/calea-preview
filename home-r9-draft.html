@@ -376,6 +376,12 @@
   @media (max-width: 1240px) { .top nav { display: none; } .top .menu-btn { display: inline-block; } }
   /* Round 9 · room lines stay on one line so every card lines up */
   .room-line { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  /* Round 9 · webcam centered and wide */
+  .stj.stj-wide { grid-template-columns: 1fr; justify-items: center; gap: clamp(32px, 4vw, 56px); }
+  .stj-wide .stj-head { display: flex; flex-direction: column; align-items: center; gap: 18px; text-align: center; max-width: 900px; }
+  .stj-wide .stj-head h2 { max-width: 24ch; }
+  .stj-wide .cam { width: 100%; max-width: 1200px; aspect-ratio: 16 / 9; }
+  @media (max-width: 860px) { .stj-wide .cam { aspect-ratio: 4 / 3; } }
   /* Round 9 · video landing */
   .hero .hero-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
   .hero-film-note { position: absolute; z-index: 3; right: var(--gutter); top: 96px; display: inline-flex; align-items: center; gap: 12px; font-size: 13px; color: rgba(255,255,255,.9); text-shadow: 0 1px 2px rgba(0,0,0,.4); }
@@ -648,11 +654,11 @@
 </section>
 
 <section class="wrap section" id="place">
-  <div class="stj">
-    <div style="display:flex;flex-direction:column;gap:22px">
+  <div class="stj stj-wide">
+    <div class="stj-head">
       <p class="eyebrow">Francis Bay &amp; St. John</p>
       <h2 class="h-l">Twenty-five minutes from Cruz Bay, and a world away.</h2>
-      <p class="muted measure">Beaches, trails and the national park on your doorstep.</p>
+      <p class="muted">Beaches, trails and the national park on your doorstep.</p>
     </div>
     <div class="cam">
       <img src="img/pool-deck.jpg" alt="View across the pool toward Francis Bay">
